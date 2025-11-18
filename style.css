@@ -1,1 +1,134 @@
+/* 1. VARIÁVEIS DE COR E TIPOGRAFIA */
+:root {
+    /* Cores Claras e Destaques */
+    --background-light: #F9F9F9;
+    --text-dark: #333333;
+    --text-light: #FFFFFF;
 
+    /* Cores de Destaque (As cores vibrantes que se destacam no fundo claro) */
+    --accent-genre: #00BCD4; /* Azul Ciano */
+    --accent-verb: #8BC34A;   /* Verde Limão */
+    --accent-adjective: #FF9800; /* Laranja Cítrico */
+    --accent-essay: #E91E63; /* Magenta */
+
+    /* Tipografia */
+    --font-primary: 'Inter', sans-serif;
+    --shadow-subtle: 0 4px 12px rgba(0, 0, 0, 0.05); /* Sombra suave para os cards */
+}
+
+/* 2. ESTILOS GERAIS E RESET */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--background-light); /* Fundo claro principal */
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+/* 3. HERO/HEADER SECTION */
+.hero-section {
+    padding: 80px 5%;
+    background-color: var(--text-light); /* Fundo branco para a seção de cabeçalho */
+    text-align: center;
+    border-bottom: 2px solid var(--accent-genre); /* Linha de destaque */
+}
+
+.hero-section h1 {
+    font-size: 2.5rem;
+    color: var(--accent-essay); /* Título com uma cor de destaque */
+    margin-bottom: 10px;
+}
+
+/* 4. SEÇÃO DE CONTEÚDO E CARDS */
+.content-section {
+    padding: 60px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.content-section h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    border-bottom: 3px solid var(--accent-genre); /* Underline de destaque */
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.card-container {
+    display: flex;
+    gap: 30px; /* Espaço entre os cards */
+    flex-wrap: wrap;
+    justify-content: center; /* Centraliza os cards se não preencherem a linha */
+}
+
+.content-card {
+    background-color: var(--text-light);
+    border-radius: 12px;
+    padding: 30px;
+    flex: 1 1 300px; /* Flexível, mas com tamanho base de 300px */
+    box-shadow: var(--shadow-subtle);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 5px solid var(--accent-genre); /* Borda lateral com a cor do tópico */
+}
+
+/* Efeito Hover moderno */
+.content-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.content-card h3 {
+    font-size: 1.5rem;
+    color: var(--accent-genre); /* Título do card com a cor de destaque */
+    margin-bottom: 15px;
+}
+
+/* Aplicação das outras cores de destaque nas bordas dos cards (opcional) */
+.genre-narrative { border-left-color: var(--accent-genre); }
+.genre-argumentative { border-left-color: var(--accent-verb); } /* Usando a cor de Verbos */
+.genre-other { border-left-color: var(--accent-adjective); } /* Usando a cor de Adjetivos */
+
+
+/* 5. BOTÕES DE DESTAQUE */
+.btn-primary {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--accent-genre);
+    color: var(--text-light);
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #008C9E; /* Um tom mais escuro do ciano */
+}
+
+/* 6. FOOTER */
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    background-color: var(--text-light);
+    border-top: 1px solid #eee;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* 7. MEDIA QUERIES (Para tornar responsivo em telas menores) */
+@media (max-width: 768px) {
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+
+    .card-container {
+        flex-direction: column; /* Empilha os cards em telas menores */
+    }
+}
