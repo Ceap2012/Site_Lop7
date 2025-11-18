@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Português Simples e Eficaz</title>
+    <title>Português Simples e Eficaz | Academia Digital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,20 +20,29 @@
     </header>
 
     <main>
-        <section id="verbos">
+        <section id="verbos" class="content-card">
             <h2>Verbos e Conjugação</h2>
-            <p>Os verbos são a classe de palavras que...</p>
-            </section>
+            <p>Os verbos são a classe de palavras que indicam ação, estado ou fenômeno da natureza.</p>
+            
+            <div class="interactive-example">
+                <h3>Exemplo de Infinitivo:</h3>
+                <button class="toggle-button" onclick="toggleContent('infinitivo-explicacao')">Mostrar / Ocultar Explicação</button>
+                <div id="infinitivo-explicacao" class="hidden-content" style="display:none;">
+                    <p>O infinitivo é a forma não conjugada do verbo (ex: amar, vender, partir). É fundamental para iniciar a conjugação.</p>
+                </div>
+            </div>
+            
+        </section>
 
-        <section id="genero">
+        <section id="genero" class="content-card">
             <h2>Explorando o Gênero Textual</h2>
-            <p>Entenda a função de textos como contos, notícias, e-mails...</p>
+            <p>Entenda a função e as características de textos como notícias, e-mails, contos e resumos.</p>
             </section>
 
         </main>
 
     <footer>
-        <p>&copy; 2025 Seu Site de Português</p>
+        <p>Desenvolvido com 💙 | &copy; 2025 Seu Site de Português</p>
     </footer>
 
     <script src="script.js"></script>
