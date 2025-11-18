@@ -1,32 +1,111 @@
-/* Definição de Cores e Fontes (Futurista/Moderno) */
+/* Definição de Cores e Fontes (Claro/Moderno) */
 :root {
-    --primary-color: #00eaff; /* Azul Néon Vibrante (Usado em H2 e acentos) */
-    --h1-color: #66ffff;      /* NOVO: Cor mais clara e suave, menos saturada, para H1 */
-    --secondary-color: #1a1a1a; /* Fundo Escuro */
-    --tertiary-color: #f0f0f0; /* Cor do Texto Principal */
-    --accent-glow: 0 0 10px var(--primary-color), 0 0 20px rgba(0, 234, 255, 0.4); /* Brilho Intenso */
-    --soft-glow: 0 0 4px var(--h1-color); /* Ajustado: Brilho Suave e usando a cor menos vibrante */
+    --primary-color: #007bff; /* Azul Moderno (Destaque) */
+    --secondary-color: #f8f9fa; /* Fundo Muito Claro */
+    --card-background: #ffffff; /* Fundo dos Cards (Branco Puro) */
+    --text-color: #343a40; /* Cor do Texto Principal (Cinza Escuro) */
+    --accent-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Sombra suave e moderna */
 }
 
-/* ... (código global inalterado) ... */
-
-/* ESTILIZAÇÃO DE TÍTULOS (MODIFICADO) */
-h1, h2 {
-    font-weight: 700;
+/* 1. Estilização Global e Reset */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--secondary-color); /* Fundo claro */
+    color: var(--text-color); /* Texto escuro */
+    line-height: 1.6;
 }
 
-/* Título Principal (H1) - MENOS DESTACADO E MAIS SUAVE */
+/* 2. Cabeçalho e Navegação */
+header {
+    background-color: var(--card-background); /* Fundo branco ou claro */
+    padding: 25px 0;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Sombra sutil */
+}
+
+/* Título Principal (H1) - Destacado sem brilho excessivo */
 h1 {
-    color: var(--h1-color); /* Cor mais suave */
-    font-size: 2.2em;       /* Tamanho ligeiramente menor */
-    text-shadow: var(--soft-glow); /* Brilho reduzido */
-    opacity: 0.85;          /* Adiciona uma leve transparência para suavizar */
+    font-weight: 700;
+    color: var(--primary-color); 
+    font-size: 2.2em;
+    margin-top: 0;
 }
 
-/* Títulos de Seção (H2) - Mantém o Destaque Original para contraste */
+nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    margin: 0 20px;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: var(--primary-color); /* Destaque no hover */
+}
+
+/* 3. Conteúdo Principal (Centralização e Cards) */
+main {
+    padding: 40px 20px;
+    max-width: 1000px;
+    margin: 20px auto;
+}
+
+.content-card {
+    background-color: var(--card-background); /* Fundo Branco */
+    padding: 30px;
+    margin-bottom: 30px;
+    border-radius: 10px; 
+    border-left: 5px solid var(--primary-color); /* Linha de destaque lateral */
+    box-shadow: var(--accent-shadow); /* Sombra suave para profundidade */
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.content-card:hover {
+    transform: translateY(-3px); /* Efeito de elevação sutil */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+}
+
+/* Títulos de Seção (H2) - Destaque com cor primária */
 h2 {
+    font-weight: 700;
     color: var(--primary-color);
-    text-shadow: var(--accent-glow); 
+    border-bottom: 2px solid #e9ecef; /* Linha de separação discreta */
+    padding-bottom: 10px;
 }
 
-/* ... (resto do CSS inalterado) ... */
+/* 4. Elementos Interativos */
+.toggle-button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 700;
+    margin-top: 15px;
+    transition: background-color 0.3s;
+}
+
+.toggle-button:hover {
+    background-color: #0056b3; /* Tom mais escuro no hover */
+}
+
+.hidden-content {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #e9ecef; /* Fundo levemente cinza para o conteúdo oculto */
+    border-left: 4px solid var(--primary-color);
+    border-radius: 5px;
+    color: var(--text-color);
+}
+
+/* 5. Rodapé */
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: var(--card-background);
+    color: #6c757d;
+    border-top: 1px solid #dee2e6;
+}
