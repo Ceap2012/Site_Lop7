@@ -9,28 +9,37 @@
 
 /* 1. Estilização Global e Reset */
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Quicksand', sans-serif; /* FONTE ARREDONDADA */
     margin: 0;
     padding: 0;
-    background-color: var(--secondary-color); /* Fundo claro */
-    color: var(--text-color); /* Texto escuro */
+    background-color: var(--secondary-color);
+    color: var(--text-color);
     line-height: 1.6;
 }
 
-/* 2. Cabeçalho e Navegação */
-header {
-    background-color: var(--card-background); /* Fundo branco ou claro */
-    padding: 25px 0;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Sombra sutil */
+/* 2. Estilos de Títulos */
+h1, h2 {
+    font-weight: 700;
 }
 
-/* Título Principal (H1) - Destacado sem brilho excessivo */
 h1 {
-    font-weight: 700;
     color: var(--primary-color); 
     font-size: 2.2em;
     margin-top: 0;
+}
+
+h2 {
+    color: var(--primary-color);
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 10px;
+}
+
+/* 3. Cabeçalho e Navegação */
+header {
+    background-color: var(--card-background);
+    padding: 25px 0;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 nav a {
@@ -42,10 +51,10 @@ nav a {
 }
 
 nav a:hover {
-    color: var(--primary-color); /* Destaque no hover */
+    color: var(--primary-color);
 }
 
-/* 3. Conteúdo Principal (Centralização e Cards) */
+/* 4. Conteúdo Principal e Cards */
 main {
     padding: 40px 20px;
     max-width: 1000px;
@@ -53,29 +62,21 @@ main {
 }
 
 .content-card {
-    background-color: var(--card-background); /* Fundo Branco */
+    background-color: var(--card-background);
     padding: 30px;
     margin-bottom: 30px;
-    border-radius: 10px; 
-    border-left: 5px solid var(--primary-color); /* Linha de destaque lateral */
-    box-shadow: var(--accent-shadow); /* Sombra suave para profundidade */
+    border-radius: 10px;
+    border-left: 5px solid var(--primary-color);
+    box-shadow: var(--accent-shadow);
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .content-card:hover {
-    transform: translateY(-3px); /* Efeito de elevação sutil */
+    transform: translateY(-3px);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
 }
 
-/* Títulos de Seção (H2) - Destaque com cor primária */
-h2 {
-    font-weight: 700;
-    color: var(--primary-color);
-    border-bottom: 2px solid #e9ecef; /* Linha de separação discreta */
-    padding-bottom: 10px;
-}
-
-/* 4. Elementos Interativos */
+/* 5. Elementos Interativos */
 .toggle-button {
     background-color: var(--primary-color);
     color: white;
@@ -89,19 +90,19 @@ h2 {
 }
 
 .toggle-button:hover {
-    background-color: #0056b3; /* Tom mais escuro no hover */
+    background-color: #0056b3;
 }
 
 .hidden-content {
     margin-top: 15px;
     padding: 15px;
-    background-color: #e9ecef; /* Fundo levemente cinza para o conteúdo oculto */
+    background-color: #e9ecef;
     border-left: 4px solid var(--primary-color);
     border-radius: 5px;
     color: var(--text-color);
 }
 
-/* 5. Rodapé */
+/* 6. Rodapé */
 footer {
     text-align: center;
     padding: 15px;
