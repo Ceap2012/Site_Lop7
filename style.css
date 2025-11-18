@@ -1,29 +1,31 @@
 /* Definição de Cores e Fontes (Futurista/Moderno) */
 :root {
-    --primary-color: #00eaff; /* Azul Néon Vibrante */
+    --primary-color: #00eaff; /* Azul Néon Vibrante (Usado em H2 e acentos) */
+    --h1-color: #66ffff;      /* NOVO: Cor mais clara e suave, menos saturada, para H1 */
     --secondary-color: #1a1a1a; /* Fundo Escuro */
     --tertiary-color: #f0f0f0; /* Cor do Texto Principal */
     --accent-glow: 0 0 10px var(--primary-color), 0 0 20px rgba(0, 234, 255, 0.4); /* Brilho Intenso */
-    --soft-glow: 0 0 5px var(--primary-color); /* NOVO: Brilho Suave para o Título Principal */
+    --soft-glow: 0 0 4px var(--h1-color); /* Ajustado: Brilho Suave e usando a cor menos vibrante */
 }
 
 /* ... (código global inalterado) ... */
 
-/* ESTILIZAÇÃO DE TÍTULOS (AQUI ESTÁ A MUDANÇA) */
+/* ESTILIZAÇÃO DE TÍTULOS (MODIFICADO) */
 h1, h2 {
     font-weight: 700;
-    color: var(--primary-color);
 }
 
-/* Título Principal (H1) - Menos Iluminado */
+/* Título Principal (H1) - MENOS DESTACADO E MAIS SUAVE */
 h1 {
-    /* Aplica o brilho mais suave */
-    text-shadow: var(--soft-glow); 
-    font-size: 2.5em; /* Um tamanho ligeiramente menor pode ajudar na sensação moderna */
+    color: var(--h1-color); /* Cor mais suave */
+    font-size: 2.2em;       /* Tamanho ligeiramente menor */
+    text-shadow: var(--soft-glow); /* Brilho reduzido */
+    opacity: 0.85;          /* Adiciona uma leve transparência para suavizar */
 }
 
-/* Títulos de Seção (H2) - Mantém o Brilho Intenso para Destaque */
+/* Títulos de Seção (H2) - Mantém o Destaque Original para contraste */
 h2 {
+    color: var(--primary-color);
     text-shadow: var(--accent-glow); 
 }
 
