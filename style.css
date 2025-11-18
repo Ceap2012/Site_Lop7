@@ -1,25 +1,26 @@
-/* Definição de Cores e Fontes (Claro/Moderno) */
+/* Definição de Cores e Fontes (Claro/Moderno, Alto Contraste) */
 :root {
     --primary-color: #007bff; /* Azul Moderno (Destaque) */
     --secondary-color: #f8f9fa; /* Fundo Muito Claro */
     --card-background: #ffffff; /* Fundo dos Cards (Branco Puro) */
-    --text-color: #343a40; /* Cor do Texto Principal (Cinza Escuro) */
+    --text-color: #212529; /* ALTO CONTRASTE: Cor do Texto Principal (Quase Preto) */
     --accent-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Sombra suave e moderna */
 }
 
 /* 1. Estilização Global e Reset */
 body {
-    font-family: 'Quicksand', sans-serif; /* FONTE ARREDONDADA */
+    font-family: 'Quicksand', sans-serif; /* Fonte Arredondada */
     margin: 0;
     padding: 0;
     background-color: var(--secondary-color);
     color: var(--text-color);
     line-height: 1.6;
+    font-weight: 500; /* MAIS DESTAQUE: Aumenta o peso da fonte padrão */
 }
 
 /* 2. Estilos de Títulos */
 h1, h2 {
-    font-weight: 700;
+    font-weight: 700; /* Garante que os títulos sejam bem fortes */
 }
 
 h1 {
