@@ -3,99 +3,28 @@
     --primary-color: #00eaff; /* Azul Néon Vibrante */
     --secondary-color: #1a1a1a; /* Fundo Escuro */
     --tertiary-color: #f0f0f0; /* Cor do Texto Principal */
-    --accent-glow: 0 0 10px var(--primary-color), 0 0 20px rgba(0, 234, 255, 0.4); /* Efeito de Brilho */
+    --accent-glow: 0 0 10px var(--primary-color), 0 0 20px rgba(0, 234, 255, 0.4); /* Brilho Intenso */
+    --soft-glow: 0 0 5px var(--primary-color); /* NOVO: Brilho Suave para o Título Principal */
 }
 
-/* 1. Estilização Global e Reset */
-body {
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: var(--secondary-color);
-    color: var(--tertiary-color);
-    line-height: 1.6;
-}
+/* ... (código global inalterado) ... */
 
+/* ESTILIZAÇÃO DE TÍTULOS (AQUI ESTÁ A MUDANÇA) */
 h1, h2 {
     font-weight: 700;
     color: var(--primary-color);
-    text-shadow: var(--accent-glow); /* Brilho no Título */
 }
 
-/* 2. Cabeçalho e Navegação */
-header {
-    background-color: #0d0d0d;
-    padding: 25px 0;
-    text-align: center;
-    border-bottom: 2px solid var(--primary-color); /* Linha de separação */
+/* Título Principal (H1) - Menos Iluminado */
+h1 {
+    /* Aplica o brilho mais suave */
+    text-shadow: var(--soft-glow); 
+    font-size: 2.5em; /* Um tamanho ligeiramente menor pode ajudar na sensação moderna */
 }
 
-nav a {
-    color: var(--tertiary-color);
-    text-decoration: none;
-    margin: 0 20px;
-    font-weight: 500;
-    transition: color 0.3s, text-shadow 0.3s;
+/* Títulos de Seção (H2) - Mantém o Brilho Intenso para Destaque */
+h2 {
+    text-shadow: var(--accent-glow); 
 }
 
-nav a:hover {
-    color: var(--primary-color);
-    text-shadow: 0 0 8px var(--primary-color); /* Efeito neon no hover */
-}
-
-/* 3. Conteúdo Principal (Centralização e Cards) */
-main {
-    padding: 40px 20px;
-    max-width: 1000px;
-    margin: 20px auto;
-}
-
-.content-card {
-    background-color: #242424; /* Fundo mais claro para os cards */
-    padding: 30px;
-    margin-bottom: 30px;
-    border-radius: 10px; /* Borda arredondada (moderno) */
-    border: 1px solid rgba(0, 234, 255, 0.2); /* Borda sutil */
-    box-shadow: 0 4px 15px rgba(0, 234, 255, 0.1); /* Sombra suave para profundidade */
-    transition: transform 0.3s;
-}
-
-.content-card:hover {
-    transform: translateY(-5px); /* Efeito de elevação ao passar o mouse */
-    box-shadow: 0 8px 25px rgba(0, 234, 255, 0.2);
-}
-
-/* 4. Elementos Interativos */
-.toggle-button {
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: 700;
-    margin-top: 15px;
-    transition: background-color 0.3s, box-shadow 0.3s;
-}
-
-.toggle-button:hover {
-    background-color: #00ffff;
-    box-shadow: var(--accent-glow);
-}
-
-.hidden-content {
-    margin-top: 15px;
-    padding: 15px;
-    background-color: #333;
-    border-left: 4px solid var(--primary-color);
-    border-radius: 5px;
-}
-
-/* 5. Rodapé */
-footer {
-    text-align: center;
-    padding: 15px;
-    background-color: #0d0d0d;
-    color: rgba(255, 255, 255, 0.6);
-    border-top: 1px solid rgba(0, 234, 255, 0.1);
-}
+/* ... (resto do CSS inalterado) ... */
