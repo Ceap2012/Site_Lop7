@@ -148,4 +148,38 @@ footer {
 .link-button:hover {
     background-color: #0056b3;
 }
+/* Estilo para a Tabela de Conjugação (Design Moderno) */
+.conjugation-table {
+    width: 100%;
+    border-collapse: collapse; /* Remove as bordas duplas */
+    margin: 20px 0;
+    font-size: 0.9em;
+    border-radius: 8px; /* Borda arredondada */
+    overflow: hidden; /* Garante que as bordas arredondadas sejam aplicadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
 
+.conjugation-table thead tr {
+    background-color: var(--primary-color);
+    color: white;
+    text-align: left;
+    font-weight: 700;
+}
+
+.conjugation-table th, 
+.conjugation-table td {
+    padding: 12px 15px;
+}
+
+.conjugation-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+/* Zebra Striping (Linhas alternadas) para melhor leitura */
+.conjugation-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.conjugation-table tbody tr:last-of-type {
+    border-bottom: 2px solid var(--primary-color);
+}
