@@ -15,7 +15,8 @@
             <a href="#verbos">Verbos</a>
             <a href="#adjetivos">Adjetivos e Pronomes</a>
             <a href="#genero">Gênero Textual</a>
-            <a href="#redacao">Como Montar uma Redação</a>
+            <a href="#redacao">Redação</a>
+            <a href="#quiz">Quiz</a>
         </nav>
     </header>
 
@@ -59,13 +60,53 @@
                 </a>
             </div>
         </section>
+        
+        <section id="quiz" class="content-card">
+            <h2>🏆 Quiz Final: Teste Seus Conhecimentos</h2>
+            <p>Responda às 4 perguntas a seguir sobre todos os temas do nosso guia!</p>
+
+            <form id="quiz-form">
+                <div class="question-block">
+                    <h4>1. Verbos: Qual modo verbal expressa uma **certeza** ou um fato real?</h4>
+                    <label><input type="radio" name="q1" value="a"> Subjuntivo</label><br>
+                    <label><input type="radio" name="q1" value="b"> Indicativo</label><br>
+                    <label><input type="radio" name="q1" value="c"> Imperativo</label>
+                </div>
+
+                <div class="question-block">
+                    <h4>2. Pronomes: Em qual tipo de frase é **proibido** usar o pronome oblíquo átono (Ex: *me*) no início?</h4>
+                    <label><input type="radio" name="q2" value="a"> Mesóclise</label><br>
+                    <label><input type="radio" name="q2" value="b"> Ênclise</label><br>
+                    <label><input type="radio" name="q2" value="c"> Próclise</label>
+                </div>
+
+                <div class="question-block">
+                    <h4>3. Gênero Textual: Qual elemento da Notícia responde às perguntas "O quê? Quem? Quando? Onde?"</h4>
+                    <label><input type="radio" name="q3" value="a"> A Tese</label><br>
+                    <label><input type="radio" name="q3" value="b"> O Título</label><br>
+                    <label><input type="radio" name="q3" value="c"> O Lide (Lead)</label>
+                </div>
+
+                <div class="question-block">
+                    <h4>4. Redação: Na Proposta de Intervenção (modelo ENEM), qual é a função do elemento **Agente**?</h4>
+                    <label><input type="radio" name="q4" value="a"> Mostrar as provas do argumento.</label><br>
+                    <label><input type="radio" name="q4" value="b"> Detalhar o modo como a ação será feita.</label><br>
+                    <label><input type="radio" name="q4" value="c"> Indicar quem será responsável por executar a solução.</label>
+                </div>
+
+                <button type="submit" class="toggle-button" onclick="submitQuiz(event)">Finalizar Quiz e Ver Resultado</button>
+            </form>
+            
+            <div id="quiz-result" class="hidden-content" style="display:none; text-align: center;">
+            </div>
+            
+        </section>
     </main>
 
     <footer>
-        <p>Desenvolvido por GABRIEL ARCANJO | &copy; 2025 Seu Site de Português</p>
+        <p>Desenvolvido com 💙 | &copy; 2025 Seu Site de Português</p>
     </footer>
 
     <script src="script.js"></script>
 </body>
 </html>
-
