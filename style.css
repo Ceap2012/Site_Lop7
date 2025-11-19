@@ -129,3 +129,23 @@ footer {
 .link-button:hover {
     background-color: #0056b3;
 }
+/* Adicionar ao final do seu style.css */
+/* Estilo para Links que agem como Botões (Para o botão "Aprofundar") */
+.link-button {
+    display: inline-block; /* Faz com que o link possa ter altura e largura */
+    background-color: var(--primary-color);
+    color: white !important; /* Garante que a cor do texto seja branca */
+    text-decoration: none; /* Remove o sublinhado padrão do link */
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 700;
+    margin-top: 15px;
+    transition: background-color 0.3s;
+}
+
+.link-button:hover {
+    background-color: #0056b3;
+}
+
