@@ -2,21 +2,22 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>SISTEMA ESPORTIVO ULTRA - MULTI TIMES</title>
+    <title>SISTEMA ESPORTIVO PROFISSIONAL - V9</title>
     <style>
         :root { --neon: #00f2ff; --err: #ff0055; --ok: #39ff14; --bg: #0d0d0d; }
         * { box-sizing: border-box; font-family: 'Courier New', Courier, monospace; }
         body { margin: 0; background: var(--bg); color: white; height: 100vh; display: flex; overflow: hidden; }
 
+        /* TELAS */
         .tela { display: none; width: 100vw; height: 100vh; flex-direction: column; align-items: center; justify-content: center; position: absolute; }
         .ativa { display: flex !important; }
 
-        .caixa-neon { background: #000; border: 2px solid var(--neon); padding: 30px; box-shadow: 0 0 20px var(--neon); text-align: center; width: 550px; }
+        .caixa-neon { background: #000; border: 2px solid var(--neon); padding: 30px; box-shadow: 0 0 20px var(--neon); text-align: center; width: 600px; }
         .workspace { display: flex; width: 100%; height: 100%; }
         .sidebar { width: 220px; border-right: 2px solid var(--neon); padding: 20px; display: flex; flex-direction: column; gap: 10px; background: #000; }
-        .main { flex: 1; padding: 40px; overflow-y: auto; position: relative; }
+        .main { flex: 1; padding: 40px; overflow-y: auto; }
 
-        h1, h2 { color: var(--neon); text-shadow: 0 0 10px var(--neon); text-transform: uppercase; }
+        h1, h2, h3 { color: var(--neon); text-shadow: 0 0 10px var(--neon); text-transform: uppercase; margin: 10px 0; }
         button { background: transparent; color: var(--neon); border: 1px solid var(--neon); padding: 12px; cursor: pointer; font-weight: bold; margin: 5px; transition: 0.3s; }
         button:hover { background: var(--neon); color: #000; box-shadow: 0 0 15px var(--neon); }
 
@@ -24,36 +25,37 @@
         .escondido { display: none !important; }
         
         /* FEEDBACK DO QUIZ */
-        #feedback-quiz { font-size: 1.5rem; font-weight: bold; margin-top: 15px; min-height: 30px; }
+        #feedback-quiz { font-size: 1.5rem; font-weight: bold; margin: 15px 0; min-height: 40px; }
         .acertou { color: var(--ok); text-shadow: 0 0 10px var(--ok); }
         .errou { color: var(--err); text-shadow: 0 0 10px var(--err); }
 
-        .btn-quiz { display: block; width: 100%; margin: 10px 0; text-align: left; padding: 15px; border: 1px solid var(--neon); color: var(--neon); cursor: pointer; background: transparent; }
+        .btn-quiz { display: block; width: 100%; margin: 10px 0; text-align: left; padding: 15px; border: 1px solid var(--neon); color: var(--neon); cursor: pointer; background: transparent; font-size: 1rem; }
         .btn-quiz:hover { background: rgba(0, 242, 255, 0.1); }
-        select { width: 100%; padding: 10px; background: #000; color: var(--neon); border: 1px solid var(--neon); margin-bottom: 20px; }
+        
+        select { width: 100%; padding: 15px; background: #000; color: var(--neon); border: 2px solid var(--neon); font-size: 1.1rem; margin-bottom: 20px; outline: none; }
     </style>
 </head>
 <body>
 
     <section id="t-login" class="tela ativa">
         <div class="caixa-neon">
-            <h1>SISTEMA_ESPORTIVO_V8</h1>
-            <p>CONTEÚDO: FUTEBOL | BASQUETE | VÔLEI | PING PONG</p>
-            <button onclick="irPara('t-selecao')">INICIAR_ACESSO</button>
+            <h1>SISTEMA_V9_ONLINE</h1>
+            <p>CONTEÚDO MULTI-ESPORTIVO E DOSSIÊ DE CLUBES</p>
+            <button onclick="irPara('t-selecao')">ACESSAR MÓDULOS_</button>
         </div>
     </section>
 
     <section id="t-selecao" class="tela">
         <div class="caixa-neon">
-            <h2>MÓDULOS DISPONÍVEIS</h2>
+            <h2>MÓDULOS DE ESTUDO</h2>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0;">
                 <button onclick="selecionar('Futebol')">FUTEBOL</button>
                 <button onclick="selecionar('Basquete')">BASQUETE</button>
                 <button onclick="selecionar('Vôlei')">VÔLEI</button>
                 <button onclick="selecionar('Ping Pong')">PING PONG</button>
             </div>
-            <p id="txt-sel">Escolha os módulos no menu acima</p>
-            <button id="btn-work" class="escondido" onclick="montarWork()">GERAR WORKSPACE_</button>
+            <p id="txt-sel">Aguardando seleção de dados...</p>
+            <button id="btn-work" class="escondido" onclick="montarWork()">GERAR WORKSPACE FINAL_</button>
         </div>
     </section>
 
@@ -68,25 +70,27 @@
                     <div class="info-bloco"><b>REGRAS:</b> <p id="v-rules"></p></div>
                     <div class="info-bloco"><b>TÁTICA:</b> <p id="v-tactic"></p></div>
                     <div class="info-bloco"><b>TECH:</b> <p id="v-tech"></p></div>
-                    <button style="width: 100%;" onclick="gerarQuiz()">DESBLOQUEAR QUIZ DE VALIDAÇÃO_</button>
+                    <button style="width: 100%; background: var(--neon); color: black;" onclick="gerarQuiz()">INICIAR QUIZ DE VALIDAÇÃO_</button>
                 </div>
 
                 <div id="view-quiz" class="escondido">
-                    <h2>TESTE_DE_SISTEMA</h2>
-                    <p id="pergunta-display" style="font-size: 1.2rem;"></p>
+                    <h2>VALIDAÇÃO_DE_CONHECIMENTO</h2>
+                    <p id="pergunta-display" style="font-size: 1.3rem; margin: 20px 0;"></p>
                     <div id="container-opcoes"></div>
                     <div id="feedback-quiz"></div>
                 </div>
 
                 <div id="view-dossie" class="escondido">
-                    <h2>ARQUIVO_DE_CLUBES_DETALHADO</h2>
+                    <h2>DOSSIÊ_HISTÓRICO_DOS_CLUBES</h2>
                     <select id="sel-clube" onchange="exibirClube()">
-                        <option value="">Selecione um dossiê...</option>
-                        <option value="Corinthians">Corinthians</option>
-                        <option value="Palmeiras">Palmeiras</option>
-                        <option value="Santos">Santos</option>
+                        <option value="">Escolha um time para ver a história...</option>
+                        <option value="Corinthians">Corinthians (O Time do Povo)</option>
+                        <option value="Palmeiras">Palmeiras (A Academia)</option>
+                        <option value="Santos">Santos (O Time do Rei)</option>
+                        <option value="São Paulo">São Paulo (O Soberano)</option>
                     </select>
-                    <div class="info-bloco" id="resultado-time">Escolha um clube para carregar os dados históricos.</div>
+                    <div class="info-bloco" id="resultado-time">Selecione uma opção acima para carregar o banco de dados.</div>
+                    <button onclick="irPara('t-selecao')" style="margin-top:20px;">VOLTAR À SELEÇÃO</button>
                 </div>
 
             </main>
@@ -96,61 +100,67 @@
     <script>
         const DB = {
             "Futebol": {
-                h: "Invasão de campo adversário. 11 vs 11.",
-                r: "90 min, Impedimento e 5 trocas.",
-                t: "Marcação por pressão e transição rápida.",
-                te: "VAR e Sensores na bola.",
-                q: "Qual o nome da tecnologia que revisa lances em vídeo?",
-                o: ["VAR", "GPS", "RADAR"], c: 0
+                h: "Disputa de 11 contra 11 em campo. Objetivo: gol.",
+                r: "Impedimento, cartões, VAR e 90 minutos de jogo.",
+                t: "Sistemas como 4-4-2 ou 4-3-3 e transição rápida.",
+                te: "Microchips na bola e coletes com GPS térmico.",
+                q: "Qual dessas regras impede um atacante de ficar 'banheirando' atrás da defesa?",
+                o: ["Escanteio", "Impedimento", "Lateral"], c: 1
             },
             "Basquete": {
-                h: "Colocar a bola no aro adversário (3,05m).",
-                r: "Posse de 24 segundos e 4 quartos.",
-                t: "Pick and Roll e Defesa por Zona.",
-                te: "Tabelas com sensores de impacto.",
-                q: "Quantos segundos dura uma posse de ataque?",
-                o: ["14s", "30s", "24s"], c: 2
+                h: "Levar a bola até o aro (3,05m de altura).",
+                r: "Posse de 24s, 4 quartos e limite de faltas.",
+                t: "Pick and Roll e arremessos do perímetro.",
+                te: "Shot Clock digital e tabelas de vidro temperado.",
+                q: "Qual a altura oficial da cesta de basquete?",
+                o: ["2,80m", "3,50m", "3,05m"], c: 2
             },
             "Vôlei": {
-                h: "A bola não pode tocar o chão. 3 toques por time.",
-                r: "Sets de 25 pontos e rodízio obrigatório.",
-                t: "Bloqueio triplo e ataque sincronizado.",
-                te: "Hawk-eye para conferência de bola dentro/fora.",
-                q: "Qual o máximo de toques que um time pode dar?",
-                o: ["1", "3", "5"], c: 1
+                h: "A bola não pode cair. Jogo dividido por uma rede.",
+                r: "Rodízio, sets de 25 pontos e máximo de 3 toques.",
+                t: "Bloqueio triplo e ataque de fundo (pipe).",
+                te: "Sensores de linha Hawk-Eye.",
+                q: "Quantos toques cada time pode dar na bola antes de passar?",
+                o: ["1 toque", "2 toques", "3 toques"], c: 2
             },
             "Ping Pong": {
-                h: "Duelo de reflexos em mesa de 2,74m.",
-                r: "Sets de 11 pontos e saque troca a cada 2 pontos.",
-                t: "Efeito Topspin e Backspin.",
-                te: "Madeiras de carbono tratadas.",
+                h: "Duelo de mesa. Requer reflexo e velocidade.",
+                r: "Sets de 11 pontos e saque a cada 2 pontos.",
+                t: "Efeito 'Corta' e ataques angulares.",
+                te: "Raquetes de madeira tratada com carbono.",
                 q: "O saque muda de lado a cada quantos pontos?",
-                o: ["1 ponto", "2 pontos", "5 pontos"], c: 1
+                o: ["2 pontos", "5 pontos", "10 pontos"], c: 0
             }
         };
 
         const TIMES = {
             "Corinthians": {
-                h: "O Time do Povo. Fundado por operários em 1910 no Bom Retiro.",
-                t: "2 Mundiais FIFA (2000, 2012), 1 Libertadores Invicta.",
-                i: "Sócrates, Cássio, Marcelinho Carioca.",
-                f: "01/09/1910"
+                f: "01/09/1910",
+                h: "Fundado por operários no Bom Retiro sob a luz de um lampião. Tornou-se o maior representante da classe trabalhadora.",
+                t: "2 Mundiais FIFA (2000, 2012), 1 Libertadores Invicta, 7 Brasileiros.",
+                i: "Sócrates, Cássio, Marcelinho Carioca, Neto."
             },
             "Palmeiras": {
-                h: "A Academia de Futebol. Fundado como Palestra Itália por imigrantes.",
+                f: "26/08/1914",
+                h: "Fundado como Palestra Itália por imigrantes italianos. Renomeado para Palmeiras em 1942 durante a guerra.",
                 t: "12 Brasileiros, 3 Libertadores, 4 Copas do Brasil.",
-                i: "Ademir da Guia, Marcos, Edmundo.",
-                f: "26/08/1914"
+                i: "Ademir da Guia, Marcos, Edmundo, Dudu."
             },
             "Santos": {
-                h: "O Time do Rei. O mundo parou para ver o Santos de Pelé jogar.",
+                f: "14/04/1912",
+                h: "Conhecido como o time que parou guerras. Celeiro de craques e casa do Rei Pelé.",
                 t: "2 Mundiais, 3 Libertadores, 8 Brasileiros.",
-                i: "Pelé, Pepe, Neymar.",
-                f: "14/04/1912"
+                i: "Pelé, Pepe, Neymar, Robinho."
+            },
+            "São Paulo": {
+                f: "25/01/1930",
+                h: "Clube que nasceu grande. Conhecido pela estrutura de ponta e por ser o maior campeão internacional de SP.",
+                t: "3 Mundiais Interclubes, 3 Libertadores, 6 Brasileiros.",
+                i: "Rogério Ceni, Raí, Telê Santana, Careca."
             }
         };
 
-        let lista = [];
+        let selecionados = [];
         let atual = "";
 
         function irPara(id) {
@@ -159,28 +169,28 @@
         }
 
         function selecionar(s) {
-            if(!lista.includes(s)) {
-                lista.push(s);
+            if(!selecionados.includes(s)) {
+                selecionados.push(s);
                 document.getElementById('btn-work').classList.remove('escondido');
-                document.getElementById('txt-sel').innerText = "SELECIONADOS: " + lista.join(' | ');
+                document.getElementById('txt-sel').innerText = "DADOS CARREGADOS: " + selecionados.join(' | ');
             }
         }
 
         function montarWork() {
             irPara('t-work');
             const menu = document.getElementById('menu-lat');
-            menu.innerHTML = "<h3>MENU_</h3>";
-            lista.forEach(s => {
+            menu.innerHTML = "<h3>NAV_SISTEMA</h3>";
+            selecionados.forEach(s => {
                 const b = document.createElement('button');
                 b.innerText = s;
                 b.style.width = "100%";
-                b.onclick = () => carregar(s);
+                b.onclick = () => carregarMódulo(s);
                 menu.appendChild(b);
             });
-            carregar(lista[0]);
+            carregarMódulo(selecionados[0]);
         }
 
-        function carregar(s) {
+        function carregarMódulo(s) {
             atual = s;
             document.getElementById('view-dados').classList.remove('escondido');
             document.getElementById('view-quiz').classList.add('escondido');
@@ -196,7 +206,7 @@
         function gerarQuiz() {
             document.getElementById('view-dados').classList.add('escondido');
             document.getElementById('view-quiz').classList.remove('escondido');
-            document.getElementById('feedback-quiz').innerText = ""; // Limpa feedback anterior
+            document.getElementById('feedback-quiz').innerText = ""; 
 
             const qObj = DB[atual];
             document.getElementById('pergunta-display').innerText = qObj.q;
@@ -208,15 +218,15 @@
                 const btn = document.createElement('button');
                 btn.className = "btn-quiz";
                 btn.innerText = opcao;
-                btn.onclick = () => validarResposta(idx, qObj.c);
+                btn.onclick = () => validar(idx, qObj.c);
                 container.appendChild(btn);
             });
         }
 
-        function validarResposta(escolha, correta) {
+        function validar(escolha, correta) {
             const feed = document.getElementById('feedback-quiz');
             if(escolha === correta) {
-                feed.innerText = "SISTEMA VALIDADO: ACERTOU!";
+                feed.innerText = "SISTEMA VALIDADO: RESPOSTA CORRETA!";
                 feed.className = "acertou";
                 
                 setTimeout(() => {
@@ -224,11 +234,11 @@
                         document.getElementById('view-quiz').classList.add('escondido');
                         document.getElementById('view-dossie').classList.remove('escondido');
                     } else {
-                        carregar(atual);
+                        carregarMódulo(atual);
                     }
-                }, 1500); // Espera 1.5s para você ver o feedback antes de mudar
+                }, 1200);
             } else {
-                feed.innerText = "ERRO DE DADOS: TENTE NOVAMENTE!";
+                feed.innerText = "ERRO DE DADOS: RESPOSTA INCORRETA!";
                 feed.className = "errou";
             }
         }
@@ -239,10 +249,10 @@
             if(c && TIMES[c]) {
                 const d = TIMES[c];
                 res.innerHTML = `<h3>${c.toUpperCase()}</h3>
-                <p><b>FUNDAÇÃO:</b> ${d.f}</p>
-                <p><b>HISTÓRIA:</b> ${d.h}</p>
-                <p><b>TÍTULOS:</b> ${d.t}</p>
-                <p><b>ÍDOLOS:</b> ${d.i}</p>`;
+                <p><b>DATA DE FUNDAÇÃO:</b> ${d.f}</p>
+                <p><b>ORIGEM E HISTÓRIA:</b> ${d.h}</p>
+                <p><b>PRINCIPAIS TÍTULOS:</b> ${d.t}</p>
+                <p><b>GRANDES ÍDOLOS:</b> ${d.i}</p>`;
             }
         }
     </script>
