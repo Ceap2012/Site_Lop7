@@ -1,31 +1,30 @@
 const database = {
     "Futebol": {
-        how: "Conduzir a bola ao gol em campo de 100m. Foco em transição e posse estratégica.",
-        rules: ["90 min", "VAR Ativo", "Impedimento via IA", "5 Substituições"],
-        tactics: "Gegenpressing e 4-3-3 ofensivo com amplitude.",
-        res: "Bolas com microchips e GPS corporal de alta frequência.",
-        quiz: [{ q: "Qual a duração oficial de uma partida?", a: ["45min", "90min", "120min"], c: 1 }]
+        how: "Domínio de campo e progressão em zonas. O objetivo é a finalização técnica no arco adversário.",
+        rules: ["Partida: 90min", "VAR: Decisões por IA", "Substituições: 5 janelas", "Linha de Meta: 100% de cruzamento"],
+        tactics: "Sistema 4-3-3 com transições agressivas (Gegenpressing).",
+        res: "Rastreamento corporal via sensores UWB e bolas inteligentes.",
+        quiz: [{ q: "Qual a regra principal para o gol ser validado?", a: ["Cruzamento parcial da linha", "Bola tocar na rede", "Cruzamento de 100% da linha"], c: 2 }]
     },
     "Ping Pong": {
-        how: "Rebater a bola com efeito Magnus sobre a mesa de 2,74m.",
-        rules: ["Sets de 11 pontos", "Saque sobe 16cm", "Mão fora da mesa"],
-        tactics: "Ataque de terceira bola e controle de spin.",
-        res: "Borrachas tencionadas e sensores de borda.",
-        quiz: [{ q: "Quantos pontos ganham um set?", a: ["11", "21"], c: 0 }]
+        how: "Troca rápida de bola com aplicação de efeito Magnus (Spin).",
+        rules: ["Sets de 11", "Vantagem de 2", "Serviço visível de 16cm"],
+        tactics: "Ataque rápido de 3ª bola.",
+        res: "Borrachas de alta fricção molecular.",
+        quiz: [{ q: "Qual a altura mínima do lançamento do saque?", a: ["10cm", "16cm", "20cm"], c: 1 }]
     }
 };
 
 const timesData = {
-    "Flamengo": { fund: "1895", hist: "Clube de Regatas que se tornou potência mundial.", titulos: "Mundial 1981, 3 Libertadores.", idolo: "Zico" },
-    "Palmeiras": { fund: "1914", hist: "Academia de futebol, multicampeão nacional e continental.", titulos: "3 Libertadores, 12 Brasileiros.", idolo: "Ademir da Guia" },
-    "Santos": { fund: "1912", hist: "O time que parou guerras e revelou o Rei do Futebol.", titulos: "2 Mundiais, 3 Libertadores.", idolo: "Pelé" },
-    "São Paulo": { fund: "1930", hist: "O Clube da Fé, primeiro tri-mundial do Brasil.", titulos: "3 Mundiais, 3 Libertadores.", idolo: "Rogério Ceni" }
+    "Flamengo": { hist: "Nascido no remo, tornou-se a maior potência do futebol brasileiro.", fund: "1895", tits: "Mundial, 3 Libertadores, 8 Brasileiros", idolo: "Zico" },
+    "Palmeiras": { hist: "A Academia de Futebol, sinônimo de técnica e organização.", fund: "1914", tits: "3 Libertadores, 12 Brasileiros", idolo: "Ademir da Guia" },
+    "Santos": { hist: "O palco do Rei Pelé e o time que parou guerras pelo mundo.", fund: "1912", tits: "2 Mundiais, 3 Libertadores", idolo: "Pelé" },
+    "São Paulo": { hist: "Primeiro brasileiro Tri-Mundial e referência de infraestrutura.", fund: "1930", tits: "3 Mundiais, 3 Libertadores", idolo: "Rogério Ceni" }
 };
 
 let roteiro = [];
 let esporteAtivo = "";
 
-// NAVEGAÇÃO PRINCIPAL
 function showScreen(id) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById(id).classList.add('active');
@@ -33,18 +32,10 @@ function showScreen(id) {
 
 function gerenciarAcesso() {
     const user = document.getElementById('user-input').value;
-    if(user !== "") {
-        showScreen('screen-selection');
-    } else {
-        alert("Digite um ID para acessar.");
-    }
+    if(user) showScreen('screen-selection');
+    else alert("IDENTIFICAÇÃO NECESSÁRIA");
 }
 
-function alternarModo() {
-    alert("Modo alterado. Tente logar agora.");
-}
-
-// SELEÇÃO DE ESPORTES
 function adicionarAoRoteiro(esp, el) {
     if(!roteiro.includes(esp)) {
         roteiro.push(esp);
@@ -52,11 +43,10 @@ function adicionarAoRoteiro(esp, el) {
         document.getElementById('btn-iniciar').classList.remove('hidden');
         const list = document.getElementById('display-roteiro');
         if(roteiro.length === 1) list.innerHTML = "";
-        list.innerHTML += `<li>Módulo: ${esp}</li>`;
+        list.innerHTML = `MÓDULOS CARREGADOS: ${roteiro.join(' | ')}`;
     }
 }
 
-// WORKSPACE
 function abrirWorkspace() {
     showScreen('screen-workspace');
     const nav = document.getElementById('sidebar-nav');
@@ -64,7 +54,7 @@ function abrirWorkspace() {
     roteiro.forEach(esp => {
         const btn = document.createElement('button');
         btn.innerText = esp.toUpperCase();
-        btn.style.width = "100%";
+        btn.className = "main-btn"; btn.style.width = "100%"; btn.style.marginBottom = "10px";
         btn.onclick = () => carregarEstudo(esp);
         nav.appendChild(btn);
     });
@@ -88,7 +78,6 @@ function carregarEstudo(esp) {
     d.rules.forEach(r => list.innerHTML += `<li>${r}</li>`);
 }
 
-// QUIZ E TIMES
 function irParaQuiz() {
     document.getElementById('section-theory').classList.add('hidden');
     document.getElementById('section-quiz').classList.remove('hidden');
@@ -101,20 +90,15 @@ function irParaQuiz() {
     qData.a.forEach((opt, i) => {
         const btn = document.createElement('button');
         btn.innerText = opt;
-        btn.style.width = "100%";
+        btn.className = "main-btn"; btn.style.width = "100%"; btn.style.margin = "5px 0";
         btn.onclick = () => {
             if(i === qData.c) {
-                alert("CONHECIMENTO VALIDADO!");
+                alert("APTIDÃO CONFIRMADA!");
                 if(esporteAtivo === "Futebol") {
                     document.getElementById('section-quiz').classList.add('hidden');
                     document.getElementById('section-team').classList.remove('hidden');
-                } else {
-                    carregarEstudo(esporteAtivo);
-                }
-            } else {
-                alert("ERRADO. REVISE A TEORIA.");
-                carregarEstudo(esporteAtivo);
-            }
+                } else carregarEstudo(esporteAtivo);
+            } else alert("DADOS INCORRETOS. REVISE A TEORIA.");
         };
         optDiv.appendChild(btn);
     });
@@ -125,13 +109,7 @@ function exibirDadosTime() {
     const res = document.getElementById('team-result');
     if(time && timesData[time]) {
         const t = timesData[time];
+        res.innerHTML = `<h3>${time}</h3><p>${t.hist}</p><p><b>FUNDAÇÃO:</b> ${t.fund}</p><p><b>TÍTULOS:</b> ${t.tits}</p><p><b>ÍDOLO:</b> ${t.idolo}</p>`;
         res.style.display = "block";
-        res.innerHTML = `
-            <h3>${time.toUpperCase()}</h3>
-            <p><b>História:</b> ${t.hist}</p>
-            <p><b>Fundação:</b> ${t.fund}</p>
-            <p><b>Títulos:</b> ${t.titulos}</p>
-            <p><b>Ídolo:</b> ${t.idolo}</p>
-        `;
     }
 }
