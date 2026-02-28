@@ -2,52 +2,31 @@ let isLoginMode = false;
 
 function alternarTela() {
     isLoginMode = !isLoginMode;
-    const title = document.getElementById('auth-title');
-    const btn = document.getElementById('main-btn');
-    const toggleText = document.getElementById('toggle-text');
-
-    if (isLoginMode) {
-        title.innerText = "LOGIN DE ATLETA";
-        btn.innerText = "ENTRAR";
-        toggleText.innerHTML = "Não possui registro? <span>CADASTRAR</span>";
-    } else {
-        title.innerText = "CRIAR ACESSO";
-        btn.innerText = "CADASTRAR";
-        toggleText.innerHTML = "Já possui registro? <span>ENTRAR</span>";
-    }
+    document.getElementById('auth-title').innerText = isLoginMode ? "LOGIN DE ACESSO" : "NOVO REGISTRO";
+    document.getElementById('main-btn').innerText = isLoginMode ? "ENTRAR" : "CADASTRAR";
 }
 
 function executarAcao() {
     const user = document.getElementById('user').value;
     const pass = document.getElementById('pass').value;
 
-    if (!user || !pass) {
-        alert("Preencha as credenciais!");
-        return;
-    }
+    if (!user || !pass) return alert("Dados incompletos!");
 
     if (isLoginMode) {
-        // Lógica de Login
-        const storedPass = localStorage.getItem(user);
-        if (storedPass === pass) {
-            logar(user);
+        if (localStorage.getItem(user) === pass) {
+            abrirArena(user);
         } else {
-            alert("Erro: Credenciais não encontradas ou incorretas.");
+            alert("Credenciais Inválidas!");
         }
     } else {
-        // Lógica de Cadastro
-        if (localStorage.getItem(user)) {
-            alert("Este usuário já existe no sistema!");
-        } else {
-            localStorage.setItem(user, pass);
-            alert("Registro efetuado com sucesso!");
-            alternarTela();
-        }
+        localStorage.setItem(user, pass);
+        alert("Usuário Criado! Mude para o Login.");
+        alternarTela();
     }
 }
 
-function logar(nome) {
+function abrirArena(nome) {
     document.getElementById('auth-container').classList.add('hidden');
-    document.getElementById('dashboard').classList.remove('hidden');
+    document.getElementById('sports-page').classList.remove('hidden');
     document.getElementById('display-name').innerText = nome.toUpperCase();
 }
