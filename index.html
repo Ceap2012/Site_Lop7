@@ -3,47 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arena Dark | Learning System</title>
+    <title>Arena Dark Futurista</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="grid-overlay"></div>
 
-    <div class="container" id="auth-container">
+    <div id="auth-screen" class="container">
         <div class="glass-box">
-            <div class="scanner-line"></div>
-            <h1>CORE<b>SYSTEM</b></h1>
-            <h2 id="auth-title">NOVO REGISTRO</h2>
+            <div class="scanner"></div>
+            <h1 class="logo">SPORTS<b>NODE</b></h1>
+            <h2 id="auth-title">CRIAR CONTA</h2>
+            
             <div class="input-group">
-                <input type="text" id="user" placeholder="USUÁRIO">
-                <input type="password" id="pass" placeholder="SENHA">
+                <input type="text" id="user-input" placeholder="NOME DE USUÁRIO">
+                <input type="password" id="pass-input" placeholder="SENHA DE ACESSO">
             </div>
-            <button onclick="executarAcao()" id="main-btn">CADASTRAR</button>
-            <p onclick="alternarTela()" id="toggle-text">ACESSO EXISTENTE? <span>ENTRAR</span></p>
+
+            <button onclick="gerenciarAcesso()" id="action-btn">CADASTRAR</button>
+            <p id="toggle-text" onclick="alternarModo()">JÁ TEM CONTA? <span>ENTRAR</span></p>
         </div>
     </div>
 
-    <div id="sports-page" class="hidden">
+    <div id="main-screen" class="container hidden">
         <header>
-            <h2>BEM-VINDO, <span id="display-name" class="neon-text"></span></h2>
-            <p>ESCOLHA A ORDEM DE APRENDIZADO DOS ESPORTES:</p>
+            <h1>BEM-VINDO, <span id="user-welcome" class="neon"></span></h1>
+            <p>QUAL ESPORTE VOCÊ QUER APRENDER PRIMEIRO?</p>
         </header>
 
         <div class="sports-grid">
-            <div class="sport-card highlight" onclick="selecionarEsporte('Futebol', this)">
-                <div class="badge">PRIORIDADE MÁXIMA</div>
+            <div class="card highlight" onclick="adicionarAolista('Futebol', this)">
+                <div class="priority-tag">PRIORIDADE ALPHA</div>
                 <h3>FUTEBOL</h3>
-                <p>O esporte mais tecnológico do mundo.</p>
-                <div class="info-extra">
-                    <span>• Táticas em VR</span>
-                    <span>• Biometria 2026</span>
-                    <span>• Análise de Scout IA</span>
+                <p>O topo do desempenho atlético.</p>
+                <div class="details">
+                    <span>• Táticas de Campo IA</span>
+                    <span>• Biometria Pro</span>
+                    <span>• Scouting 2026</span>
                 </div>
             </div>
 
-            <div class="sport-card" onclick="selecionarEsporte('Ping Pong', this)">
+            <div class="card" onclick="adicionarAolista('Ping Pong', this)">
                 <h3>PING PONG</h3>
-                <p>Reflexos neurais.</p>
+                <p>Treino de reflexo.</p>
             </div>
 
-            <div class="sport-card" onclick="selecionarEsporte('Basquete',
+            <div class="card" onclick="adicionarAolista('Basquete', this)">
+                <h3>BASQUETE</h3>
+                <p>Dinâmica de precisão.</p>
+            </div>
+
+            <div class="card" onclick="adicionarAolista('Vôlei', this)">
+                <h3>VÔLEI</h3>
+                <p>Explosão e salto.</p>
+            </div>
+        </div>
+
+        <div class="learning-section">
+            <h3 class="neon">MEU ROTEIRO DE APRENDIZADO</h3>
+            <ul id="learning-list">
+                <li class="placeholder">Clique nos cards acima para definir a ordem...</li>
+            </ul>
+            <button onclick="limparRoteiro()" class="btn-clear">REDEFINIR ORDEM</button>
+        </div>
+
+        <button onclick="location.reload()" class="btn-logout">SAIR DO SISTEMA</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
