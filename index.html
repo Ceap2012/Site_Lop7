@@ -13,7 +13,7 @@
             <h1>CORE<b>INTEL</b></h1>
             <input type="text" id="user-input" placeholder="ID DO ATLETA">
             <input type="password" id="pass-input" placeholder="SENHA">
-            <button type="button" onclick="gerenciarAcesso()">ACESSAR SISTEMA</button>
+            <button type="button" onclick="gerenciarAcesso()">ACESSAR</button>
             <p onclick="alternarModo()" style="cursor:pointer">Trocar para <span class="neon">Login/Cadastro</span></p>
         </div>
     </section>
@@ -24,14 +24,14 @@
             <div class="sports-grid">
                 <div class="card" onclick="adicionarAoRoteiro('Futebol', this)">
                     <h3>FUTEBOL</h3>
-                    <p>Dossiê e Quiz Interativo</p>
+                    <p>Dossiê + Quiz + Time</p>
                 </div>
                 <div class="card" onclick="adicionarAoRoteiro('Ping Pong', this)"><h3>PING PONG</h3></div>
                 <div class="card" onclick="adicionarAoRoteiro('Basquete', this)"><h3>BASQUETE</h3></div>
                 <div class="card" onclick="adicionarAoRoteiro('Vôlei', this)"><h3>VÔLEI</h3></div>
             </div>
             <ul id="display-roteiro"><li>Fila vazia...</li></ul>
-            <button id="btn-iniciar" class="hidden neon-btn" onclick="abrirWorkspace()">GERAR WORKSPACE ➔</button>
+            <button id="btn-iniciar" class="hidden neon-btn" onclick="abrirWorkspace()">ABRIR WORKSPACE ➔</button>
         </div>
     </section>
 
@@ -51,21 +51,21 @@
                         <div class="info-card"><h3>TÁTICA</h3><p id="text-tactics"></p></div>
                         <div class="info-card"><h3>TECNOLOGIA</h3><p id="text-resources"></p></div>
                     </div>
-                    <button class="neon-btn" onclick="irParaQuiz()">IR PARA O QUIZ ➔</button>
+                    <button class="neon-btn" onclick="irParaQuiz()">FAZER QUIZ ➔</button>
                 </div>
 
                 <div id="section-quiz" class="hidden">
                     <h2 class="neon">QUIZ DE VALIDAÇÃO</h2>
                     <div class="info-card">
-                        <p id="quiz-question"></p>
+                        <p id="quiz-question" style="font-size:1.2rem;"></p>
                         <div id="quiz-options"></div>
                     </div>
                 </div>
 
                 <div id="section-team" class="hidden">
-                    <h2 class="neon">DADOS DO CLUBE</h2>
-                    <select id="team-selector" onchange="exibirDadosTime()">
-                        <option value="">Escolha seu time...</option>
+                    <h2 class="neon">DETALHES DO CLUBE</h2>
+                    <select id="team-selector" onchange="exibirDadosTime()" style="width:100%; padding:10px; background:#000; color:cyan;">
+                        <option value="">Selecione seu time...</option>
                         <option value="Flamengo">Flamengo</option>
                         <option value="Palmeiras">Palmeiras</option>
                         <option value="Santos">Santos</option>
