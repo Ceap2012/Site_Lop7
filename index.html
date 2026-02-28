@@ -9,65 +9,54 @@
 <body>
     <div class="grid-overlay"></div>
 
-    <div id="auth-screen" class="container">
+    <div id="auth-screen">
         <div class="glass-box">
-            <div class="scanner"></div>
             <h1 class="logo">SPORTS<b>NODE</b></h1>
             <h2 id="auth-title">CRIAR CONTA</h2>
-            
-            <div class="input-group">
-                <input type="text" id="user-input" placeholder="NOME DE USUÁRIO">
-                <input type="password" id="pass-input" placeholder="SENHA DE ACESSO">
-            </div>
-
+            <input type="text" id="user-input" placeholder="USUÁRIO">
+            <input type="password" id="pass-input" placeholder="SENHA">
             <button onclick="gerenciarAcesso()" id="action-btn">CADASTRAR</button>
             <p id="toggle-text" onclick="alternarModo()">JÁ TEM CONTA? <span>ENTRAR</span></p>
         </div>
     </div>
 
-    <div id="main-screen" class="container hidden">
-        <header>
-            <h1>BEM-VINDO, <span id="user-welcome" class="neon"></span></h1>
-            <p>QUAL ESPORTE VOCÊ QUER APRENDER PRIMEIRO?</p>
-        </header>
+    <div id="main-screen" class="hidden">
+        <div class="container">
+            <header>
+                <h1>OLÁ, <span id="user-welcome" class="neon"></span></h1>
+                <p>MONTE SEU ROTEIRO DE APRENDIZADO:</p>
+            </header>
 
-        <div class="sports-grid">
-            <div class="card highlight" onclick="adicionarAolista('Futebol', this)">
-                <div class="priority-tag">PRIORIDADE ALPHA</div>
-                <h3>FUTEBOL</h3>
-                <p>O topo do desempenho atlético.</p>
-                <div class="details">
-                    <span>• Táticas de Campo IA</span>
-                    <span>• Biometria Pro</span>
-                    <span>• Scouting 2026</span>
+            <div class="sports-grid">
+                <div class="card highlight" onclick="adicionarAoRoteiro('Futebol', this)">
+                    <div class="priority-tag">DESTAQUE</div>
+                    <h3>FUTEBOL</h3>
+                    <p>Tecnologia de campo e táticas IA.</p>
+                </div>
+                <div class="card" onclick="adicionarAoRoteiro('Ping Pong', this)">
+                    <h3>PING PONG</h3>
+                    <p>Reflexos rápidos.</p>
+                </div>
+                <div class="card" onclick="adicionarAoRoteiro('Basquete', this)">
+                    <h3>BASQUETE</h3>
+                    <p>Precisão de tiro.</p>
+                </div>
+                <div class="card" onclick="adicionarAoRoteiro('Vôlei', this)">
+                    <h3>VÔLEI</h3>
+                    <p>Poder de salto.</p>
                 </div>
             </div>
 
-            <div class="card" onclick="adicionarAolista('Ping Pong', this)">
-                <h3>PING PONG</h3>
-                <p>Treino de reflexo.</p>
+            <div class="learning-section">
+                <h3 class="neon">ORDEM DE APRENDIZADO:</h3>
+                <ul id="learning-list">
+                    <li id="placeholder-msg">Selecione a ordem acima...</li>
+                </ul>
+                <button onclick="limparRoteiro()" class="btn-small">REINICIAR</button>
             </div>
-
-            <div class="card" onclick="adicionarAolista('Basquete', this)">
-                <h3>BASQUETE</h3>
-                <p>Dinâmica de precisão.</p>
-            </div>
-
-            <div class="card" onclick="adicionarAolista('Vôlei', this)">
-                <h3>VÔLEI</h3>
-                <p>Explosão e salto.</p>
-            </div>
+            
+            <button onclick="location.reload()" class="btn-exit">SAIR</button>
         </div>
-
-        <div class="learning-section">
-            <h3 class="neon">MEU ROTEIRO DE APRENDIZADO</h3>
-            <ul id="learning-list">
-                <li class="placeholder">Clique nos cards acima para definir a ordem...</li>
-            </ul>
-            <button onclick="limparRoteiro()" class="btn-clear">REDEFINIR ORDEM</button>
-        </div>
-
-        <button onclick="location.reload()" class="btn-logout">SAIR DO SISTEMA</button>
     </div>
 
     <script src="script.js"></script>
