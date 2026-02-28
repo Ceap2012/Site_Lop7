@@ -2,234 +2,203 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>SISTEMA ESPORTIVO FINAL - CORINTHIANS E PING PONG</title>
+    <title>SISTEMA ESPORTIVO PRO - V5</title>
     <style>
-        /* O DESIGN NEON QUE VOCÊ CURTE */
         :root { --neon: #00f2ff; --bg: #050505; }
-        * { box-sizing: border-box; font-family: 'Courier New', monospace; }
+        * { box-sizing: border-box; font-family: 'Courier New', Courier, monospace; }
         body { margin: 0; background: var(--bg); color: white; height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; }
         
-        /* FUNDO DE GRADE */
-        .grade { position: fixed; width: 100%; height: 100%; background: linear-gradient(rgba(0,242,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,242,255,0.05) 1px, transparent 1px); background-size: 30px 30px; z-index: -1; }
-
-        /* CONTROLE DE TELAS - O SEGREDO */
+        /* TELAS */
         .tela { display: none; width: 100vw; height: 100vh; flex-direction: column; align-items: center; justify-content: center; position: absolute; }
         .ativa { display: flex !important; }
 
-        /* CAIXAS NEON */
-        .painel { background: #000; border: 2px solid var(--neon); padding: 40px; box-shadow: 0 0 20px var(--neon); text-align: center; width: 450px; }
-        .work-container { width: 95%; height: 90%; background: #000; border: 2px solid var(--neon); display: flex; }
+        /* DESIGN */
+        .caixa { background: #000; border: 3px solid var(--neon); padding: 40px; box-shadow: 0 0 30px var(--neon); text-align: center; width: 450px; }
+        .dashboard { width: 95%; height: 90%; background: #000; border: 2px solid var(--neon); display: flex; }
         
-        h1, h2 { color: var(--neon); text-shadow: 0 0 10px var(--neon); }
-        input, select { width: 100%; padding: 10px; margin: 10px 0; background: #111; border: 1px solid var(--neon); color: var(--neon); outline: none; }
-        button { background: transparent; color: var(--neon); border: 1px solid var(--neon); padding: 10px 20px; cursor: pointer; margin: 5px; font-weight: bold; text-transform: uppercase; }
-        button:hover { background: var(--neon); color: #000; box-shadow: 0 0 15px var(--neon); }
+        h1, h2 { color: var(--neon); text-shadow: 0 0 10px var(--neon); margin-bottom: 20px; }
+        button { background: transparent; color: var(--neon); border: 1px solid var(--neon); padding: 15px 25px; cursor: pointer; margin: 10px; font-weight: bold; font-size: 1rem; }
+        button:hover { background: var(--neon); color: #000; box-shadow: 0 0 20px var(--neon); }
 
-        /* GRID E WORKSPACE */
-        .grid-esp { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; width: 100%; }
-        .btn-esp { border: 1px solid #444; padding: 15px; cursor: pointer; }
-        .btn-esp.marcado { border-color: var(--neon); background: rgba(0,242,255,0.1); }
+        .sidebar { width: 220px; border-right: 1px solid var(--neon); padding: 20px; display: flex; flex-direction: column; gap: 15px; }
+        .conteudo { flex: 1; padding: 30px; overflow-y: auto; text-align: left; }
+        .box-info { background: rgba(0, 242, 255, 0.05); padding: 15px; border-left: 5px solid var(--neon); margin-bottom: 15px; }
         
-        .sidebar { width: 200px; border-right: 1px solid var(--neon); padding: 20px; display: flex; flex-direction: column; gap: 10px; }
-        .main { flex: 1; padding: 30px; overflow-y: auto; }
-        .box-dado { background: rgba(255,255,255,0.05); padding: 15px; border-left: 4px solid var(--neon); margin-bottom: 10px; }
+        .opcoes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
+        .item-sport { border: 1px solid #444; padding: 20px; cursor: pointer; }
+        .item-sport.selecionado { border-color: var(--neon); background: rgba(0, 242, 255, 0.1); }
+        .btn-grande { width: 100%; display: block; margin-top: 20px; }
         .escondido { display: none !important; }
     </style>
 </head>
 <body>
-    <div class="grade"></div>
 
-    <section id="tela1" class="tela ativa">
-        <div class="painel">
-            <h1>LOGIN_SISTEMA</h1>
-            <input type="text" id="u" placeholder="USUÁRIO">
-            <input type="password" id="p" placeholder="SENHA">
-            <button onclick="salvar()">CADASTRAR</button>
-            <button onclick="entrar()">ENTRAR_</button>
+    <section id="page1" class="tela ativa">
+        <div class="caixa">
+            <h1>SISTEMA_V5</h1>
+            <p>Clique em entrar para testar a troca de página</p>
+            <input type="text" id="u" placeholder="USUÁRIO" style="width:100%; padding:10px; margin-bottom:10px;">
+            <input type="password" id="p" placeholder="SENHA" style="width:100%; padding:10px; margin-bottom:10px;">
+            <button onclick="mudar('page2')">ENTRAR DIRETO (TESTE)</button>
         </div>
     </section>
 
-    <section id="tela2" class="tela">
-        <div class="painel" style="width: 600px;">
-            <h2>ESCOLHA_MÓDULOS</h2>
-            <div class="grid-esp">
-                <div class="btn-esp" onclick="marcar('Futebol', this)">FUTEBOL</div>
-                <div class="btn-esp" onclick="marcar('Ping Pong', this)">PING PONG</div>
+    <section id="page2" class="tela">
+        <div class="caixa" style="width: 600px;">
+            <h2>ESCOLHA_MÓDULO</h2>
+            <div class="opcoes-grid">
+                <div class="item-sport" onclick="marcar('Futebol', this)">FUTEBOL</div>
+                <div class="item-sport" onclick="marcar('Ping Pong', this)">PING PONG</div>
             </div>
-            <p id="status">STATUS: AGUARDANDO...</p>
-            <button id="btn-next" class="escondido" onclick="abrirWork()">GERAR_INTERFACE</button>
+            <p id="msg-status">STATUS: AGUARDANDO ESCOLHA</p>
+            <button id="btn-gerar" class="escondido" onclick="gerarWorkspace()">GERAR WORKSPACE</button>
         </div>
     </section>
 
-    <section id="tela3" class="tela">
-        <div class="work-container">
-            <aside class="sidebar" id="menu-lateral"></aside>
-            <main class="main">
-                <div id="bloco-teoria">
-                    <h1 id="tit-esp">---</h1>
-                    <div class="box-dado"><b>DINÂMICA:</b> <span id="v-how"></span></div>
-                    <div class="box-dado"><b>REGRAS:</b> <span id="v-rules"></span></div>
-                    <div class="box-dado"><b>TÁTICA:</b> <span id="v-tactic"></span></div>
-                    <div class="box-dado"><b>TECH:</b> <span id="v-tech"></span></div>
-                    <button onclick="irQuiz()" style="width:100%">INICIAR QUIZ DE VALIDAÇÃO_</button>
+    <section id="page3" class="tela">
+        <div class="dashboard">
+            <aside class="sidebar" id="menu-esportes"></aside>
+            <main class="conteudo">
+                <div id="bloco-texto">
+                    <h1 id="titulo-atual">---</h1>
+                    <div class="box-info"><b>DINÂMICA:</b> <span id="txt-how"></span></div>
+                    <div class="box-info"><b>REGRAS:</b> <span id="txt-rules"></span></div>
+                    <div class="box-info"><b>TÁTICA:</b> <span id="txt-tactic"></span></div>
+                    <div class="box-info"><b>TECNOLOGIA:</b> <span id="txt-tech"></span></div>
+                    <button class="btn-grande" onclick="abrirQuiz()">DESBLOQUEAR QUIZ_</button>
                 </div>
 
                 <div id="bloco-quiz" class="escondido">
-                    <h2>VALIDAÇÃO_DE_DADOS</h2>
-                    <p id="q-txt" style="font-size: 1.2rem;"></p>
-                    <div id="q-opts"></div>
+                    <h2>QUIZ_DE_VALIDAÇÃO</h2>
+                    <p id="pergunta-txt" style="font-size: 1.2rem;"></p>
+                    <div id="botoes-quiz"></div>
                 </div>
 
-                <div id="bloco-dossie" class="escondido">
-                    <h2>DOSSIÊ_CORINTHIANS_E_OUTROS</h2>
-                    <select id="sel-clube" onchange="verClube()">
-                        <option value="">Escolha um clube...</option>
-                        <option value="Corinthians">Corinthians (Timão)</option>
-                        <option value="Flamengo">Flamengo (Mengão)</option>
+                <div id="bloco-corinthians" class="escondido">
+                    <h2>DOSSIÊ_ESPECIAL_CORINTHIANS</h2>
+                    <select id="select-time" onchange="mostrarCorinthians()" style="width:100%; padding:10px; background:#000; color:#00f2ff; border:1px solid #00f2ff;">
+                        <option value="">Selecione o Time...</option>
+                        <option value="Corinthians">Corinthians (O Coringão)</option>
+                        <option value="Outro">Outro Time</option>
                     </select>
-                    <div id="res-dossie" style="margin-top:20px; border:1px solid var(--neon); padding:20px; background: rgba(0,242,255,0.1);"></div>
+                    <div id="dados-corinthians" style="margin-top:20px; border:1px solid #00f2ff; padding:20px;"></div>
                 </div>
             </main>
         </div>
     </section>
 
     <script>
-        // DADOS COMPLETOS
-        const INFO = {
+        const DADOS = {
             "Futebol": {
                 h: "Avanço coletivo para marcar gols. Jogo de 11 contra 11.",
                 r: "90 min, Impedimento, VAR, 5 trocas.",
                 t: "Marcação alta e contra-ataque rápido.",
                 te: "GPS nos coletes e sensores na bola.",
-                quiz: { p: "O que o VAR revisa?", o: ["Escanteio", "Gols e Pênaltis", "Lateral"], c: 1 }
+                q: { p: "O que o VAR revisa?", o: ["Lateral", "Gols e Pênaltis", "Escanteio"], c: 1 }
             },
             "Ping Pong": {
                 h: "Duelo de reflexos em mesa de 2,74m. Alta velocidade.",
                 r: "Sets de 11 pontos, saque troca a cada 2 pontos.",
                 t: "Efeito Topspin e Backspin agressivo.",
                 te: "Madeiras de carbono e borrachas tensionadas.",
-                quiz: { p: "Quantos pontos ganham um Set?", o: ["11", "21", "15"], c: 0 }
+                q: { p: "Quantos pontos ganham um Set?", o: ["11", "21", "15"], c: 0 }
             }
         };
 
-        const TIMES = {
+        const TIMAO = {
             "Corinthians": {
                 f: "01/09/1910",
-                fund: "Joaquim Ambrósio, Antônio Pereira e outros operários no Bom Retiro.",
-                hist: "O 'Time do Povo'. Surgiu da vontade de trabalhadores de ter um clube que os representasse. Conhecido pela Fiel e pela Democracia Corinthiana.",
+                fund: "Joaquim Ambrósio, Antônio Pereira e operários no Bom Retiro.",
+                hist: "O 'Time do Povo'. Surgiu sob a luz de um lampião para representar os trabalhadores.",
                 tit: "2 Mundiais FIFA (2000, 2012), 1 Libertadores Invicta, 7 Brasileiros.",
-                i: "Sócrates, Cássio, Marcelinho Carioca, Neto, Rivellino."
-            },
-            "Flamengo": {
-                f: "1895",
-                fund: "Grupo de remadores do Rio.",
-                hist: "Começou no remo e se tornou a maior torcida do Brasil.",
-                tit: "1 Mundial, 3 Libertadores, 8 Brasileiros.",
-                i: "Zico, Júnior, Gabigol."
+                i: "Sócrates, Cássio, Marcelinho Carioca."
             }
         };
 
         let selecionados = [];
         let atual = "";
 
-        // FUNÇÃO DE TROCAR PÁGINA (ESTA FUNCIONA!)
-        function mudar(id) {
-            const telas = document.getElementsByClassName('tela');
-            for (let i = 0; i < telas.length; i++) {
-                telas[i].classList.remove('ativa');
-            }
-            document.getElementById(id).classList.add('ativa');
+        // FUNÇÃO DE TROCAR PÁGINA (COM COMANDO BRUTO)
+        function mudar(idTela) {
+            console.log("Mudando para: " + idTela);
+            const todas = document.querySelectorAll('.tela');
+            todas.forEach(t => t.classList.remove('ativa'));
+            document.getElementById(idTela).classList.add('ativa');
         }
 
-        function salvar() {
-            const u = document.getElementById('u').value;
-            const p = document.getElementById('p').value;
-            if(u && p) { localStorage.setItem(u, p); alert("CADASTRADO!"); }
-        }
-
-        function entrar() {
-            const u = document.getElementById('u').value;
-            const p = document.getElementById('p').value;
-            if(localStorage.getItem(u) === p && u !== "") {
-                mudar('tela2');
-            } else {
-                alert("ERRO: USUÁRIO OU SENHA INVÁLIDOS");
+        function marcar(nome, el) {
+            if(!selecionados.includes(nome)) {
+                selecionados.push(nome);
+                el.classList.add('selecionado');
+                document.getElementById('btn-gerar').classList.remove('escondido');
+                document.getElementById('msg-status').innerText = "SELECIONADOS: " + selecionados.join(' | ');
             }
         }
 
-        function marcar(s, el) {
-            if(!selecionados.includes(s)) {
-                selecionados.push(s);
-                el.classList.add('marcado');
-                document.getElementById('btn-next').classList.remove('escondido');
-                document.getElementById('status').innerText = "SELECIONADOS: " + selecionados.join(' | ');
-            }
-        }
-
-        function abrirWork() {
-            mudar('tela3');
-            const menu = document.getElementById('menu-lateral');
-            menu.innerHTML = "<h3>MENU</h3>";
+        function gerarWorkspace() {
+            mudar('page3');
+            const menu = document.getElementById('menu-esportes');
+            menu.innerHTML = "<h3>NAV_ESPORTES</h3>";
             selecionados.forEach(s => {
                 const b = document.createElement('button');
                 b.innerText = s;
                 b.style.width = "100%";
-                b.onclick = () => carregar(s);
+                b.onclick = () => carregarEstudo(s);
                 menu.appendChild(b);
             });
-            carregar(selecionados[0]);
+            carregarEstudo(selecionados[0]);
         }
 
-        function carregar(s) {
+        function carregarEstudo(s) {
             atual = s;
-            document.getElementById('bloco-teoria').classList.remove('escondido');
+            document.getElementById('bloco-texto').classList.remove('escondido');
             document.getElementById('bloco-quiz').classList.add('escondido');
-            document.getElementById('bloco-dossie').classList.add('escondido');
+            document.getElementById('bloco-corinthians').classList.add('escondido');
             
-            const d = INFO[s];
-            document.getElementById('tit-esp').innerText = s;
-            document.getElementById('v-how').innerText = d.h;
-            document.getElementById('v-rules').innerText = d.r;
-            document.getElementById('v-tactic').innerText = d.t;
-            document.getElementById('v-tech').innerText = d.te;
+            const info = DADOS[s];
+            document.getElementById('titulo-atual').innerText = s;
+            document.getElementById('txt-how').innerText = info.h;
+            document.getElementById('txt-rules').innerText = info.r;
+            document.getElementById('txt-tactic').innerText = info.t;
+            document.getElementById('txt-tech').innerText = info.te;
         }
 
-        function irQuiz() {
-            document.getElementById('bloco-teoria').classList.add('escondido');
+        function abrirQuiz() {
+            document.getElementById('bloco-texto').classList.add('escondido');
             document.getElementById('bloco-quiz').classList.remove('escondido');
-            const q = INFO[atual].quiz;
-            document.getElementById('q-txt').innerText = q.p;
-            const box = document.getElementById('q-opts');
-            box.innerHTML = "";
-            q.o.forEach((opt, i) => {
-                const b = document.createElement('button');
-                b.innerText = opt;
-                b.style.display = "block"; b.style.width = "100%";
-                b.onclick = () => {
+            const q = DADOS[atual].q;
+            document.getElementById('pergunta-txt').innerText = q.p;
+            const b_area = document.getElementById('botoes-quiz');
+            b_area.innerHTML = "";
+            q.o.forEach((opcao, i) => {
+                const btn = document.createElement('button');
+                btn.innerText = opcao;
+                btn.style.width = "100%";
+                btn.onclick = () => {
                     if(i === q.c) {
-                        alert("ACERTOU! DOSSIÊ LIBERADO.");
+                        alert("ACERTOU!");
                         if(atual === "Futebol") {
                             document.getElementById('bloco-quiz').classList.add('escondido');
-                            document.getElementById('bloco-dossie').classList.remove('escondido');
-                        } else carregar(atual);
-                    } else alert("DADO INCORRETO!");
+                            document.getElementById('bloco-corinthians').classList.remove('escondido');
+                        } else {
+                            carregarEstudo(atual);
+                        }
+                    } else {
+                        alert("ERROU!");
+                    }
                 };
-                box.appendChild(b);
+                b_area.appendChild(btn);
             });
         }
 
-        function verClube() {
-            const t = document.getElementById('sel-clube').value;
-            const d = TIMES[t];
-            if(d) {
-                document.getElementById('res-dossie').innerHTML = `
-                    <h3>${t}</h3>
-                    <p><b>FUNDAÇÃO:</b> ${d.f}</p>
-                    <p><b>FUNDADORES:</b> ${d.fund}</p>
-                    <p><b>HISTÓRIA:</b> ${d.hist}</p>
-                    <p><b>TÍTULOS:</b> ${d.tit}</p>
-                    <p><b>ÍDOLOS:</b> ${d.i}</p>
-                `;
+        function mostrarCorinthians() {
+            const t = document.getElementById('select-time').value;
+            const out = document.getElementById('dados-corinthians');
+            if(t === "Corinthians") {
+                const d = TIMAO.Corinthians;
+                out.innerHTML = `<h3>CORINTHIANS</h3><p><b>FUNDAÇÃO:</b> ${d.f}</p><p><b>FUNDADORES:</b> ${d.fund}</p><p><b>HISTÓRIA:</b> ${d.hist}</p><p><b>TÍTULOS:</b> ${d.tit}</p><p><b>ÍDOLOS:</b> ${d.i}</p>`;
+            } else {
+                out.innerHTML = "Selecione Corinthians para ver o Dossiê.";
             }
         }
     </script>
