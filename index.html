@@ -1,15 +1,19 @@
-<div class="stats-container">
-    <h3><span class="pulse"></span> Live Analytics: UEFA Champions 2026</h3>
-    <table class="futuristic-table">
-        <thead>
-            <tr>
-                <th>Jogador</th>
-                <th>Velocidade Max.</th>
-                <th>Precisão de Passe</th>
-                <th>Energia Bio</th>
-            </tr>
-        </thead>
-        <tbody id="stats-body">
-            </tbody>
-    </table>
+<div class="glass-card" id="auth-container">
+    <h2 id="auth-title">Criar Conta Futurista</h2>
+    
+    <input type="text" id="user" placeholder="Nome de Usuário">
+    <input type="password" id="pass" placeholder="Senha Secreta">
+    
+    <div id="btn-group">
+        <button onclick="registrar()" id="btn-main">Cadastrar</button>
+        <p onclick="alternarTela()" id="toggle-text">Já tem conta? Entrar</p>
+    </div>
+</div>
+
+<div id="dashboard" class="hidden">
+    <div class="glass-card">
+        <h1>Bem-vindo à Arena, <span id="display-name" style="color: var(--accent)"></span>!</h1>
+        <p>Acesso biometrico confirmado. Futebol 2026 ativo.</p>
+        <button onclick="logout()" style="background: #ff4757; margin-top: 20px;">Sair do Sistema</button>
+    </div>
 </div>
