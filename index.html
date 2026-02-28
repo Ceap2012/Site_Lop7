@@ -2,62 +2,82 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Sports Intel Pro | Ultra Edition</title>
+    <title>Sports Intel Pro 2026</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="animated-bg"></div>
-    <div class="scanline"></div>
+    <div class="grid-overlay"></div>
 
     <section id="screen-auth" class="screen active">
-        <div class="auth-card">
-            <div class="logo-container">
-                <div class="logo-icon"></div>
-                <h1>SPORTS<span>NODE</span></h1>
+        <div class="glass-card">
+            <h1 class="neon-text">CORE<b>INTEL</b></h1>
+            <div class="input-box">
+                <input type="text" id="user-input" placeholder="ID DO OPERADOR" required>
+                <input type="password" id="pass-input" placeholder="SENHA DE ACESSO" required>
             </div>
-            <div class="input-container">
-                <input type="text" id="user-input" required>
-                <label>ID DO OPERADOR</label>
-            </div>
-            <div class="input-container">
-                <input type="password" id="pass-input" required>
-                <label>ACCESS KEY</label>
-            </div>
-            <button class="main-btn" onclick="gerenciarAcesso()">INICIALIZAR SISTEMA</button>
-            <p class="subtext">SISTEMA MONITORADO POR IA 2.6</p>
+            <button class="cyber-btn" onclick="gerenciarAcesso()">INICIALIZAR</button>
         </div>
     </section>
 
     <section id="screen-selection" class="screen">
-        <div class="selection-wrapper">
-            <h2 class="section-title">SELECIONE OS <span>MÓDULOS DE DADOS</span></h2>
+        <div class="selection-container">
+            <h2 class="neon-text">ESCOLHA OS MÓDULOS</h2>
             <div class="sports-grid">
-                <div class="module-card" onclick="adicionarAoRoteiro('Futebol', this)">
-                    <div class="module-info">
-                        <h3>FUTEBOL</h3>
-                        <p>Dossiê Estratégico & Clubes</p>
-                    </div>
-                </div>
-                <div class="module-card" onclick="adicionarAoRoteiro('Ping Pong', this)">
-                    <div class="module-info">
-                        <h3>PING PONG</h3>
-                        <p>Dinâmica de Micro-reação</p>
-                    </div>
-                </div>
-                <div class="module-card" onclick="adicionarAoRoteiro('Basquete', this)">
-                    <div class="module-info">
-                        <h3>BASQUETE</h3>
-                        <p>Geometria e Salto</p>
-                    </div>
-                </div>
-                <div class="module-card" onclick="adicionarAoRoteiro('Vôlei', this)">
-                    <div class="module-info">
-                        <h3>VÔLEI</h3>
-                        <p>Sincronia de Rede</p>
-                    </div>
-                </div>
+                <div class="sport-card" onclick="adicionarAoRoteiro('Futebol', this)">FUTEBOL</div>
+                <div class="sport-card" onclick="adicionarAoRoteiro('Ping Pong', this)">PING PONG</div>
+                <div class="sport-card" onclick="adicionarAoRoteiro('Basquete', this)">BASQUETE</div>
+                <div class="sport-card" onclick="adicionarAoRoteiro('Vôlei', this)">VÔLEI</div>
             </div>
-            <div class="status-bar">
-                <div id="display-roteiro" class="roteiro-list">Aguardando seleção...</div>
-                <button id="btn-iniciar" class="hidden pulse-btn" onclick
+            <div id="status-area">
+                <p id="display-roteiro">Nenhum módulo selecionado</p>
+                <button id="btn-iniciar" class="hidden-force cyber-btn pulse" onclick="abrirWorkspace()">ABRIR WORKSPACE</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="screen-workspace" class="screen">
+        <div class="workspace-wrapper">
+            <aside class="sidebar">
+                <div class="sidebar-label">MÓDULOS ATIVOS</div>
+                <nav id="sidebar-nav"></nav>
+                <button class="exit-btn" onclick="location.reload()">SAIR</button>
+            </aside>
+            <main class="main-content">
+                <div id="section-theory">
+                    <h1 id="study-title" class="neon-text">--</h1>
+                    <div class="info-grid">
+                        <div class="info-item"><h4>DINÂMICA</h4><p id="text-how"></p></div>
+                        <div class="info-item"><h4>REGRAS</h4><ul id="list-rules"></ul></div>
+                        <div class="info-item"><h4>TÁTICA</h4><p id="text-tactics"></p></div>
+                        <div class="info-item"><h4>TECNOLOGIA</h4><p id="text-resources"></p></div>
+                    </div>
+                    <button class="cyber-btn" onclick="irParaQuiz()">DESBLOQUEAR QUIZ</button>
+                </div>
+
+                <div id="section-quiz" class="hidden-force">
+                    <h2 class="neon-text">TESTE DE APTIDÃO</h2>
+                    <div class="quiz-container">
+                        <p id="quiz-question" class="q-text"></p>
+                        <div id="quiz-options"></div>
+                    </div>
+                </div>
+
+                <div id="section-team" class="hidden-force">
+                    <h2 class="neon-text">DOSSIÊ DO TIME</h2>
+                    <select id="team-selector" onchange="exibirDadosTime()">
+                        <option value="">Selecione seu clube...</option>
+                        <option value="Flamengo">Flamengo</option>
+                        <option value="Palmeiras">Palmeiras</option>
+                        <option value="Santos">Santos</option>
+                        <option value="São Paulo">São Paulo</option>
+                    </select>
+                    <div id="team-result" class="team-info-box"></div>
+                </div>
+            </main>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
