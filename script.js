@@ -1,40 +1,54 @@
-const jogadores = [
-    { nome: "Vinícius Jr.", vel: 38.5, pass: 92, energia: 85 },
-    { nome: "Mbappé", vel: 39.2, pass: 88, energia: 82 },
-    { nome: "Haaland", vel: 36.8, pass: 79, energia: 94 }
-];
+let modoLogin = false;
 
-function carregarEstatisticas() {
-    const tbody = document.getElementById('stats-body');
-    tbody.innerHTML = ""; // Limpa antes de atualizar
+function alternarTela() {
+    modoLogin = !modoLogin;
+    const titulo = document.getElementById('auth-title');
+    const btn = document.getElementById('btn-main');
+    const toggle = document.getElementById('toggle-text');
 
-    jogadores.forEach(j => {
-        // Oscilação leve para parecer "ao vivo"
-        const velOscilada = (j.vel + (Math.random() * 0.5)).toFixed(1);
-        
-        const row = `
-            <tr>
-                <td><strong>${j.nome}</strong></td>
-                <td style="color: var(--accent)">${velOscilada} km/h</td>
-                <td>${j.pass}%</td>
-                <td>
-                    <div style="background: #eee; border-radius: 5px; height: 8px; width: 100px; margin: auto;">
-                        <div style="background: var(--accent); width: ${j.energia}%; height: 100%; border-radius: 5px;"></div>
-                    </div>
-                </td>
-            </tr>
-        `;
-        tbody.innerHTML += row;
-    });
+    if (modoLogin) {
+        titulo.innerText = "Login de Jogador";
+        btn.innerText = "Entrar";
+        toggle.innerText = "Não tem conta? Criar agora";
+    } else {
+        titulo.innerText = "Criar Conta Futurista";
+        btn.innerText = "Cadastrar";
+        toggle.innerText = "Já tem conta? Entrar";
+    }
 }
 
-// Atualiza os dados a cada 3 segundos
-setInterval(carregarEstatisticas, 3000);
-window.onload = () => {
-    // Mantém a lógica de login anterior e inicia as stats
-    const usuarioSalvo = localStorage.getItem('usuarioFutebol');
-    if (usuarioSalvo) {
-        mostrarInterfaceLogada(usuarioSalvo);
-        carregarEstatisticas();
+function registrar() {
+    const user = document.getElementById('user').value;
+    const pass = document.getElementById('pass').value;
+
+    if (!user || !pass) return alert("Preencha todos os campos!");
+
+    if (modoLogin) {
+        // Lógica de LOGIN
+        const senhaSalva = localStorage.getItem(user);
+        if (senhaSalva && senhaSalva === pass) {
+            entrar(user);
+        } else {
+            alert("Usuário ou senha incorretos!");
+        }
+    } else {
+        // Lógica de CADASTRO
+        if (localStorage.getItem(user)) {
+            alert("Este nome já está em uso!");
+        } else {
+            localStorage.setItem(user, pass);
+            alert("Conta criada com sucesso! Agora faça login.");
+            alternarTela();
+        }
     }
-};
+}
+
+function entrar(nome) {
+    document.getElementById('auth-container').classList.add('hidden');
+    document.getElementById('dashboard').classList.remove('hidden');
+    document.getElementById('display-name').innerText = nome;
+}
+
+function logout() {
+    location.reload(); // Reinicia a página para voltar ao login
+}
