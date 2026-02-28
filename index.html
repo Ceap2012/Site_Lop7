@@ -13,8 +13,8 @@
             <h1>CORE<b>INTEL</b></h1>
             <input type="text" id="user-input" placeholder="ID DO ATLETA">
             <input type="password" id="pass-input" placeholder="SENHA">
-            <button onclick="gerenciarAcesso()">ACESSAR</button>
-            <p onclick="alternarModo()">Trocar para <span class="neon">Login/Cadastro</span></p>
+            <button type="button" onclick="gerenciarAcesso()">ACESSAR SISTEMA</button>
+            <p onclick="alternarModo()" style="cursor:pointer">Trocar para <span class="neon">Login/Cadastro</span></p>
         </div>
     </section>
 
@@ -22,9 +22,9 @@
         <div class="container">
             <h2 class="neon">FILA DE PROCESSAMENTO</h2>
             <div class="sports-grid">
-                <div class="card highlight" onclick="adicionarAoRoteiro('Futebol', this)">
-                    <h3>FUTEBOL + QUIZ</h3>
-                    <p>Dossiê completo e validação de conhecimento.</p>
+                <div class="card" onclick="adicionarAoRoteiro('Futebol', this)">
+                    <h3>FUTEBOL</h3>
+                    <p>Dossiê e Quiz Interativo</p>
                 </div>
                 <div class="card" onclick="adicionarAoRoteiro('Ping Pong', this)"><h3>PING PONG</h3></div>
                 <div class="card" onclick="adicionarAoRoteiro('Basquete', this)"><h3>BASQUETE</h3></div>
@@ -40,7 +40,7 @@
             <aside class="sidebar">
                 <div class="sidebar-title">MÓDULOS</div>
                 <nav id="sidebar-nav"></nav>
-                <button onclick="location.reload()" class="btn-exit">LOGOUT</button>
+                <button onclick="window.location.reload()" class="btn-exit">SAIR</button>
             </aside>
             <main class="main-panel">
                 <div id="section-theory">
@@ -51,27 +51,25 @@
                         <div class="info-card"><h3>TÁTICA</h3><p id="text-tactics"></p></div>
                         <div class="info-card"><h3>TECNOLOGIA</h3><p id="text-resources"></p></div>
                     </div>
-                    <button class="neon-btn" style="margin-top:20px" onclick="irParaQuiz()">IR PARA O QUIZ ➔</button>
+                    <button class="neon-btn" onclick="irParaQuiz()">IR PARA O QUIZ ➔</button>
                 </div>
 
                 <div id="section-quiz" class="hidden">
-                    <h2 class="neon">VALIDAÇÃO DE CONHECIMENTO</h2>
+                    <h2 class="neon">QUIZ DE VALIDAÇÃO</h2>
                     <div class="info-card">
-                        <p id="quiz-question" style="font-size: 1.2rem; margin-bottom: 20px;"></p>
+                        <p id="quiz-question"></p>
                         <div id="quiz-options"></div>
                     </div>
                 </div>
 
                 <div id="section-team" class="hidden">
-                    <h2 class="neon">DOSSIÊ DO TORCEDOR</h2>
-                    <p>Para qual time você torce?</p>
+                    <h2 class="neon">DADOS DO CLUBE</h2>
                     <select id="team-selector" onchange="exibirDadosTime()">
-                        <option value="">Selecione seu clube...</option>
+                        <option value="">Escolha seu time...</option>
                         <option value="Flamengo">Flamengo</option>
                         <option value="Palmeiras">Palmeiras</option>
                         <option value="Santos">Santos</option>
                         <option value="São Paulo">São Paulo</option>
-                        <option value="Corinthians">Corinthians</option>
                     </select>
                     <div id="team-result" class="info-card" style="margin-top:20px; display:none;"></div>
                 </div>
