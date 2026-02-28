@@ -2,20 +2,19 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>SISTEMA ESPORTIVO FINAL - QUIZ FIX</title>
+    <title>SISTEMA ESPORTIVO ULTRA - MULTI TIMES</title>
     <style>
-        :root { --neon: #00f2ff; --bg: #0d0d0d; }
+        :root { --neon: #00f2ff; --err: #ff0055; --ok: #39ff14; --bg: #0d0d0d; }
         * { box-sizing: border-box; font-family: 'Courier New', Courier, monospace; }
         body { margin: 0; background: var(--bg); color: white; height: 100vh; display: flex; overflow: hidden; }
 
-        /* TELAS */
         .tela { display: none; width: 100vw; height: 100vh; flex-direction: column; align-items: center; justify-content: center; position: absolute; }
         .ativa { display: flex !important; }
 
-        .caixa-neon { background: #000; border: 2px solid var(--neon); padding: 30px; box-shadow: 0 0 20px var(--neon); text-align: center; width: 500px; }
+        .caixa-neon { background: #000; border: 2px solid var(--neon); padding: 30px; box-shadow: 0 0 20px var(--neon); text-align: center; width: 550px; }
         .workspace { display: flex; width: 100%; height: 100%; }
         .sidebar { width: 220px; border-right: 2px solid var(--neon); padding: 20px; display: flex; flex-direction: column; gap: 10px; background: #000; }
-        .main { flex: 1; padding: 40px; overflow-y: auto; }
+        .main { flex: 1; padding: 40px; overflow-y: auto; position: relative; }
 
         h1, h2 { color: var(--neon); text-shadow: 0 0 10px var(--neon); text-transform: uppercase; }
         button { background: transparent; color: var(--neon); border: 1px solid var(--neon); padding: 12px; cursor: pointer; font-weight: bold; margin: 5px; transition: 0.3s; }
@@ -24,29 +23,36 @@
         .info-bloco { background: rgba(255,255,255,0.05); padding: 20px; border-left: 5px solid var(--neon); margin-bottom: 20px; text-align: left; }
         .escondido { display: none !important; }
         
-        /* ESTILO DOS BOTÕES DO QUIZ */
-        .btn-quiz { display: block; width: 100%; margin: 10px 0; text-align: left; padding: 15px; border: 1px solid var(--neon); }
+        /* FEEDBACK DO QUIZ */
+        #feedback-quiz { font-size: 1.5rem; font-weight: bold; margin-top: 15px; min-height: 30px; }
+        .acertou { color: var(--ok); text-shadow: 0 0 10px var(--ok); }
+        .errou { color: var(--err); text-shadow: 0 0 10px var(--err); }
+
+        .btn-quiz { display: block; width: 100%; margin: 10px 0; text-align: left; padding: 15px; border: 1px solid var(--neon); color: var(--neon); cursor: pointer; background: transparent; }
+        .btn-quiz:hover { background: rgba(0, 242, 255, 0.1); }
+        select { width: 100%; padding: 10px; background: #000; color: var(--neon); border: 1px solid var(--neon); margin-bottom: 20px; }
     </style>
 </head>
 <body>
 
     <section id="t-login" class="tela ativa">
         <div class="caixa-neon">
-            <h1>SISTEMA_ACESSO</h1>
-            <button onclick="irPara('t-selecao')">ENTRAR NO SISTEMA_</button>
+            <h1>SISTEMA_ESPORTIVO_V8</h1>
+            <p>CONTEÚDO: FUTEBOL | BASQUETE | VÔLEI | PING PONG</p>
+            <button onclick="irPara('t-selecao')">INICIAR_ACESSO</button>
         </div>
     </section>
 
     <section id="t-selecao" class="tela">
         <div class="caixa-neon">
-            <h2>ESCOLHA OS ESPORTES</h2>
+            <h2>MÓDULOS DISPONÍVEIS</h2>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0;">
                 <button onclick="selecionar('Futebol')">FUTEBOL</button>
                 <button onclick="selecionar('Basquete')">BASQUETE</button>
                 <button onclick="selecionar('Vôlei')">VÔLEI</button>
                 <button onclick="selecionar('Ping Pong')">PING PONG</button>
             </div>
-            <p id="txt-sel">Nenhum selecionado</p>
+            <p id="txt-sel">Escolha os módulos no menu acima</p>
             <button id="btn-work" class="escondido" onclick="montarWork()">GERAR WORKSPACE_</button>
         </div>
     </section>
@@ -62,19 +68,25 @@
                     <div class="info-bloco"><b>REGRAS:</b> <p id="v-rules"></p></div>
                     <div class="info-bloco"><b>TÁTICA:</b> <p id="v-tactic"></p></div>
                     <div class="info-bloco"><b>TECH:</b> <p id="v-tech"></p></div>
-                    <button style="width: 100%; background: var(--neon); color: black;" onclick="gerarQuiz()">DESBLOQUEAR VALIDAÇÃO_</button>
+                    <button style="width: 100%;" onclick="gerarQuiz()">DESBLOQUEAR QUIZ DE VALIDAÇÃO_</button>
                 </div>
 
                 <div id="view-quiz" class="escondido">
-                    <h2>VALIDAÇÃO_DE_CONHECIMENTO</h2>
-                    <p id="pergunta-display" style="font-size: 1.2rem; margin-bottom: 20px;"></p>
+                    <h2>TESTE_DE_SISTEMA</h2>
+                    <p id="pergunta-display" style="font-size: 1.2rem;"></p>
                     <div id="container-opcoes"></div>
+                    <div id="feedback-quiz"></div>
                 </div>
 
                 <div id="view-dossie" class="escondido">
-                    <h2>DOSSIÊ_RESTRITO: CORINTHIANS</h2>
-                    <div class="info-bloco" id="conteudo-timao"></div>
-                    <button onclick="irPara('t-selecao')">VOLTAR AO INÍCIO</button>
+                    <h2>ARQUIVO_DE_CLUBES_DETALHADO</h2>
+                    <select id="sel-clube" onchange="exibirClube()">
+                        <option value="">Selecione um dossiê...</option>
+                        <option value="Corinthians">Corinthians</option>
+                        <option value="Palmeiras">Palmeiras</option>
+                        <option value="Santos">Santos</option>
+                    </select>
+                    <div class="info-bloco" id="resultado-time">Escolha um clube para carregar os dados históricos.</div>
                 </div>
 
             </main>
@@ -84,45 +96,58 @@
     <script>
         const DB = {
             "Futebol": {
-                h: "Onze contra onze. O objetivo é colocar a bola no gol usando os pés.",
-                r: "90 minutos, Impedimento e VAR.",
-                t: "4-3-3 Ofensivo e Marcação Alta.",
-                te: "Chips na bola e GPS nos coletes.",
-                q: "Quantos jogadores tem cada time em campo?",
-                o: ["11 jogadores", "7 jogadores", "15 jogadores"],
-                c: 0
+                h: "Invasão de campo adversário. 11 vs 11.",
+                r: "90 min, Impedimento e 5 trocas.",
+                t: "Marcação por pressão e transição rápida.",
+                te: "VAR e Sensores na bola.",
+                q: "Qual o nome da tecnologia que revisa lances em vídeo?",
+                o: ["VAR", "GPS", "RADAR"], c: 0
             },
             "Basquete": {
-                h: "Levar a bola até a cesta a 3,05m de altura.",
-                r: "24 segundos de posse e 4 quartos.",
-                t: "Pick and Roll e arremessos de 3.",
-                te: "Sensores de impacto na tabela.",
-                q: "Qual a altura da cesta de basquete?",
-                o: ["2,50m", "3,05m", "3,50m"],
-                c: 1
+                h: "Colocar a bola no aro adversário (3,05m).",
+                r: "Posse de 24 segundos e 4 quartos.",
+                t: "Pick and Roll e Defesa por Zona.",
+                te: "Tabelas com sensores de impacto.",
+                q: "Quantos segundos dura uma posse de ataque?",
+                o: ["14s", "30s", "24s"], c: 2
             },
             "Vôlei": {
-                h: "Bola não pode cair no seu lado da quadra.",
-                r: "Máximo de 3 toques e sets de 25 pontos.",
-                t: "Rodízio e bloqueio triplo.",
-                te: "Hawk-eye para conferência de linha.",
-                q: "Quantos toques cada time pode dar na bola?",
-                o: ["2 toques", "3 toques", "4 toques"],
-                c: 1
+                h: "A bola não pode tocar o chão. 3 toques por time.",
+                r: "Sets de 25 pontos e rodízio obrigatório.",
+                t: "Bloqueio triplo e ataque sincronizado.",
+                te: "Hawk-eye para conferência de bola dentro/fora.",
+                q: "Qual o máximo de toques que um time pode dar?",
+                o: ["1", "3", "5"], c: 1
             },
             "Ping Pong": {
-                h: "Tênis de mesa de alta velocidade.",
-                r: "Sets de 11 pontos e saque a cada 2 pontos.",
-                t: "Efeitos de Topspin e Backspin.",
-                te: "Raquetes de carbono.",
-                q: "Até quantos pontos vai um set comum?",
-                o: ["11 pontos", "15 pontos", "21 pontos"],
-                c: 0
+                h: "Duelo de reflexos em mesa de 2,74m.",
+                r: "Sets de 11 pontos e saque troca a cada 2 pontos.",
+                t: "Efeito Topspin e Backspin.",
+                te: "Madeiras de carbono tratadas.",
+                q: "O saque muda de lado a cada quantos pontos?",
+                o: ["1 ponto", "2 pontos", "5 pontos"], c: 1
             }
         };
 
-        const CORINTHIANS = {
-            hist: "<b>Fundação:</b> 01/09/1910 por operários no Bom Retiro.<br><b>História:</b> O Time do Povo, fundado sob a luz de um lampião.<br><b>Títulos:</b> 2 Mundiais FIFA e 1 Libertadores Invicta.<br><b>Ídolos:</b> Sócrates, Cássio e Marcelinho Carioca."
+        const TIMES = {
+            "Corinthians": {
+                h: "O Time do Povo. Fundado por operários em 1910 no Bom Retiro.",
+                t: "2 Mundiais FIFA (2000, 2012), 1 Libertadores Invicta.",
+                i: "Sócrates, Cássio, Marcelinho Carioca.",
+                f: "01/09/1910"
+            },
+            "Palmeiras": {
+                h: "A Academia de Futebol. Fundado como Palestra Itália por imigrantes.",
+                t: "12 Brasileiros, 3 Libertadores, 4 Copas do Brasil.",
+                i: "Ademir da Guia, Marcos, Edmundo.",
+                f: "26/08/1914"
+            },
+            "Santos": {
+                h: "O Time do Rei. O mundo parou para ver o Santos de Pelé jogar.",
+                t: "2 Mundiais, 3 Libertadores, 8 Brasileiros.",
+                i: "Pelé, Pepe, Neymar.",
+                f: "14/04/1912"
+            }
         };
 
         let lista = [];
@@ -137,17 +162,18 @@
             if(!lista.includes(s)) {
                 lista.push(s);
                 document.getElementById('btn-work').classList.remove('escondido');
-                document.getElementById('txt-sel').innerText = "Selecionados: " + lista.join(', ');
+                document.getElementById('txt-sel').innerText = "SELECIONADOS: " + lista.join(' | ');
             }
         }
 
         function montarWork() {
             irPara('t-work');
             const menu = document.getElementById('menu-lat');
-            menu.innerHTML = "<h3>MENU</h3>";
+            menu.innerHTML = "<h3>MENU_</h3>";
             lista.forEach(s => {
                 const b = document.createElement('button');
                 b.innerText = s;
+                b.style.width = "100%";
                 b.onclick = () => carregar(s);
                 menu.appendChild(b);
             });
@@ -167,43 +193,57 @@
             document.getElementById('v-tech').innerText = DB[s].te;
         }
 
-        // --- MOTOR DO QUIZ CONSERTADO ---
         function gerarQuiz() {
-            // 1. Esconde a teoria e mostra o quiz
             document.getElementById('view-dados').classList.add('escondido');
             document.getElementById('view-quiz').classList.remove('escondido');
+            document.getElementById('feedback-quiz').innerText = ""; // Limpa feedback anterior
 
-            // 2. Pega os dados do esporte atual
-            const perguntaObj = DB[atual];
-            document.getElementById('pergunta-display').innerText = perguntaObj.q;
+            const qObj = DB[atual];
+            document.getElementById('pergunta-display').innerText = qObj.q;
 
-            // 3. Limpa os botões antigos e cria novos
             const container = document.getElementById('container-opcoes');
-            container.innerHTML = ""; // Limpa tudo!
+            container.innerHTML = ""; 
 
-            perguntaObj.o.forEach((opcao, index) => {
+            qObj.o.forEach((opcao, idx) => {
                 const btn = document.createElement('button');
                 btn.className = "btn-quiz";
                 btn.innerText = opcao;
-                
-                btn.onclick = function() {
-                    if(index === perguntaObj.c) {
-                        alert("ACERTOU! ACESSO LIBERADO.");
-                        if(atual === "Futebol") {
-                            // Se for futebol, mostra o Corinthians
-                            document.getElementById('view-quiz').classList.add('escondido');
-                            document.getElementById('view-dossie').classList.remove('escondido');
-                            document.getElementById('conteudo-timao').innerHTML = CORINTHIANS.hist;
-                        } else {
-                            // Se for outro, volta para a teoria
-                            carregar(atual);
-                        }
-                    } else {
-                        alert("ERROU! TENTE NOVAMENTE.");
-                    }
-                };
+                btn.onclick = () => validarResposta(idx, qObj.c);
                 container.appendChild(btn);
             });
+        }
+
+        function validarResposta(escolha, correta) {
+            const feed = document.getElementById('feedback-quiz');
+            if(escolha === correta) {
+                feed.innerText = "SISTEMA VALIDADO: ACERTOU!";
+                feed.className = "acertou";
+                
+                setTimeout(() => {
+                    if(atual === "Futebol") {
+                        document.getElementById('view-quiz').classList.add('escondido');
+                        document.getElementById('view-dossie').classList.remove('escondido');
+                    } else {
+                        carregar(atual);
+                    }
+                }, 1500); // Espera 1.5s para você ver o feedback antes de mudar
+            } else {
+                feed.innerText = "ERRO DE DADOS: TENTE NOVAMENTE!";
+                feed.className = "errou";
+            }
+        }
+
+        function exibirClube() {
+            const c = document.getElementById('sel-clube').value;
+            const res = document.getElementById('resultado-time');
+            if(c && TIMES[c]) {
+                const d = TIMES[c];
+                res.innerHTML = `<h3>${c.toUpperCase()}</h3>
+                <p><b>FUNDAÇÃO:</b> ${d.f}</p>
+                <p><b>HISTÓRIA:</b> ${d.h}</p>
+                <p><b>TÍTULOS:</b> ${d.t}</p>
+                <p><b>ÍDOLOS:</b> ${d.i}</p>`;
+            }
         }
     </script>
 </body>
