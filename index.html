@@ -4,75 +4,78 @@
     <meta charset="UTF-8">
     <title>Sports Intel Pro 2026</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="grid-overlay"></div>
 
     <section id="screen-auth" class="screen active">
-        <div class="glass-card">
-            <h1 class="neon-text">CORE<b>INTEL</b></h1>
-            <div class="input-box">
-                <input type="text" id="user-input" placeholder="ID DO OPERADOR" required>
-                <input type="password" id="pass-input" placeholder="SENHA DE ACESSO" required>
+        <div class="main-card">
+            <h1>SISTEMA DE INTELIGÊNCIA ESPORTIVA</h1>
+            <div class="auth-box">
+                <input type="text" id="user-input" placeholder="Usuário">
+                <input type="password" id="pass-input" placeholder="Senha">
+                <div class="btn-group">
+                    <button onclick="cadastrar()">CADASTRAR</button>
+                    <button onclick="login()" class="btn-prime">ENTRAR</button>
+                </div>
             </div>
-            <button class="cyber-btn" onclick="gerenciarAcesso()">INICIALIZAR</button>
         </div>
     </section>
 
     <section id="screen-selection" class="screen">
-        <div class="selection-container">
-            <h2 class="neon-text">ESCOLHA OS MÓDULOS</h2>
-            <div class="sports-grid">
-                <div class="sport-card" onclick="adicionarAoRoteiro('Futebol', this)">FUTEBOL</div>
-                <div class="sport-card" onclick="adicionarAoRoteiro('Ping Pong', this)">PING PONG</div>
-                <div class="sport-card" onclick="adicionarAoRoteiro('Basquete', this)">BASQUETE</div>
-                <div class="sport-card" onclick="adicionarAoRoteiro('Vôlei', this)">VÔLEI</div>
+        <div class="main-card large">
+            <h2>MÓDULOS DISPONÍVEIS</h2>
+            <div class="grid-esportes">
+                <div class="item-card" onclick="selecionar('Futebol', this)">FUTEBOL (Enciclopédia)</div>
+                <div class="item-card" onclick="selecionar('Basquete', this)">BASQUETE</div>
+                <div class="item-card" onclick="selecionar('Vôlei', this)">VÔLEI</div>
+                <div class="item-card" onclick="selecionar('Ping Pong', this)">PING PONG</div>
             </div>
-            <div id="status-area">
-                <p id="display-roteiro">Nenhum módulo selecionado</p>
-                <button id="btn-iniciar" class="hidden-force cyber-btn pulse" onclick="abrirWorkspace()">ABRIR WORKSPACE</button>
+            <div id="fila-area">
+                <p id="txt-fila">Nenhum selecionado</p>
+                <button id="btn-gerar" class="hidden" onclick="montarWorkspace()">GERAR ÁREA DE ESTUDO</button>
             </div>
         </div>
     </section>
 
     <section id="screen-workspace" class="screen">
-        <div class="workspace-wrapper">
-            <aside class="sidebar">
-                <div class="sidebar-label">MÓDULOS ATIVOS</div>
-                <nav id="sidebar-nav"></nav>
-                <button class="exit-btn" onclick="location.reload()">SAIR</button>
-            </aside>
-            <main class="main-content">
-                <div id="section-theory">
-                    <h1 id="study-title" class="neon-text">--</h1>
+        <div class="workspace-container">
+            <nav class="sidebar">
+                <h3>MENU</h3>
+                <div id="nav-links"></div>
+                <button onclick="location.reload()" class="btn-sair">SAIR</button>
+            </nav>
+            <main class="content">
+                <div id="bloco-teoria">
+                    <h2 id="titulo-esporte"></h2>
                     <div class="info-grid">
-                        <div class="info-item"><h4>DINÂMICA</h4><p id="text-how"></p></div>
-                        <div class="info-item"><h4>REGRAS</h4><ul id="list-rules"></ul></div>
-                        <div class="info-item"><h4>TÁTICA</h4><p id="text-tactics"></p></div>
-                        <div class="info-item"><h4>TECNOLOGIA</h4><p id="text-resources"></p></div>
+                        <div class="box"><h4>DINÂMICA</h4><p id="info-how"></p></div>
+                        <div class="box"><h4>REGRAS</h4><ul id="info-rules"></ul></div>
+                        <div class="box"><h4>TÁTICA</h4><p id="info-tactics"></p></div>
+                        <div class="box"><h4>TECNOLOGIA</h4><p id="info-tech"></p></div>
                     </div>
-                    <button class="cyber-btn" onclick="irParaQuiz()">DESBLOQUEAR QUIZ</button>
+                    <button class="btn-quiz" onclick="abrirQuiz()">FAZER TESTE DE ENTENDIMENTO</button>
                 </div>
 
-                <div id="section-quiz" class="hidden-force">
-                    <h2 class="neon-text">TESTE DE APTIDÃO</h2>
-                    <div class="quiz-container">
-                        <p id="quiz-question" class="q-text"></p>
-                        <div id="quiz-options"></div>
+                <div id="bloco-quiz" class="hidden">
+                    <h2>QUIZ: VALIDE SEU CONHECIMENTO</h2>
+                    <div class="quiz-box">
+                        <p id="pergunta-txt"></p>
+                        <div id="opcoes-quiz"></div>
                     </div>
                 </div>
 
-                <div id="section-team" class="hidden-force">
-                    <h2 class="neon-text">DOSSIÊ DO TIME</h2>
-                    <select id="team-selector" onchange="exibirDadosTime()">
-                        <option value="">Selecione seu clube...</option>
+                <div id="bloco-time" class="hidden">
+                    <h2>ANÁLISE DE CLUBES</h2>
+                    <p>Selecione seu time para ver a história detalhada:</p>
+                    <select id="select-time" onchange="detalharTime()">
+                        <option value="">Escolha...</option>
                         <option value="Flamengo">Flamengo</option>
                         <option value="Palmeiras">Palmeiras</option>
-                        <option value="Santos">Santos</option>
                         <option value="São Paulo">São Paulo</option>
+                        <option value="Corinthians">Corinthians</option>
+                        <option value="Santos">Santos</option>
                     </select>
-                    <div id="team-result" class="team-info-box"></div>
+                    <div id="resultado-time" class="time-detalhe"></div>
                 </div>
             </main>
         </div>
