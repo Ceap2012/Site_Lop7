@@ -1,42 +1,23 @@
-:root {
-    --bg: #05070a;
-    --accent: #00f2ff;
-    --card: #0f1218;
-}
+:root { --bg: #020406; --accent: #00f2ff; --card: #0a0c10; }
+body, html { margin: 0; padding: 0; background: var(--bg); color: white; font-family: 'Segoe UI', sans-serif; overflow: hidden; }
+.screen { display: none; width: 100vw; height: 100vh; justify-content: center; align-items: center; position: absolute; }
+.screen.active { display: flex; }
 
-body, html {
-    margin: 0; padding: 0;
-    background-color: var(--bg);
-    color: white; font-family: sans-serif;
-    overflow: hidden; /* Evita rolagens estranhas entre telas */
-}
+.dashboard { display: flex; width: 98%; height: 95%; background: var(--card); border: 1px solid #1a1a1a; border-radius: 8px; }
+.sidebar { width: 240px; border-right: 1px solid #222; padding: 15px; display: flex; flex-direction: column; }
+.main-panel { flex: 1; padding: 30px; overflow-y: auto; text-align: left; background: #07080b; }
 
-.screen {
-    display: none; /* Todas começam escondidas */
-    width: 100vw; height: 100vh;
-    justify-content: center; align-items: center;
-    position: absolute; top: 0; left: 0;
-}
+.dossier-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+.info-card { background: rgba(255,255,255,0.02); padding: 20px; border-radius: 5px; border-top: 2px solid var(--accent); }
+.info-card h3 { font-size: 0.9rem; color: var(--accent); letter-spacing: 1px; margin-bottom: 15px; }
+.info-card p, li { font-size: 0.85rem; line-height: 1.6; color: #ccc; }
 
-.screen.active {
-    display: flex; /* Apenas a ativa aparece */
-}
-
-/* Estilo da Área de Trabalho */
-.dashboard {
-    display: flex; width: 95%; height: 90%;
-    background: var(--card); border: 1px solid #222;
-}
-
-.sidebar { width: 250px; border-right: 1px solid #333; padding: 20px; }
-.main-panel { flex: 1; padding: 40px; overflow-y: auto; text-align: left; }
-
-.info-card { background: #161b22; padding: 20px; margin-bottom: 15px; border-left: 4px solid var(--accent); }
+.tag-origin { font-size: 0.7rem; color: #888; text-transform: uppercase; margin-top: -10px; margin-bottom: 20px; }
 .neon { color: var(--accent); text-shadow: 0 0 10px var(--accent); }
 .hidden { display: none !important; }
 
-/* Grid de Esportes */
-.sports-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
-.card { background: #1a1e26; padding: 20px; border: 1px solid #333; cursor: pointer; border-radius: 8px; }
-.card:hover { border-color: var(--accent); }
-.selected { opacity: 0.3; pointer-events: none; }
+/* Grid de Seleção */
+.sports-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; }
+.card { background: #111; padding: 20px; border: 1px solid #333; cursor: pointer; border-radius: 10px; transition: 0.3s; }
+.card:hover { border-color: var(--accent); background: #161b22; }
+.selected { opacity: 0.3; pointer-events: none; border-style: dashed; }
