@@ -1,53 +1,64 @@
 let isLoginMode = false;
-let userQueue = [];
+let order = [];
 
-function alternarTela() {
+function alternarModo() {
     isLoginMode = !isLoginMode;
-    document.getElementById('auth-title').innerText = isLoginMode ? "LOGIN DE ATLETA" : "NOVO REGISTRO";
-    document.getElementById('main-btn').innerText = isLoginMode ? "ENTRAR" : "CADASTRAR";
+    document.getElementById('auth-title').innerText = isLoginMode ? "ENTRAR NO SISTEMA" : "CRIAR CONTA";
+    document.getElementById('action-btn').innerText = isLoginMode ? "ENTRAR" : "CADASTRAR";
+    document.getElementById('toggle-text').innerHTML = isLoginMode ? "NÃO TEM CONTA? <span>CADASTRAR</span>" : "JÁ TEM CONTA? <span>ENTRAR</span>";
 }
 
-function executarAcao() {
-    const user = document.getElementById('user').value;
-    const pass = document.getElementById('pass').value;
+function gerenciarAcesso() {
+    const user = document.getElementById('user-input').value;
+    const pass = document.getElementById('pass-input').value;
 
-    if (!user || !pass) return alert("Preencha os campos!");
+    if (!user || !pass) return alert("Erro: Preencha todos os campos.");
 
     if (isLoginMode) {
-        if (localStorage.getItem(user) === pass) {
-            abrirApp(user);
-        } else { alert("Usuário ou senha incorretos."); }
+        // Lógica de Login
+        const storedPass = localStorage.getItem(user);
+        if (storedPass === pass) {
+            entrarNaArena(user);
+        } else {
+            alert("Credenciais incorretas.");
+        }
     } else {
-        localStorage.setItem(user, pass);
-        alert("Conta criada! Agora clique em ENTRAR.");
-        alternarTela();
+        // Lógica de Cadastro
+        if (localStorage.getItem(user)) {
+            alert("Este usuário já existe.");
+        } else {
+            localStorage.setItem(user, pass);
+            alert("Usuário registrado! Clique em ENTRAR agora.");
+            alternarModo();
+        }
     }
 }
 
-function abrirApp(nome) {
-    document.getElementById('auth-container').classList.add('hidden');
-    document.getElementById('sports-page').classList.remove('hidden');
-    document.getElementById('display-name').innerText = nome.toUpperCase();
+function entrarNaArena(nome) {
+    document.getElementById('auth-screen').classList.add('hidden');
+    document.getElementById('main-screen').classList.remove('hidden');
+    document.getElementById('user-welcome').innerText = nome.toUpperCase();
 }
 
-function selecionarEsporte(nome, elemento) {
-    if (!userQueue.includes(nome)) {
-        userQueue.push(nome);
+function adicionarAolista(esporte, elemento) {
+    if (!order.includes(esporte)) {
+        order.push(esporte);
         elemento.classList.add('selected');
-        renderizarLista();
+        atualizarVisualLista();
     }
 }
 
-function renderizarLista() {
-    const listaUI = document.getElementById('order-list');
-    listaUI.innerHTML = "";
-    userQueue.forEach((esp, i) => {
-        listaUI.innerHTML += `<li>[Fase ${i+1}] → Aprender ${esp}</li>`;
+function atualizarVisualLista() {
+    const listaUI = document.getElementById('learning-list');
+    listaUI.innerHTML = ""; // Limpa o placeholder
+
+    order.forEach((item, index) => {
+        listaUI.innerHTML += `<li><strong>FASE ${index + 1}:</strong> Aprender ${item}</li>`;
     });
 }
 
-function limparLista() {
-    userQueue = [];
-    document.getElementById('order-list').innerHTML = '<li class="empty-msg">Clique nos cards acima...</li>';
-    document.querySelectorAll('.sport-card').forEach(c => c.classList.remove('selected'));
+function limparRoteiro() {
+    order = [];
+    document.getElementById('learning-list').innerHTML = '<li class="placeholder">Clique nos cards acima...</li>';
+    document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
 }
