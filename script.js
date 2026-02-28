@@ -1,54 +1,53 @@
-let modoLogin = false;
+let isLoginMode = false;
 
 function alternarTela() {
-    modoLogin = !modoLogin;
-    const titulo = document.getElementById('auth-title');
-    const btn = document.getElementById('btn-main');
-    const toggle = document.getElementById('toggle-text');
+    isLoginMode = !isLoginMode;
+    const title = document.getElementById('auth-title');
+    const btn = document.getElementById('main-btn');
+    const toggleText = document.getElementById('toggle-text');
 
-    if (modoLogin) {
-        titulo.innerText = "Login de Jogador";
-        btn.innerText = "Entrar";
-        toggle.innerText = "Não tem conta? Criar agora";
+    if (isLoginMode) {
+        title.innerText = "LOGIN DE ATLETA";
+        btn.innerText = "ENTRAR";
+        toggleText.innerHTML = "Não possui registro? <span>CADASTRAR</span>";
     } else {
-        titulo.innerText = "Criar Conta Futurista";
-        btn.innerText = "Cadastrar";
-        toggle.innerText = "Já tem conta? Entrar";
+        title.innerText = "CRIAR ACESSO";
+        btn.innerText = "CADASTRAR";
+        toggleText.innerHTML = "Já possui registro? <span>ENTRAR</span>";
     }
 }
 
-function registrar() {
+function executarAcao() {
     const user = document.getElementById('user').value;
     const pass = document.getElementById('pass').value;
 
-    if (!user || !pass) return alert("Preencha todos os campos!");
+    if (!user || !pass) {
+        alert("Preencha as credenciais!");
+        return;
+    }
 
-    if (modoLogin) {
-        // Lógica de LOGIN
-        const senhaSalva = localStorage.getItem(user);
-        if (senhaSalva && senhaSalva === pass) {
-            entrar(user);
+    if (isLoginMode) {
+        // Lógica de Login
+        const storedPass = localStorage.getItem(user);
+        if (storedPass === pass) {
+            logar(user);
         } else {
-            alert("Usuário ou senha incorretos!");
+            alert("Erro: Credenciais não encontradas ou incorretas.");
         }
     } else {
-        // Lógica de CADASTRO
+        // Lógica de Cadastro
         if (localStorage.getItem(user)) {
-            alert("Este nome já está em uso!");
+            alert("Este usuário já existe no sistema!");
         } else {
             localStorage.setItem(user, pass);
-            alert("Conta criada com sucesso! Agora faça login.");
+            alert("Registro efetuado com sucesso!");
             alternarTela();
         }
     }
 }
 
-function entrar(nome) {
+function logar(nome) {
     document.getElementById('auth-container').classList.add('hidden');
     document.getElementById('dashboard').classList.remove('hidden');
-    document.getElementById('display-name').innerText = nome;
-}
-
-function logout() {
-    location.reload(); // Reinicia a página para voltar ao login
+    document.getElementById('display-name').innerText = nome.toUpperCase();
 }
