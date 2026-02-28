@@ -2,71 +2,71 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>SISTEMA ULTRA NEON</title>
+    <title>Sports Intel Neon</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="grid-fundo"></div>
+    <div class="grid-bg"></div>
 
-    <section id="tela-login" class="area-visivel">
-        <div class="card-neon">
-            <h1 class="neon-titulo">ACESSO_SISTEMA</h1>
-            <input type="text" id="user" placeholder="USUÁRIO">
-            <input type="password" id="pass" placeholder="SENHA">
-            <div class="linha-btns">
-                <button type="button" onclick="registrar()">CADASTRAR</button>
-                <button type="button" onclick="logar()" class="btn-destaque">ENTRAR_</button>
+    <section id="tela-login" class="screen active">
+        <div class="neon-box">
+            <h1 class="neon-txt">SISTEMA_LOGIN</h1>
+            <input type="text" id="user-id" placeholder="USUÁRIO">
+            <input type="password" id="pass-id" placeholder="SENHA">
+            <div class="btn-group">
+                <button type="button" onclick="cadastrar()">REGISTRAR</button>
+                <button type="button" onclick="logar()" class="btn-glow">ENTRAR_</button>
             </div>
         </div>
     </section>
 
-    <section id="tela-selecao" class="area-oculta">
-        <div class="card-neon largo">
-            <h2 class="neon-titulo">ESCOLHA_MÓDULOS</h2>
-            <div class="grid-esportes">
-                <div class="item-esp" onclick="selecionar('Futebol', this)">FUTEBOL</div>
-                <div class="item-esp" onclick="selecionar('Basquete', this)">BASQUETE</div>
-                <div class="item-esp" onclick="selecionar('Vôlei', this)">VÔLEI</div>
+    <section id="tela-selecao" class="screen">
+        <div class="neon-box wide">
+            <h2 class="neon-txt">MÓDULOS_ESPORTIVOS</h2>
+            <div class="sports-grid">
+                <div class="sport-card" onclick="selecionar('Futebol', this)">FUTEBOL</div>
+                <div class="sport-card" onclick="selecionar('Basquete', this)">BASQUETE</div>
+                <div class="sport-card" onclick="selecionar('Vôlei', this)">VÔLEI</div>
             </div>
-            <p id="txt-selecionados">NENHUM SELECIONADO</p>
-            <button type="button" id="btn-gerar" class="area-oculta btn-destaque" onclick="irParaWorkspace()">GERAR_WORKSPACE</button>
+            <p id="msg-selecao">SELECIONE OS MÓDULOS DESEJADOS</p>
+            <button type="button" id="btn-ir-work" class="hidden btn-glow" onclick="montarDashboard()">GERAR_DASHBOARD</button>
         </div>
     </section>
 
-    <section id="tela-workspace" class="area-oculta">
-        <div class="container-work">
-            <aside class="menu-lateral">
-                <h3 class="neon-titulo">MENU_</h3>
-                <div id="lista-menu"></div>
-                <button type="button" onclick="location.reload()" class="btn-sair">SAIR</button>
+    <section id="tela-workspace" class="screen">
+        <div class="main-container">
+            <aside class="nav-lateral">
+                <h3 class="neon-txt">MENU_</h3>
+                <div id="lista-esportes-nav"></div>
+                <button type="button" onclick="location.reload()" class="btn-exit">LOGOUT</button>
             </aside>
-            <main class="painel-principal">
-                <div id="secao-estudo">
-                    <h1 id="tit-esporte" class="neon-titulo"></h1>
-                    <div class="grade-info">
-                        <div class="box"><h4>DINÂMICA</h4><p id="res-how"></p></div>
-                        <div class="box"><h4>REGRAS</h4><p id="res-rules"></p></div>
-                        <div class="box"><h4>TÁTICA</h4><p id="res-tactic"></p></div>
-                        <div class="box"><h4>TECH</h4><p id="res-tech"></p></div>
+            <main class="content-area">
+                <div id="view-estudo">
+                    <h1 id="tit-modulo" class="neon-txt"></h1>
+                    <div class="data-grid">
+                        <div class="data-item"><h4>DINÂMICA</h4><p id="d-how"></p></div>
+                        <div class="data-item"><h4>REGRAS</h4><p id="d-rules"></p></div>
+                        <div class="data-item"><h4>TÁTICA</h4><p id="d-tactic"></p></div>
+                        <div class="data-item"><h4>TECH</h4><p id="d-tech"></p></div>
                     </div>
-                    <button type="button" class="btn-destaque" onclick="abrirQuiz()">INICIAR QUIZ_</button>
+                    <button type="button" class="btn-glow" onclick="irParaQuiz()">DESBLOQUEAR QUIZ_</button>
                 </div>
 
-                <div id="secao-quiz" class="area-oculta">
-                    <h2 class="neon-titulo">VALIDAÇÃO_DADOS</h2>
-                    <p id="pergunta-txt" style="font-size: 1.2rem;"></p>
-                    <div id="opcoes-quiz"></div>
+                <div id="view-quiz" class="hidden">
+                    <h2 class="neon-txt">VALIDAÇÃO_CONHECIMENTO</h2>
+                    <p id="pergunta-display" style="font-size: 1.3rem;"></p>
+                    <div id="opcoes-container"></div>
                 </div>
 
-                <div id="secao-time" class="area-oculta">
-                    <h2 class="neon-titulo">DOSSIÊ_CLUBE</h2>
-                    <select id="select-time" onchange="mostrarDadosTime()">
-                        <option value="">Escolha seu clube...</option>
+                <div id="view-times" class="hidden">
+                    <h2 class="neon-txt">DOSSIÊ_CLUBES</h2>
+                    <select id="select-clube" onchange="mostrarInfoTime()">
+                        <option value="">Selecione um clube...</option>
                         <option value="Flamengo">Flamengo</option>
                         <option value="Palmeiras">Palmeiras</option>
                         <option value="Santos">Santos</option>
                     </select>
-                    <div id="dados-time" class="box-resultado"></div>
+                    <div id="detalhes-time" class="result-box"></div>
                 </div>
             </main>
         </div>
