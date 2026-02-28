@@ -2,68 +2,68 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>SISTEMA NEON PRO</title>
+    <title>CYBER_SPORTS 2026</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="grid-bg"></div>
+    <div class="grid-overlay"></div>
 
-    <section id="tela-login" class="tela ativa">
-        <div class="box-neon">
-            <h1 class="texto-neon">ACESSO_RESTREITO</h1>
+    <section id="tela-login" class="screen active">
+        <div class="neon-card">
+            <h1 class="neon-text">LOGIN_REQUERIDO</h1>
             <input type="text" id="user" placeholder="USUÁRIO">
             <input type="password" id="pass" placeholder="SENHA">
-            <div class="botoes">
-                <button onclick="cadastrar()">REGISTRAR</button>
-                <button onclick="logar()" class="btn-neon">ENTRAR</button>
+            <div class="btn-row">
+                <button onclick="registrar()">CADASTRAR</button>
+                <button onclick="logar()" class="btn-main">ENTRAR</button>
             </div>
         </div>
     </section>
 
-    <section id="tela-selecao" class="tela">
-        <div class="box-neon larga">
-            <h2 class="texto-neon">SELECIONE_MODULOS</h2>
-            <div class="grid-esportes">
-                <div class="card-esporte" onclick="addEsporte('Futebol', this)">FUTEBOL</div>
-                <div class="card-esporte" onclick="addEsporte('Basquete', this)">BASQUETE</div>
-                <div class="card-esporte" onclick="addEsporte('Lutas', this)">LUTAS</div>
+    <section id="tela-selecao" class="screen">
+        <div class="neon-card wide">
+            <h2 class="neon-text">MÓDULOS_DISPONÍVEIS</h2>
+            <div class="grid-sports">
+                <div class="sport-opt" onclick="selecionar('Futebol', this)">FUTEBOL</div>
+                <div class="sport-opt" onclick="selecionar('Basquete', this)">BASQUETE</div>
+                <div class="sport-opt" onclick="selecionar('Ping Pong', this)">PING PONG</div>
             </div>
-            <p id="lista-escolhidos">AGUARDANDO SELEÇÃO...</p>
-            <button id="btn-gerar" class="hidden btn-neon" onclick="abrirWorkspace()">GERAR_WORKSPACE</button>
+            <p id="status-txt">SELECIONE UM ESPORTE PARA AVANÇAR</p>
+            <button id="btn-gerar" class="hidden btn-main" onclick="gerarWorkspace()">GERAR_DASHBOARD</button>
         </div>
     </section>
 
-    <section id="tela-work" class="tela">
-        <div class="workspace">
+    <section id="tela-work" class="screen">
+        <div class="dashboard">
             <aside class="sidebar" id="menu-lateral"></aside>
-            <main class="principal">
-                <div id="bloco-estudo">
-                    <h1 id="tit-esporte" class="texto-neon"></h1>
+            <main class="main-panel">
+                <div id="content-estudo">
+                    <h1 id="tit-esp" class="neon-text"></h1>
                     <div class="info-grid">
-                        <div class="item"><h3>COMO JOGAR</h3><p id="txt-how"></p></div>
-                        <div class="item"><h3>REGRAS</h3><p id="txt-rules"></p></div>
-                        <div class="item"><h3>TÁTICA</h3><p id="txt-tactic"></p></div>
-                        <div class="item"><h3>TECNOLOGIA</h3><p id="txt-tech"></p></div>
+                        <div class="info-box"><h3>DINÂMICA</h3><p id="p-how"></p></div>
+                        <div class="info-box"><h3>REGRAS</h3><p id="p-rules"></p></div>
+                        <div class="info-box"><h3>TÁTICA</h3><p id="p-tactic"></p></div>
+                        <div class="info-box"><h3>TECNOLOGIA</h3><p id="p-tech"></p></div>
                     </div>
-                    <button class="btn-neon" onclick="irProQuiz()">INICIAR QUIZ_</button>
+                    <button class="btn-main" onclick="abrirQuiz()">INICIAR TESTE_</button>
                 </div>
 
-                <div id="bloco-quiz" class="hidden">
-                    <h2 class="texto-neon">VALIDAÇÃO_DE_DADOS</h2>
-                    <p id="pergunta-quiz"></p>
-                    <div id="opcoes-quiz"></div>
+                <div id="content-quiz" class="hidden">
+                    <h2 class="neon-text">VALIDAÇÃO_DE_SISTEMA</h2>
+                    <p id="pergunta-txt" style="font-size: 1.2rem; margin-bottom: 20px;"></p>
+                    <div id="quiz-options"></div>
                 </div>
 
-                <div id="bloco-time" class="hidden">
-                    <h2 class="texto-neon">DOSSIÊ_DO_CLUBE</h2>
-                    <select id="select-time" onchange="verTime()">
+                <div id="content-time" class="hidden">
+                    <h2 class="neon-text">DOSSIÊ_DE_CLUBES</h2>
+                    <select id="select-time" onchange="exibirTime()">
                         <option value="">ESCOLHA UM TIME...</option>
                         <option value="Flamengo">Flamengo</option>
                         <option value="Palmeiras">Palmeiras</option>
-                        <option value="Corinthians">Corinthians</option>
+                        <option value="Santos">Santos</option>
                         <option value="São Paulo">São Paulo</option>
                     </select>
-                    <div id="res-time" class="box-time"></div>
+                    <div id="time-data" class="time-box"></div>
                 </div>
             </main>
         </div>
