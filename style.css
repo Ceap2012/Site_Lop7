@@ -1,72 +1,73 @@
 :root {
-    --bg: #05070a;
-    --card: #0f1218;
+    --bg: #050505;
+    --glass: #0f1115;
     --accent: #00f2ff;
     --text: #ffffff;
-    --border: rgba(0, 242, 255, 0.3);
+    --border: rgba(0, 242, 255, 0.2);
 }
 
 body {
     background-color: var(--bg);
     color: var(--text);
     font-family: 'Segoe UI', sans-serif;
+    margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    margin: 0;
+    overflow-x: hidden;
 }
 
 .grid-overlay {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background-image: radial-gradient(var(--border) 1px, transparent 1px);
-    background-size: 30px 30px;
+    background-image: linear-gradient(var(--border) 1px, transparent 1px),
+                      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 40px 40px;
     z-index: -1;
-    opacity: 0.5;
+    opacity: 0.3;
 }
+
+.container { width: 100%; max-width: 800px; padding: 20px; text-align: center; }
 
 .glass-box {
-    background: var(--card);
-    border: 1px solid var(--border);
-    padding: 40px;
+    background: var(--glass);
+    padding: 50px;
     border-radius: 20px;
-    text-align: center;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+    border: 1px solid var(--border);
+    box-shadow: 0 0 40px rgba(0, 242, 255, 0.05);
 }
 
-.scanner-line {
+.scanner {
     width: 100%;
-    height: 2px;
+    height: 1px;
     background: var(--accent);
-    box-shadow: 0 0 15px var(--accent);
-    animation: scan 4s infinite ease-in-out;
+    box-shadow: 0 0 10px var(--accent);
+    animation: scan 4s infinite alternate;
 }
 
-@keyframes scan {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(250px); }
-}
+@keyframes scan { from { opacity: 0.1; } to { opacity: 1; } }
 
 input {
     width: 100%;
     background: #000;
     border: 1px solid #333;
-    color: white;
-    padding: 12px;
+    padding: 15px;
     margin: 10px 0;
-    border-radius: 8px;
+    color: white;
+    border-radius: 5px;
+    box-sizing: border-box;
 }
 
 button {
     background: transparent;
     border: 1px solid var(--accent);
     color: var(--accent);
-    padding: 12px 30px;
+    padding: 15px 30px;
+    font-weight: bold;
     cursor: pointer;
-    text-transform: uppercase;
-    letter-spacing: 2px;
     transition: 0.3s;
+    letter-spacing: 2px;
 }
 
 button:hover {
@@ -78,50 +79,45 @@ button:hover {
 /* Sports Grid */
 .sports-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr 1fr;
     gap: 15px;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
-.sport-card {
-    background: #161b22;
-    padding: 20px;
-    border: 1px solid #333;
+.card {
+    background: #14161a;
+    padding: 25px;
+    border: 1px solid #222;
     border-radius: 12px;
     cursor: pointer;
     transition: 0.3s;
 }
 
-.sport-card:hover { border-color: var(--accent); }
+.card:hover { border-color: var(--accent); transform: translateY(-5px); }
 
-.highlight { grid-column: span 2; border: 1px solid var(--border); }
+.highlight { grid-column: span 2; border: 1px solid var(--accent); }
 
-.info-extra {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    font-size: 0.7rem;
-    margin-top: 15px;
-    color: var(--accent);
-}
+.details { display: flex; justify-content: center; gap: 10px; font-size: 0.7rem; color: var(--accent); margin-top: 10px; }
 
-.selected { border-color: var(--accent); opacity: 0.5; pointer-events: none; }
+.priority-tag { background: var(--accent); color: #000; font-size: 0.6rem; display: inline-block; padding: 2px 10px; border-radius: 10px; margin-bottom: 10px; font-weight: bold; }
 
-/* Learning List */
-.learning-path {
-    background: rgba(255, 255, 255, 0.03);
+/* Lista de Ordem */
+.learning-section {
+    background: rgba(255, 255, 255, 0.02);
+    margin-top: 40px;
     padding: 20px;
-    margin-top: 30px;
-    border-radius: 12px;
+    border-radius: 15px;
     text-align: left;
 }
 
-#order-list { list-style: none; padding: 0; }
-#order-list li {
-    padding: 10px;
-    border-bottom: 1px solid #222;
-    color: var(--accent);
+#learning-list { list-style: none; padding: 0; }
+#learning-list li {
+    padding: 12px;
+    border-left: 3px solid var(--accent);
+    background: rgba(0, 242, 255, 0.05);
+    margin-bottom: 10px;
 }
 
 .hidden { display: none; }
-.neon-text { color: var(--accent); text-shadow: 0 0 10px var(--accent); }
+.neon { color: var(--accent); text-shadow: 0 0 10px var(--accent); }
+.selected { opacity: 0.4; pointer-events: none; border-style: dashed; }
