@@ -1,48 +1,48 @@
 const database = {
     "Futebol": {
-        origin: "Origem: Inglaterra, Século XIX | Órgão: FIFA",
-        how: "Disputado em campo de 100-110m. O objetivo é a progressão da posse de bola através de passes triangulares e infiltrações nas zonas de finalização (Box). Em 2026, o jogo é focado em transições rápidas e pressão alta (Gegenpressing).",
+        origin: "Origem: Reino Unido | Regulação: FIFA (International Board)",
+        how: "Disputado em campo retangular. O objetivo é a progressão coletiva da bola até o gol adversário sem o uso das mãos. O jogo moderno baseia-se em zonas de pressão e controle de posse em 1/3 do campo.",
         rules: [
-            "Partida: 2 tempos de 45 min (+ acréscimos).",
-            "Gols: Bola deve ultrapassar totalmente a linha.",
-            "Impedimento: Atacante à frente do último defensor no passe.",
-            "VAR: Revisão de gols, pênaltis, vermelhos e erro de identidade."
+            "Partida dividida em dois tempos de 45 minutos.",
+            "Impedimento: Atacante à frente do penúltimo defensor no momento do passe.",
+            "Substituições: Atualmente permitidas até 5 janelas.",
+            "Gols: Bola deve cruzar 100% da linha de meta."
         ],
-        tactics: "As formações variam entre o clássico 4-4-2, o ofensivo 4-3-3 e o equilibrado 3-5-2. Cada jogador possui um 'Heat Map' (mapa de calor) que dita sua zona de atuação primária.",
-        res: "Bolas com microchips de 500Hz, coletes de monitoramento cardíaco/GPS, e chuteiras de tração adaptativa ao gramado."
+        tactics: "As táticas modernas incluem o 4-3-3 ofensivo, o 4-4-2 em bloco baixo e o 3-4-3 com alas agressivos. O 'Heat Map' (mapa de calor) define a eficácia do posicionamento.",
+        res: "VAR (Árbitro de Vídeo), Chuteiras com sensor de tração, Bolas com chips de 500Hz e Coletes de GPS/Monitoramento Cardíaco."
     },
     "Ping Pong": {
-        origin: "Origem: Inglaterra (Vitoriana) | Órgão: ITTF",
-        how: "Esporte de raquetes de alta velocidade. O foco é gerar 'Spin' (rotação) na bola (Topspin, Backspin e Sidespin) para dificultar a recepção do oponente em uma mesa de 2,74m.",
+        origin: "Origem: Inglaterra (Mesa Inglesa) | Regulação: ITTF",
+        how: "Jogo de raquetes sobre mesa dividida por uma rede. Foco total em 'Spin' (rotação) e velocidade de reação em frações de segundo.",
         rules: [
-            "Partida: Melhor de 5 ou 7 sets de 11 pontos.",
-            "Saque: A bola deve subir no mínimo 16cm da palma da mão.",
-            "Let: Saque que toca a rede e cai no campo adversário (repete)."
+            "Sets disputados até 11 pontos (deve haver 2 de vantagem).",
+            "Saque deve quicar uma vez em cada lado da mesa.",
+            "Não é permitido tocar na superfície da mesa com a mão livre."
         ],
-        tactics: "Estilos variam entre 'Attacker' (ataque rápido perto da mesa) e 'Chopper' (defesa com muito efeito cortado longe da mesa).",
-        res: "Borrachas tencionadas de 2.1mm, colas à base de água e bolas de plástico ABS não inflamável."
+        tactics: "Uso de 'Looping' (ataque rápido com spin) e 'Chopping' (defesa cortada). O posicionamento lateral é crucial para cobrir os ângulos da mesa.",
+        res: "Raquetes de madeira/carbono, Borrachas tencionadas e Mesas de alta densidade com sensores de borda."
     },
     "Basquete": {
-        origin: "Origem: EUA, 1891 (James Naismith) | Órgão: FIBA/NBA",
-        how: "Jogo de alta pontuação em quadra de 28m. Exige coordenação motora fina para arremessos e força explosiva para infiltrações e rebotes.",
+        origin: "Origem: EUA (1891) | Regulação: FIBA / NBA",
+        how: "Objetivo é introduzir a bola no cesto adversário a 3,05m de altura. Exige coordenação explosiva e drible constante para movimentação.",
         rules: [
-            "Pontuação: 1 ponto (Lance Livre), 2 pontos (Área), 3 pontos (Fora do Arco).",
-            "Violações: 'Walking' (andar sem driblar), 'Double Dribble'.",
-            "Faltas: 5 faltas individuais excluem o jogador (FIBA)."
+            "Posses de bola limitadas a 24 segundos.",
+            "Passos: Não se pode dar mais de 2 passos sem quicar a bola.",
+            "Faltas: 5 a 6 faltas individuais excluem o atleta."
         ],
-        tactics: "Sistemas como 'Pick and Roll', Defesa por Zona ou Individual. O pivô controla o garrafão enquanto os armadores ditam o ritmo do perímetro.",
-        res: "Aros retráteis (Breakaway rims), sensores de 24 segundos e tecnologia de amortecimento Air/Zoom nos calçados."
+        tactics: "Estratégias de 'Pick and Roll', defesa individual ou por zona. Pivôs controlam o garrafão enquanto alas focam no perímetro de 3 pontos.",
+        res: "Aros retráteis (Breakaway), Bolas de material sintético de alta aderência e Placar Eletrônico de Precisão."
     },
     "Vôlei": {
-        origin: "Origem: EUA, 1895 (William Morgan) | Órgão: FIVB",
-        how: "Esporte de não-contato onde a bola não pode tocar o chão. Baseado no ciclo: Recepção -> Levantamento -> Ataque (Cortada).",
+        origin: "Origem: EUA (1895) | Regulação: FIVB",
+        how: "Jogo de recepção e ataque sobre rede alta. A bola não pode tocar o solo e o contato físico com o adversário é nulo.",
         rules: [
-            "Sets: Vence quem ganha 3 sets de 25 pontos.",
-            "Toques: Máximo de 3 toques (Bloqueio não conta na maioria das ligas).",
-            "Líbero: Especialista defensivo que usa uniforme de cor diferente."
+            "Máximo de 3 toques por equipe antes de passar a rede.",
+            "Rotação obrigatória de posições a cada saque ganho.",
+            "Sets de 25 pontos (Tie-break de 15 pontos)."
         ],
-        tactics: "Sistema 5-1 (um levantador) ou 4-2. Posicionamento em quadra segue uma numeração de 1 a 6 para o rodízio obrigatório de saque.",
-        res: "Pisos flutuantes de madeira ou polímero, antenas limitadoras de rede e sistemas de 'Challenge' por câmera de alta velocidade."
+        tactics: "Sistema 5-1 com levantador especializado. Posicionamento tático defensivo baseado em 'diagonal' e 'paralela' no bloqueio.",
+        res: "Antenas de delimitação, Piso de polímero de impacto e Sistema de Challenge por câmeras de 120fps."
     }
 };
 
@@ -54,25 +54,36 @@ function showScreen(id) {
     document.getElementById(id).classList.add('active');
 }
 
-function alternarModo() { isLoginMode = !isLoginMode; document.getElementById('auth-title').innerText = isLoginMode ? "LOGIN" : "CADASTRO"; }
+function alternarModo() {
+    isLoginMode = !isLoginMode;
+    document.getElementById('auth-title').innerText = isLoginMode ? "ENTRAR NO HUB" : "CRIAR CONTA";
+    document.getElementById('btn-auth').innerText = isLoginMode ? "ENTRAR" : "CADASTRAR";
+}
 
 function gerenciarAcesso() {
-    const u = document.getElementById('user-input').value;
-    const p = document.getElementById('pass-input').value;
-    if(isLoginMode) {
-        if(localStorage.getItem(u) === p) { document.getElementById('user-display').innerText = u; showScreen('screen-selection'); }
-        else alert("Erro");
+    const user = document.getElementById('user-input').value;
+    const pass = document.getElementById('pass-input').value;
+    if(!user || !pass) return alert("Preencha os campos!");
+
+    if (isLoginMode) {
+        if (localStorage.getItem(user) === pass) {
+            document.getElementById('user-display').innerText = user.toUpperCase();
+            showScreen('screen-selection');
+        } else alert("Acesso negado.");
     } else {
-        localStorage.setItem(u, p); alert("Cadastrado!"); alternarModo();
+        localStorage.setItem(user, pass);
+        alert("Cadastrado! Mude para Entrar.");
+        alternarModo();
     }
 }
 
 function adicionarAoRoteiro(esp, el) {
-    if(!roteiro.includes(esp)) {
-        roteiro.push(esp); el.classList.add('selected');
+    if (!roteiro.includes(esp)) {
+        roteiro.push(esp);
+        el.classList.add('selected');
         const list = document.getElementById('display-roteiro');
-        if(roteiro.length === 1) list.innerHTML = "";
-        list.innerHTML += `<li>${roteiro.length}º - ${esp}</li>`;
+        if (roteiro.length === 1) list.innerHTML = "";
+        list.innerHTML += `<li>Módulo ${roteiro.length}: ${esp}</li>`;
         document.getElementById('btn-iniciar').classList.remove('hidden');
     }
 }
@@ -84,21 +95,21 @@ function abrirWorkspace() {
     roteiro.forEach(esp => {
         const btn = document.createElement('button');
         btn.innerText = esp.toUpperCase();
-        btn.style = "width:100%; padding:12px; background:#111; color:cyan; border:1px solid #333; margin-top:5px; cursor:pointer;";
-        btn.onclick = () => carregarEstudo(esp);
+        btn.style = "width:100%; padding:15px; margin-top:5px; background:#111; color:cyan; border:1px solid #333; cursor:pointer;";
+        btn.onclick = () => carregarDossie(esp);
         nav.appendChild(btn);
     });
-    carregarEstudo(roteiro[0]);
+    carregarDossie(roteiro[0]);
 }
 
-function carregarEstudo(esp) {
-    const d = database[esp];
+function carregarDossie(esp) {
+    const data = database[esp];
     document.getElementById('study-title').innerText = esp.toUpperCase();
-    document.getElementById('sport-origin').innerText = d.origin;
-    document.getElementById('text-how').innerText = d.how;
-    document.getElementById('text-tactics').innerText = d.tactics;
-    document.getElementById('text-resources').innerText = d.res;
-    const list = document.getElementById('list-rules');
-    list.innerHTML = "";
-    d.rules.forEach(r => list.innerHTML += `<li>${r}</li>`);
+    document.getElementById('sport-origin').innerText = data.origin;
+    document.getElementById('text-how').innerText = data.how;
+    document.getElementById('text-tactics').innerText = data.tactics;
+    document.getElementById('text-resources').innerText = data.res;
+    const rulesUI = document.getElementById('list-rules');
+    rulesUI.innerHTML = "";
+    data.rules.forEach(r => rulesUI.innerHTML += `<li>${r}</li>`);
 }
