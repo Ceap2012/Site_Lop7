@@ -1,21 +1,21 @@
 :root { --bg: #020406; --accent: #00f2ff; --card: #0a0c10; }
 body, html { margin: 0; padding: 0; background: var(--bg); color: white; font-family: sans-serif; overflow: hidden; }
 
+/* Forçar visibilidade correta */
 .screen { display: none !important; width: 100vw; height: 100vh; justify-content: center; align-items: center; position: absolute; }
 .screen.active { display: flex !important; }
-
 .hidden { display: none !important; }
 
-.glass-box, .container { background: var(--card); padding: 30px; border: 1px solid #1a1a1a; border-radius: 10px; width: 400px; text-align: center; }
+.glass-box, .container { background: var(--card); padding: 30px; border: 1px solid #1a1a1a; border-radius: 10px; text-align: center; }
 .dashboard { display: flex; width: 98%; height: 95%; background: var(--card); border: 1px solid #1a1a1a; }
 .sidebar { width: 200px; border-right: 1px solid #222; padding: 15px; }
 .main-panel { flex: 1; padding: 30px; overflow-y: auto; }
 
-.info-card { background: rgba(255,255,255,0.05); padding: 20px; margin: 10px 0; border-top: 2px solid var(--accent); }
+.info-card { background: rgba(255,255,255,0.05); padding: 20px; border-top: 2px solid var(--accent); margin-bottom: 15px; }
 .neon { color: var(--accent); text-shadow: 0 0 10px var(--accent); }
-button { background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 10px; cursor: pointer; margin: 5px; transition: 0.3s; }
+button { background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 10px; cursor: pointer; margin-top: 10px; transition: 0.3s; }
 button:hover { background: var(--accent); color: black; }
 
 .sports-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
 .card { background: #111; padding: 15px; border: 1px solid #333; cursor: pointer; }
-.selected { border-color: var(--accent); color: var(--accent); }
+.selected { border-color: var(--accent) !important; color: var(--accent); }
