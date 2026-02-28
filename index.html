@@ -12,12 +12,16 @@
     <section id="screen-auth" class="active">
         <div class="glass-box">
             <div class="scanner"></div>
-            <h1>CORE<b>SYSTEM</b></h1>
+            <h1 class="logo">CORE<b>SYSTEM</b></h1>
             <h2 id="auth-title">CRIAR CONTA</h2>
-            <input type="text" id="user-input" placeholder="NOME DO ATLETA">
-            <input type="password" id="pass-input" placeholder="SENHA DE ACESSO">
+            
+            <div class="input-group">
+                <input type="text" id="user-input" placeholder="NOME DO ATLETA">
+                <input type="password" id="pass-input" placeholder="SENHA DE ACESSO">
+            </div>
+
             <button onclick="gerenciarAcesso()" id="btn-auth">CADASTRAR</button>
-            <p id="toggle-text" onclick="alternarModo()">JÁ TEM CONTA? <span>ENTRAR</span></p>
+            <p id="toggle-text" onclick="alternarModo()">JÁ TEM CONTA? <span class="neon">ENTRAR</span></p>
         </div>
     </section>
 
@@ -25,22 +29,22 @@
         <div class="container">
             <header>
                 <h2>BEM-VINDO, <span id="user-display" class="neon"></span></h2>
-                <p>CLIQUE NOS ESPORTES PARA DEFINIR SUA ORDEM DE TREINO:</p>
+                <p>DEFINA A ORDEM DE APRENDIZADO CLICANDO NOS CARDS:</p>
             </header>
 
             <div class="sports-grid">
                 <div class="card highlight" onclick="adicionarAoRoteiro('Futebol', this)">
                     <div class="badge">PRIORIDADE</div>
                     <h3>FUTEBOL</h3>
-                    <p>Módulos avançados de tática e biomecânica.</p>
+                    <p>Análise de táticas 2026 e biomecânica de elite.</p>
                 </div>
                 <div class="card" onclick="adicionarAoRoteiro('Ping Pong', this)">
                     <h3>PING PONG</h3>
-                    <p>Treino de reflexo neural.</p>
+                    <p>Reflexos neurais rápidos.</p>
                 </div>
                 <div class="card" onclick="adicionarAoRoteiro('Basquete', this)">
                     <h3>BASQUETE</h3>
-                    <p>Física de arremesso orbital.</p>
+                    <p>Física de arremesso de precisão.</p>
                 </div>
                 <div class="card" onclick="adicionarAoRoteiro('Vôlei', this)">
                     <h3>VÔLEI</h3>
@@ -48,14 +52,14 @@
                 </div>
             </div>
 
-            <div class="learning-list-area">
+            <div class="learning-area">
                 <h3 class="neon">SEU ROTEIRO:</h3>
                 <ul id="display-roteiro">
-                    <li class="placeholder">Sua lista aparecerá aqui...</li>
+                    <li class="placeholder">Monte sua lista acima...</li>
                 </ul>
                 <div class="controls">
                     <button onclick="limparRoteiro()" class="btn-secondary">REINICIAR</button>
-                    <button id="btn-iniciar" onclick="irParaTreino()" class="hidden neon-btn">INICIAR APRENDIZADO ➔</button>
+                    <button id="btn-iniciar" onclick="irParaTreino()" class="hidden neon-btn">INICIAR TREINO ➔</button>
                 </div>
             </div>
         </div>
@@ -63,12 +67,12 @@
 
     <section id="screen-training" class="hidden">
         <div class="glass-box training-box">
-            <div class="top-info">MÓDULO DE APRENDIZADO ATIVO</div>
+            <div class="top-tag">SESSÃO ATIVA</div>
             <h1 id="training-sport-name" class="neon">ESPORTE</h1>
-            <div class="training-ui">
+            <div class="training-content">
                 <p id="training-desc">Carregando dados...</p>
                 <div class="timer">TEMPO: <span id="time-display">00:00</span></div>
-                <div class="progress-bar-bg">
+                <div class="progress-container">
                     <div id="progress-fill"></div>
                 </div>
             </div>
