@@ -2,81 +2,228 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>HUB ESPORTIVO PRO</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SISTEMA ESPORTIVO ULTRA NEON</title>
+    <style>
+        /* CSS - O DESIGN NEON E CENTRALIZAÇÃO */
+        * { box-sizing: border-box; font-family: 'Courier New', Courier, monospace; }
+        body { 
+            margin: 0; background: #050505; color: #00f2ff; 
+            height: 100vh; width: 100vw; overflow: hidden;
+            display: flex; justify-content: center; align-items: center;
+        }
+
+        /* FUNDO DE GRADE */
+        .grid-bg { 
+            position: fixed; width: 100%; height: 100%; 
+            background: linear-gradient(rgba(0, 242, 255, 0.05) 1px, transparent 1px), 
+                        linear-gradient(90deg, rgba(0, 242, 255, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px; z-index: -1; 
+        }
+
+        /* CONTROLE DE PÁGINAS */
+        .page { display: none; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; }
+        .active { display: flex !important; }
+        .hidden { display: none !important; }
+
+        /* CARDS NEON */
+        .card { 
+            background: #000; border: 2px solid #00f2ff; padding: 40px; 
+            box-shadow: 0 0 20px #00f2ff; text-align: center; width: 90%; max-width: 450px; 
+        }
+        .wide-card { max-width: 800px; height: 90vh; display: flex; }
+
+        h1, h2 { text-shadow: 0 0 10px #00f2ff; text-transform: uppercase; }
+        input { 
+            width: 100%; padding: 12px; margin: 10px 0; background: #111; 
+            border: 1px solid #00f2ff; color: #00f2ff; outline: none; 
+        }
+        button { 
+            background: transparent; color: #00f2ff; border: 1px solid #00f2ff; 
+            padding: 12px 20px; cursor: pointer; transition: 0.3s; margin: 10px 5px; font-weight: bold;
+        }
+        button:hover { background: #00f2ff; color: #000; box-shadow: 0 0 15px #00f2ff; }
+
+        /* GRID DE ESPORTES */
+        .grid-sports { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin: 20px 0; }
+        .sport-btn { border: 1px solid #444; padding: 15px; cursor: pointer; }
+        .sport-btn.selected { border-color: #00f2ff; background: rgba(0, 242, 255, 0.1); }
+
+        /* WORKSPACE */
+        .sidebar { width: 200px; border-right: 1px solid #00f2ff; padding: 20px; display: flex; flex-direction: column; }
+        .content { flex: 1; padding: 30px; overflow-y: auto; text-align: left; }
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .info-box { border: 1px solid #333; padding: 15px; background: rgba(255,255,255,0.02); }
+    </style>
 </head>
 <body>
-    <div class="cyber-bg"></div>
+    <div class="grid-bg"></div>
 
-    <main id="page-auth" class="page active">
-        <div class="glass-box">
-            <h1 class="neon-title">CORE_SYSTEM</h1>
-            <p>Identifique-se para acessar os dados</p>
-            <input type="text" id="reg-user" placeholder="USUÁRIO">
-            <input type="password" id="reg-pass" placeholder="SENHA">
-            <div class="row">
-                <button type="button" onclick="salvarCadastro()">CADASTRAR</button>
-                <button type="button" onclick="autenticar()" class="btn-neon">ACESSAR</button>
-            </div>
+    <section id="p1" class="page active">
+        <div class="card">
+            <h1>ACESSO_RESTRITO</h1>
+            <input type="text" id="user" placeholder="USUÁRIO">
+            <input type="password" id="pass" placeholder="SENHA">
+            <button onclick="registrar()">CADASTRAR</button>
+            <button onclick="logar()">ENTRAR_</button>
         </div>
-    </main>
+    </section>
 
-    <main id="page-select" class="page">
-        <div class="glass-box wide">
-            <h2 class="neon-title">MÓDULOS_DISPONÍVEIS</h2>
+    <section id="p2" class="page">
+        <div class="card">
+            <h2>ESCOLHA_MÓDULO</h2>
             <div class="grid-sports">
-                <div class="card" onclick="toggleSport('Futebol', this)">FUTEBOL</div>
-                <div class="card" onclick="toggleSport('Basquete', this)">BASQUETE</div>
-                <div class="card" onclick="toggleSport('Vôlei', this)">VÔLEI</div>
+                <div class="sport-btn" onclick="selectSport('Futebol', this)">FUTEBOL</div>
+                <div class="sport-btn" onclick="selectSport('Basquete', this)">BASQUETE</div>
+                <div class="sport-btn" onclick="selectSport('Vôlei', this)">VÔLEI</div>
             </div>
-            <div id="status-bar">
-                <p id="txt-selecao">Aguardando escolha...</p>
-                <button type="button" id="btn-work" class="hidden btn-neon" onclick="irParaWorkspace()">GERAR WORKSPACE</button>
-            </div>
+            <p id="sel-status">NENHUM SELECIONADO</p>
+            <button id="btn-next" class="hidden" onclick="irWork()">GERAR_WORKSPACE</button>
         </div>
-    </main>
+    </section>
 
-    <main id="page-work" class="page">
-        <div class="workspace-container">
-            <aside class="sidebar">
-                <h2 class="neon-title">MENU</h2>
-                <nav id="nav-esportes"></nav>
-                <button onclick="location.reload()" class="btn-exit">LOGOUT</button>
-            </aside>
-            
-            <section class="main-content">
-                <div id="sec-teoria">
-                    <h1 id="view-titulo" class="neon-title">---</h1>
-                    <div class="data-grid">
-                        <div class="data-card"><h3>DINÂMICA</h3><p id="view-how"></p></div>
-                        <div class="data-card"><h3>REGRAS</h3><p id="view-rules"></p></div>
-                        <div class="data-card"><h3>TÁTICA</h3><p id="view-tactic"></p></div>
-                        <div class="data-card"><h3>TECNOLOGIA</h3><p id="view-tech"></p></div>
+    <section id="p3" class="page">
+        <div class="card wide-card">
+            <aside class="sidebar" id="menu-lateral"></aside>
+            <main class="content">
+                <div id="area-estudo">
+                    <h1 id="tit-esp">---</h1>
+                    <div class="info-grid">
+                        <div class="info-box"><h4>DINÂMICA</h4><p id="v-how"></p></div>
+                        <div class="info-box"><h4>REGRAS</h4><p id="v-rules"></p></div>
+                        <div class="info-box"><h4>TÁTICA</h4><p id="v-tactic"></p></div>
+                        <div class="info-box"><h4>TECH</h4><p id="v-tech"></p></div>
                     </div>
-                    <button class="btn-neon" onclick="abrirQuiz()">DESBLOQUEAR QUIZ</button>
+                    <button onclick="irQuiz()">DESBLOQUEAR QUIZ_</button>
                 </div>
 
-                <div id="sec-quiz" class="hidden">
-                    <h2 class="neon-title">TESTE DE APTIDÃO</h2>
-                    <p id="pergunta-txt" class="q-text"></p>
-                    <div id="opcoes-quiz"></div>
+                <div id="area-quiz" class="hidden">
+                    <h2>VALIDAÇÃO_DADOS</h2>
+                    <p id="pergunta-txt"></p>
+                    <div id="quiz-opts"></div>
                 </div>
 
-                <div id="sec-time" class="hidden">
-                    <h2 class="neon-title">DOSSIÊ DO CLUBE</h2>
-                    <select id="select-time" onchange="exibirDossie()">
-                        <option value="">Selecione um clube...</option>
+                <div id="area-time" class="hidden">
+                    <h2>DOSSIÊ_CLUBE</h2>
+                    <select id="select-clube" onchange="verClube()" style="width:100%; padding:10px; background:#000; color:#00f2ff; border:1px solid #00f2ff;">
+                        <option value="">Escolha seu time...</option>
                         <option value="Flamengo">Flamengo</option>
                         <option value="Palmeiras">Palmeiras</option>
                         <option value="Santos">Santos</option>
-                        <option value="São Paulo">São Paulo</option>
                     </select>
-                    <div id="dossie-resultado" class="dossie-box"></div>
+                    <div id="res-time" style="margin-top:20px; border:1px solid #00f2ff; padding:15px;"></div>
                 </div>
-            </section>
+            </main>
         </div>
-    </main>
+    </section>
 
-    <script src="script.js"></script>
+    <script>
+        // JAVASCRIPT - A LÓGICA QUE FAZ FUNCIONAR
+        const DB = {
+            "Futebol": {
+                h: "Jogo de invasão. Marcar gols no alvo adversário.",
+                r: "90 min, Impedimento, VAR, 11 jogadores.",
+                t: "4-3-3, marcação em bloco alto.",
+                te: "GPS nos coletes, bola com sensores.",
+                q: { p: "O que o VAR revisa?", o: ["Lateral", "Gols e Pênaltis", "Escanteio"], c: 1 }
+            }
+        };
+
+        const TIMES = {
+            "Flamengo": { f: "1895", h: "Nascido no remo.", t: "Mundial, 3 Libertadores.", i: "Zico", fund: "Remadores do Rio" },
+            "Palmeiras": { f: "1914", h: "Antigo Palestra Itália.", t: "12 Brasileiros.", i: "Ademir", fund: "Imigrantes Italianos" },
+            "Santos": { f: "1912", h: "O time de Pelé.", t: "2 Mundiais, 3 Liberta.", i: "Pelé", fund: "Marques e Ferraz" }
+        };
+
+        let selecionados = [];
+        let atual = "";
+
+        // TROCA DE TELA REAL
+        function go(id) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+
+        function registrar() {
+            const u = document.getElementById('user').value;
+            const p = document.getElementById('pass').value;
+            if(u && p) { localStorage.setItem(u, p); alert("CADASTRADO!"); }
+        }
+
+        function logar() {
+            const u = document.getElementById('user').value;
+            const p = document.getElementById('pass').value;
+            if(localStorage.getItem(u) === p && u !== "") go('p2');
+            else alert("ACESSO NEGADO!");
+        }
+
+        function selectSport(s, el) {
+            if(!selecionados.includes(s)) {
+                selecionados.push(s);
+                el.classList.add('selected');
+                document.getElementById('btn-next').classList.remove('hidden');
+                document.getElementById('sel-status').innerText = selecionados.join(' | ');
+            }
+        }
+
+        function irWork() {
+            go('p3');
+            const menu = document.getElementById('menu-lateral');
+            menu.innerHTML = "<h3>MENU</h3>";
+            selecionados.forEach(s => {
+                const b = document.createElement('button');
+                b.innerText = s;
+                b.onclick = () => carregar(s);
+                menu.appendChild(b);
+            });
+            carregar(selecionados[0]);
+        }
+
+        function carregar(s) {
+            atual = s;
+            document.getElementById('area-estudo').classList.remove('hidden');
+            document.getElementById('area-quiz').classList.add('hidden');
+            document.getElementById('area-time').classList.add('hidden');
+            
+            const d = DB[s] || {h:"Em breve", r:"-", t:"-", te:"-"};
+            document.getElementById('tit-esp').innerText = s;
+            document.getElementById('v-how').innerText = d.h;
+            document.getElementById('v-rules').innerText = d.r;
+            document.getElementById('v-tactic').innerText = d.t;
+            document.getElementById('v-tech').innerText = d.te;
+        }
+
+        function irQuiz() {
+            document.getElementById('area-estudo').classList.add('hidden');
+            document.getElementById('area-quiz').classList.remove('hidden');
+            const q = DB[atual].q;
+            document.getElementById('pergunta-txt').innerText = q.p;
+            const box = document.getElementById('quiz-opts');
+            box.innerHTML = "";
+            q.o.forEach((opt, i) => {
+                const b = document.createElement('button');
+                b.innerText = opt;
+                b.style.display = "block"; b.style.width = "100%";
+                b.onclick = () => {
+                    if(i === q.c) {
+                        alert("ACERTOU!");
+                        if(atual === "Futebol") {
+                            document.getElementById('area-quiz').classList.add('hidden');
+                            document.getElementById('area-time').classList.remove('hidden');
+                        } else carregar(atual);
+                    } else alert("ERROU!");
+                };
+                box.appendChild(b);
+            });
+        }
+
+        function verClube() {
+            const t = document.getElementById('select-clube').value;
+            const d = TIMES[t];
+            if(d) {
+                document.getElementById('res-time').innerHTML = `<h3>${t}</h3><p><b>Fundação:</b> ${d.f}</p><p><b>História:</b> ${d.h}</p><p><b>Títulos:</b> ${d.t}</p><p><b>Ídolo:</b> ${d.i}</p><p><b>Fundadores:</b> ${d.fund}</p>`;
+            }
+        }
+    </script>
 </body>
 </html>
