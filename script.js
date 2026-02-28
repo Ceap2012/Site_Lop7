@@ -1,77 +1,40 @@
-// --- 1. FUNÇÃO DE ALTERNAR CONTEÚDO (Mantida para uso futuro) ---
-function toggleContent(id) {
-    const element = document.getElementById(id);
+const jogadores = [
+    { nome: "Vinícius Jr.", vel: 38.5, pass: 92, energia: 85 },
+    { nome: "Mbappé", vel: 39.2, pass: 88, energia: 82 },
+    { nome: "Haaland", vel: 36.8, pass: 79, energia: 94 }
+];
 
-    if (element) {
-        if (element.style.display === 'none' || element.style.display === '') {
-            element.style.display = 'block';
-        } else {
-            element.style.display = 'none';
-        }
-    }
+function carregarEstatisticas() {
+    const tbody = document.getElementById('stats-body');
+    tbody.innerHTML = ""; // Limpa antes de atualizar
+
+    jogadores.forEach(j => {
+        // Oscilação leve para parecer "ao vivo"
+        const velOscilada = (j.vel + (Math.random() * 0.5)).toFixed(1);
+        
+        const row = `
+            <tr>
+                <td><strong>${j.nome}</strong></td>
+                <td style="color: var(--accent)">${velOscilada} km/h</td>
+                <td>${j.pass}%</td>
+                <td>
+                    <div style="background: #eee; border-radius: 5px; height: 8px; width: 100px; margin: auto;">
+                        <div style="background: var(--accent); width: ${j.energia}%; height: 100%; border-radius: 5px;"></div>
+                    </div>
+                </td>
+            </tr>
+        `;
+        tbody.innerHTML += row;
+    });
 }
 
-
-// --- 2. LÓGICA DO QUIZ ---
-
-function submitQuiz(event) {
-    // Impede o envio padrão do formulário (que recarregaria a página)
-    event.preventDefault(); 
-
-    const form = document.getElementById('quiz-form');
-    let score = 0;
-    const totalQuestions = 4;
-    
-    // Respostas corretas: q1=b (Indicativo), q2=b (Ênclise), q3=c (Lide), q4=c (Agente)
-    const correctAnswers = {
-        q1: 'b', 
-        q2: 'b', 
-        q3: 'c',  
-        q4: 'c'   
-    };
-
-    // Itera sobre as respostas do usuário
-    for (let i = 1; i <= totalQuestions; i++) {
-        const questionName = 'q' + i;
-        const selectedOption = form.elements[questionName].value; 
-
-        if (selectedOption === correctAnswers[questionName]) {
-            score++;
-        }
+// Atualiza os dados a cada 3 segundos
+setInterval(carregarEstatisticas, 3000);
+window.onload = () => {
+    // Mantém a lógica de login anterior e inicia as stats
+    const usuarioSalvo = localStorage.getItem('usuarioFutebol');
+    if (usuarioSalvo) {
+        mostrarInterfaceLogada(usuarioSalvo);
+        carregarEstatisticas();
     }
-
-    // Exibe o resultado
-    const resultDiv = document.getElementById('quiz-result');
-    const percentage = (score / totalQuestions) * 100;
-    
-    let feedback;
-    let scoreColor; // Cor do fundo da caixa de resultado
-
-    if (score === totalQuestions) {
-        feedback = 'Parabéns! Você é um MESTRE da Língua Portuguesa!';
-        scoreColor = '#28a745'; // Verde (Sucesso)
-    } else if (score >= 2) {
-        feedback = 'Muito bom! Você acertou a maioria e está no caminho certo.';
-        scoreColor = '#ffc107'; // Amarelo (Atenção)
-    } else {
-        feedback = 'Continue estudando! Revise os tópicos para a próxima tentativa.';
-        scoreColor = '#dc3545'; // Vermelho (Alerta)
-    }
-
-    // Aplica cor e conteúdo ao resultado
-    resultDiv.style.backgroundColor = scoreColor;
-    
-    resultDiv.innerHTML = `
-        <h3>Resultado Final</h3>
-        <p class="result-score">${score} / ${totalQuestions}</p>
-        <p>Aproveitamento: ${percentage.toFixed(0)}%</p>
-        <p>${feedback}</p>
-        <button class="link-button" style="background-color: white; color: ${scoreColor}; font-weight: 700;" onclick="window.location.reload()">Refazer Quiz</button>
-    `;
-
-    // Torna a div de resultado visível
-    resultDiv.style.display = 'block';
-
-    // Rola a tela para o resultado
-    resultDiv.scrollIntoView({ behavior: 'smooth' });
-}
+};
