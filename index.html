@@ -2,7 +2,8 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Sports Intel Pro 2026</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports Intel Pro 2026 | Hub</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -10,29 +11,50 @@
 
     <section id="screen-auth" class="screen active">
         <div class="glass-box">
-            <h1>CORE<b>INTEL</b></h1>
-            <input type="text" id="user-input" placeholder="USUÁRIO">
-            <input type="password" id="pass-input" placeholder="SENHA">
-            <button onclick="gerenciarAcesso()">ACESSAR SISTEMA</button>
-            <p onclick="alternarModo()">Trocar para <span class="neon">Cadastro/Login</span></p>
+            <div class="scanner"></div>
+            <h1 class="logo">SPORTS<b>NODE</b></h1>
+            <h2 id="auth-title">CRIAR CONTA</h2>
+            <div class="input-group">
+                <input type="text" id="user-input" placeholder="ID DO ATLETA">
+                <input type="password" id="pass-input" placeholder="CHAVE DE ACESSO">
+            </div>
+            <button onclick="gerenciarAcesso()" id="btn-auth">CADASTRAR</button>
+            <p id="toggle-text" onclick="alternarModo()">JÁ POSSUI ACESSO? <span class="neon">ENTRAR</span></p>
         </div>
     </section>
 
     <section id="screen-selection" class="screen">
         <div class="container">
-            <h2 class="neon">SELEÇÃO DE MÓDULOS</h2>
+            <header>
+                <h2>BEM-VINDO, <span id="user-display" class="neon"></span></h2>
+                <p>SELECIONE OS MÓDULOS PARA MONTAR SUA FILA DE ESTUDO:</p>
+            </header>
             <div class="sports-grid">
                 <div class="card highlight" onclick="adicionarAoRoteiro('Futebol', this)">
-                    <h3>FUTEBOL (FULL DOCS)</h3>
-                    <p>Táticas, Biomecânica e Regras FIFA 2026.</p>
+                    <div class="badge">FULL DATABASE</div>
+                    <h3>FUTEBOL</h3>
+                    <p>Dossiê completo: Regras FIFA, Táticas e Biomecânica.</p>
                 </div>
-                <div class="card" onclick="adicionarAoRoteiro('Ping Pong', this)"><h3>PING PONG</h3></div>
-                <div class="card" onclick="adicionarAoRoteiro('Basquete', this)"><h3>BASQUETE</h3></div>
-                <div class="card" onclick="adicionarAoRoteiro('Vôlei', this)"><h3>VÔLEI</h3></div>
+                <div class="card" onclick="adicionarAoRoteiro('Ping Pong', this)">
+                    <h3>PING PONG</h3>
+                    <p>Dinâmica de spin e reflexos neurais.</p>
+                </div>
+                <div class="card" onclick="adicionarAoRoteiro('Basquete', this)">
+                    <h3>BASQUETE</h3>
+                    <p>Sistemas de quadra e física de aro.</p>
+                </div>
+                <div class="card" onclick="adicionarAoRoteiro('Vôlei', this)">
+                    <h3>VÔLEI</h3>
+                    <p>Estratégias de rede e rotação.</p>
+                </div>
             </div>
             <div class="learning-area">
-                <ul id="display-roteiro"><li>Fila de estudo vazia...</li></ul>
-                <button id="btn-iniciar" class="hidden neon-btn" onclick="abrirWorkspace()">GERAR ÁREA DE TRABALHO</button>
+                <h3 class="neon">FILA DE PROCESSAMENTO:</h3>
+                <ul id="display-roteiro"><li>Aguardando entrada de dados...</li></ul>
+                <div class="btn-row">
+                    <button onclick="location.reload()" class="btn-secondary">LIMPAR</button>
+                    <button id="btn-iniciar" class="hidden neon-btn pulse" onclick="abrirWorkspace()">ABRIR ÁREA DE TRABALHO ➔</button>
+                </div>
             </div>
         </div>
     </section>
@@ -40,31 +62,34 @@
     <section id="screen-workspace" class="screen">
         <div class="dashboard">
             <aside class="sidebar">
-                <div class="sidebar-title">BIBLIOTECA TÉCNICA</div>
+                <div class="sidebar-header">MENU TÉCNICO</div>
                 <nav id="sidebar-nav"></nav>
-                <button onclick="location.reload()" class="btn-danger">LOGOUT</button>
+                <button class="btn-logout" onclick="location.reload()">ENCERRAR</button>
             </aside>
             <main class="main-panel">
-                <div class="panel-header">
-                    <h1 id="study-title" class="neon">ESPORTE</h1>
-                    <div id="sport-origin" class="tag-origin"></div>
-                </div>
-
+                <header class="panel-header">
+                    <div class="title-group">
+                        <h1 id="study-title" class="neon">ESPORTE</h1>
+                        <p id="sport-origin" class="origin-tag"></p>
+                    </div>
+                    <div class="version">DOCS V2.6</div>
+                </header>
+                
                 <div class="dossier-grid">
                     <div class="info-card">
-                        <h3><span class="neon">#</span> DINÂMICA E COMO JOGAR</h3>
+                        <h3><span class="neon">/</span> COMO JOGAR</h3>
                         <p id="text-how"></p>
                     </div>
                     <div class="info-card">
-                        <h3><span class="neon">#</span> REGRAS E PONTUAÇÃO</h3>
+                        <h3><span class="neon">/</span> REGRAS E PONTUAÇÃO</h3>
                         <ul id="list-rules"></ul>
                     </div>
                     <div class="info-card">
-                        <h3><span class="neon">#</span> POSICIONAMENTO TÁTICO</h3>
+                        <h3><span class="neon">/</span> POSICIONAMENTO E TÁTICA</h3>
                         <p id="text-tactics"></p>
                     </div>
                     <div class="info-card">
-                        <h3><span class="neon">#</span> RECURSOS E TECNOLOGIA</h3>
+                        <h3><span class="neon">/</span> RECURSOS E TECNOLOGIA</h3>
                         <p id="text-resources"></p>
                     </div>
                 </div>
