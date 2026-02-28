@@ -2,80 +2,68 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Sports Intel Pro 2026</title>
+    <title>SISTEMA NEON PRO</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="grid-bg"></div>
 
-    <section id="screen-auth" class="screen active">
-        <div class="main-card">
-            <h1>SISTEMA DE INTELIGÊNCIA ESPORTIVA</h1>
-            <div class="auth-box">
-                <input type="text" id="user-input" placeholder="Usuário">
-                <input type="password" id="pass-input" placeholder="Senha">
-                <div class="btn-group">
-                    <button onclick="cadastrar()">CADASTRAR</button>
-                    <button onclick="login()" class="btn-prime">ENTRAR</button>
-                </div>
+    <section id="tela-login" class="tela ativa">
+        <div class="box-neon">
+            <h1 class="texto-neon">ACESSO_RESTREITO</h1>
+            <input type="text" id="user" placeholder="USUÁRIO">
+            <input type="password" id="pass" placeholder="SENHA">
+            <div class="botoes">
+                <button onclick="cadastrar()">REGISTRAR</button>
+                <button onclick="logar()" class="btn-neon">ENTRAR</button>
             </div>
         </div>
     </section>
 
-    <section id="screen-selection" class="screen">
-        <div class="main-card large">
-            <h2>MÓDULOS DISPONÍVEIS</h2>
+    <section id="tela-selecao" class="tela">
+        <div class="box-neon larga">
+            <h2 class="texto-neon">SELECIONE_MODULOS</h2>
             <div class="grid-esportes">
-                <div class="item-card" onclick="selecionar('Futebol', this)">FUTEBOL (Enciclopédia)</div>
-                <div class="item-card" onclick="selecionar('Basquete', this)">BASQUETE</div>
-                <div class="item-card" onclick="selecionar('Vôlei', this)">VÔLEI</div>
-                <div class="item-card" onclick="selecionar('Ping Pong', this)">PING PONG</div>
+                <div class="card-esporte" onclick="addEsporte('Futebol', this)">FUTEBOL</div>
+                <div class="card-esporte" onclick="addEsporte('Basquete', this)">BASQUETE</div>
+                <div class="card-esporte" onclick="addEsporte('Lutas', this)">LUTAS</div>
             </div>
-            <div id="fila-area">
-                <p id="txt-fila">Nenhum selecionado</p>
-                <button id="btn-gerar" class="hidden" onclick="montarWorkspace()">GERAR ÁREA DE ESTUDO</button>
-            </div>
+            <p id="lista-escolhidos">AGUARDANDO SELEÇÃO...</p>
+            <button id="btn-gerar" class="hidden btn-neon" onclick="abrirWorkspace()">GERAR_WORKSPACE</button>
         </div>
     </section>
 
-    <section id="screen-workspace" class="screen">
-        <div class="workspace-container">
-            <nav class="sidebar">
-                <h3>MENU</h3>
-                <div id="nav-links"></div>
-                <button onclick="location.reload()" class="btn-sair">SAIR</button>
-            </nav>
-            <main class="content">
-                <div id="bloco-teoria">
-                    <h2 id="titulo-esporte"></h2>
+    <section id="tela-work" class="tela">
+        <div class="workspace">
+            <aside class="sidebar" id="menu-lateral"></aside>
+            <main class="principal">
+                <div id="bloco-estudo">
+                    <h1 id="tit-esporte" class="texto-neon"></h1>
                     <div class="info-grid">
-                        <div class="box"><h4>DINÂMICA</h4><p id="info-how"></p></div>
-                        <div class="box"><h4>REGRAS</h4><ul id="info-rules"></ul></div>
-                        <div class="box"><h4>TÁTICA</h4><p id="info-tactics"></p></div>
-                        <div class="box"><h4>TECNOLOGIA</h4><p id="info-tech"></p></div>
+                        <div class="item"><h3>COMO JOGAR</h3><p id="txt-how"></p></div>
+                        <div class="item"><h3>REGRAS</h3><p id="txt-rules"></p></div>
+                        <div class="item"><h3>TÁTICA</h3><p id="txt-tactic"></p></div>
+                        <div class="item"><h3>TECNOLOGIA</h3><p id="txt-tech"></p></div>
                     </div>
-                    <button class="btn-quiz" onclick="abrirQuiz()">FAZER TESTE DE ENTENDIMENTO</button>
+                    <button class="btn-neon" onclick="irProQuiz()">INICIAR QUIZ_</button>
                 </div>
 
                 <div id="bloco-quiz" class="hidden">
-                    <h2>QUIZ: VALIDE SEU CONHECIMENTO</h2>
-                    <div class="quiz-box">
-                        <p id="pergunta-txt"></p>
-                        <div id="opcoes-quiz"></div>
-                    </div>
+                    <h2 class="texto-neon">VALIDAÇÃO_DE_DADOS</h2>
+                    <p id="pergunta-quiz"></p>
+                    <div id="opcoes-quiz"></div>
                 </div>
 
                 <div id="bloco-time" class="hidden">
-                    <h2>ANÁLISE DE CLUBES</h2>
-                    <p>Selecione seu time para ver a história detalhada:</p>
-                    <select id="select-time" onchange="detalharTime()">
-                        <option value="">Escolha...</option>
+                    <h2 class="texto-neon">DOSSIÊ_DO_CLUBE</h2>
+                    <select id="select-time" onchange="verTime()">
+                        <option value="">ESCOLHA UM TIME...</option>
                         <option value="Flamengo">Flamengo</option>
                         <option value="Palmeiras">Palmeiras</option>
-                        <option value="São Paulo">São Paulo</option>
                         <option value="Corinthians">Corinthians</option>
-                        <option value="Santos">Santos</option>
+                        <option value="São Paulo">São Paulo</option>
                     </select>
-                    <div id="resultado-time" class="time-detalhe"></div>
+                    <div id="res-time" class="box-time"></div>
                 </div>
             </main>
         </div>
