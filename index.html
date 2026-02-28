@@ -1,19 +1,41 @@
-<div class="glass-card" id="auth-container">
-    <h2 id="auth-title">Criar Conta Futurista</h2>
-    
-    <input type="text" id="user" placeholder="Nome de Usuário">
-    <input type="password" id="pass" placeholder="Senha Secreta">
-    
-    <div id="btn-group">
-        <button onclick="registrar()" id="btn-main">Cadastrar</button>
-        <p onclick="alternarTela()" id="toggle-text">Já tem conta? Entrar</p>
-    </div>
-</div>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arena Futurista | Sports Tech</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="tech-bg"></div>
 
-<div id="dashboard" class="hidden">
-    <div class="glass-card">
-        <h1>Bem-vindo à Arena, <span id="display-name" style="color: var(--accent)"></span>!</h1>
-        <p>Acesso biometrico confirmado. Futebol 2026 ativo.</p>
-        <button onclick="logout()" style="background: #ff4757; margin-top: 20px;">Sair do Sistema</button>
+    <div class="container" id="auth-container">
+        <div class="glass-box">
+            <div class="logo-space">
+                <div class="orb"></div>
+                <h1>NEXT<b>GEN</b> SPORTS</h1>
+            </div>
+            
+            <h2 id="auth-title">CRIAR ACESSO</h2>
+            <div class="input-group">
+                <input type="text" id="user" placeholder="USUÁRIO" autocomplete="off">
+                <input type="password" id="pass" placeholder="SENHA" autocomplete="off">
+            </div>
+
+            <button onclick="executarAcao()" id="main-btn">CADASTRAR</button>
+            <p onclick="alternarTela()" id="toggle-text">Já possui registro? <span>ENTRAR</span></p>
+        </div>
     </div>
-</div>
+
+    <div id="dashboard" class="hidden">
+        <div class="glass-box dashboard-card">
+            <div class="pulse-status">SISTEMA ONLINE</div>
+            <h2>BEM-VINDO, <span id="display-name">ATLETA</span></h2>
+            <p>Sincronização com o futebol 2026 completa.</p>
+            <button onclick="location.reload()" class="btn-exit">SAIR DO SISTEMA</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
