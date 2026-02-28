@@ -1,78 +1,86 @@
-const db = {
+const database = {
     "Futebol": {
-        how: "Disputado em campo retangular, o objetivo é conduzir a bola ao gol adversário apenas com os pés e tronco.",
-        rules: ["11 jogadores por lado", "Duração: 90 min", "Impedimento assistido por IA", "Cartões Amarelo/Vermelho"],
-        res: "Bola com sensor inercial, chuteiras inteligentes e VAR automático."
+        how: "Conduza a bola ao gol adversário usando os pés em um campo gramado.",
+        rules: ["11 jogadores", "90 minutos", "Impedimento tecnológico", "Faltas e Cartões"],
+        res: "Bolas com sensores, Chuteiras Biométricas e VAR 2026."
     },
     "Ping Pong": {
-        how: "Tênis de mesa onde se rebate a bola sobre uma rede central em uma mesa rígida.",
-        rules: ["Sets de 11 pontos", "Serviço alterna a cada 2 pontos", "A bola deve quicar uma vez de cada lado"],
-        res: "Raquete de carbono, bolas de polímero e mesa com sensores de pressão."
+        how: "Rebata a bola na mesa para o lado adversário.",
+        rules: ["11 pontos para ganhar", "Saque alterna a cada 2", "Mesa não pode ser tocada"],
+        res: "Raquetes de Carbono e Sensores de Borda."
     },
     "Basquete": {
-        how: "O foco é encestar a bola no aro adversário a 3 metros de altura usando as mãos.",
-        rules: ["5 jogadores ativos", "Limite de 24 segundos de posse", "Pontuações de 1, 2 e 3 pontos"],
-        res: "Bola de alta aderência, tênis de propulsão e tabelas digitais."
+        how: "Arremesse a bola no aro adversário.",
+        rules: ["5 jogadores", "Drible obrigatório", "Posse de 24s"],
+        res: "Aro Digital e Tênis de Performance."
     },
     "Vôlei": {
-        how: "Enviar a bola por cima da rede para tocar o chão do oponente com no máximo 3 toques.",
-        rules: ["6 jogadores por time", "Rodízio obrigatório", "Sets de 25 pontos (Tie-break 15)"],
-        res: "Rede com sensores infravermelhos e bolas micro-texturizadas."
+        how: "Jogue a bola por cima da rede para o chão adversário.",
+        rules: ["3 toques por time", "Rotação de jogadores", "Set de 25 pontos"],
+        res: "Redes de fibra ótica e bolas texturizadas."
     }
 };
 
-let roteiro = []; let loginMode = false;
+let roteiro = [];
+let isLoginMode = false;
+
+function showScreen(screenId) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(screenId).classList.add('active');
+}
 
 function alternarModo() {
-    loginMode = !loginMode;
-    document.getElementById('auth-title').innerText = loginMode ? "LOGIN" : "CRIAR CONTA";
-    document.getElementById('btn-auth').innerText = loginMode ? "ENTRAR" : "CADASTRAR";
+    isLoginMode = !isLoginMode;
+    document.getElementById('auth-title').innerText = isLoginMode ? "LOGIN" : "CRIAR CONTA";
 }
 
 function gerenciarAcesso() {
-    const u = document.getElementById('user-input').value;
-    const p = document.getElementById('pass-input').value;
-    if(!u || !p) return alert("Dados incompletos");
+    const user = document.getElementById('user-input').value;
+    const pass = document.getElementById('pass-input').value;
 
-    if(loginMode) {
-        if(localStorage.getItem(u) === p) {
-            document.getElementById('screen-auth').classList.add('hidden');
-            document.getElementById('screen-selection').classList.remove('hidden');
-            document.getElementById('user-display').innerText = u.toUpperCase();
-        } else alert("Acesso negado");
+    if (isLoginMode) {
+        if (localStorage.getItem(user) === pass) {
+            document.getElementById('user-display').innerText = user;
+            showScreen('screen-selection'); // TROCA PARA SELEÇÃO
+        } else alert("Erro de Login");
     } else {
-        localStorage.setItem(u, p); alert("Cadastrado! Mude para entrar."); alternarModo();
+        localStorage.setItem(user, pass);
+        alert("Cadastrado! Mude para Login.");
+        alternarModo();
     }
 }
 
 function adicionarAoRoteiro(esp, el) {
-    if(!roteiro.includes(esp)) {
-        roteiro.push(esp); el.classList.add('selected');
+    if (!roteiro.includes(esp)) {
+        roteiro.push(esp);
+        el.classList.add('selected');
         const list = document.getElementById('display-roteiro');
-        if(roteiro.length === 1) list.innerHTML = "";
+        if (roteiro.length === 1) list.innerHTML = "";
         list.innerHTML += `<li>${roteiro.length}º - ${esp}</li>`;
         document.getElementById('btn-iniciar').classList.remove('hidden');
     }
 }
 
-function iniciarEstudo() {
-    document.getElementById('screen-selection').classList.add('hidden');
-    document.getElementById('screen-workspace').classList.remove('hidden');
-    const nav = document.getElementById('side-menu');
+function abrirWorkspace() {
+    showScreen('screen-workspace'); // TROCA PARA AREA DE TRABALHO
+    const nav = document.getElementById('sidebar-nav');
+    nav.innerHTML = "";
     roteiro.forEach(esp => {
-        nav.innerHTML += `<button onclick="carregarConteudo('${esp}')">${esp}</button>`;
+        const btn = document.createElement('button');
+        btn.innerText = esp;
+        btn.style.cssText = "width:100%; padding:10px; margin-top:10px; background:#222; color:cyan; border:1px solid #444; cursor:pointer;";
+        btn.onclick = () => carregarConteudo(esp);
+        nav.appendChild(btn);
     });
     carregarConteudo(roteiro[0]);
 }
 
 function carregarConteudo(esp) {
-    const data = db[esp];
+    const d = database[esp];
     document.getElementById('study-title').innerText = esp.toUpperCase();
-    document.getElementById('text-how').innerText = data.how;
-    document.getElementById('text-resources').innerText = data.res;
-    const rulesUI = document.getElementById('list-rules');
-    rulesUI.innerHTML = "";
-    data.rules.forEach(r => rulesUI.innerHTML += `<li>${r}</li>`);
+    document.getElementById('text-how').innerText = d.how;
+    document.getElementById('text-resources').innerText = d.res;
+    const list = document.getElementById('list-rules');
+    list.innerHTML = "";
+    d.rules.forEach(r => list.innerHTML += `<li>${r}</li>`);
 }
-
-function limparRoteiro() { location.reload(); }
