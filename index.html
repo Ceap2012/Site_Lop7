@@ -3,61 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arena Dark Futurista</title>
+    <title>Arena Sports Tech 2026</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="grid-overlay"></div>
 
-    <div id="auth-screen">
+    <section id="screen-auth" class="active">
         <div class="glass-box">
-            <h1 class="logo">SPORTS<b>NODE</b></h1>
+            <div class="scanner"></div>
+            <h1>CORE<b>SYSTEM</b></h1>
             <h2 id="auth-title">CRIAR CONTA</h2>
-            <input type="text" id="user-input" placeholder="USUÁRIO">
-            <input type="password" id="pass-input" placeholder="SENHA">
-            <button onclick="gerenciarAcesso()" id="action-btn">CADASTRAR</button>
+            <input type="text" id="user-input" placeholder="NOME DO ATLETA">
+            <input type="password" id="pass-input" placeholder="SENHA DE ACESSO">
+            <button onclick="gerenciarAcesso()" id="btn-auth">CADASTRAR</button>
             <p id="toggle-text" onclick="alternarModo()">JÁ TEM CONTA? <span>ENTRAR</span></p>
         </div>
-    </div>
+    </section>
 
-    <div id="main-screen" class="hidden">
+    <section id="screen-selection" class="hidden">
         <div class="container">
             <header>
-                <h1>OLÁ, <span id="user-welcome" class="neon"></span></h1>
-                <p>MONTE SEU ROTEIRO DE APRENDIZADO:</p>
+                <h2>BEM-VINDO, <span id="user-display" class="neon"></span></h2>
+                <p>CLIQUE NOS ESPORTES PARA DEFINIR SUA ORDEM DE TREINO:</p>
             </header>
 
             <div class="sports-grid">
                 <div class="card highlight" onclick="adicionarAoRoteiro('Futebol', this)">
-                    <div class="priority-tag">DESTAQUE</div>
+                    <div class="badge">PRIORIDADE</div>
                     <h3>FUTEBOL</h3>
-                    <p>Tecnologia de campo e táticas IA.</p>
+                    <p>Módulos avançados de tática e biomecânica.</p>
                 </div>
                 <div class="card" onclick="adicionarAoRoteiro('Ping Pong', this)">
                     <h3>PING PONG</h3>
-                    <p>Reflexos rápidos.</p>
+                    <p>Treino de reflexo neural.</p>
                 </div>
                 <div class="card" onclick="adicionarAoRoteiro('Basquete', this)">
                     <h3>BASQUETE</h3>
-                    <p>Precisão de tiro.</p>
+                    <p>Física de arremesso orbital.</p>
                 </div>
                 <div class="card" onclick="adicionarAoRoteiro('Vôlei', this)">
                     <h3>VÔLEI</h3>
-                    <p>Poder de salto.</p>
+                    <p>Dinâmica de salto vertical.</p>
                 </div>
             </div>
 
-            <div class="learning-section">
-                <h3 class="neon">ORDEM DE APRENDIZADO:</h3>
-                <ul id="learning-list">
-                    <li id="placeholder-msg">Selecione a ordem acima...</li>
+            <div class="learning-list-area">
+                <h3 class="neon">SEU ROTEIRO:</h3>
+                <ul id="display-roteiro">
+                    <li class="placeholder">Sua lista aparecerá aqui...</li>
                 </ul>
-                <button onclick="limparRoteiro()" class="btn-small">REINICIAR</button>
+                <div class="controls">
+                    <button onclick="limparRoteiro()" class="btn-secondary">REINICIAR</button>
+                    <button id="btn-iniciar" onclick="irParaTreino()" class="hidden neon-btn">INICIAR APRENDIZADO ➔</button>
+                </div>
             </div>
-            
-            <button onclick="location.reload()" class="btn-exit">SAIR</button>
         </div>
-    </div>
+    </section>
+
+    <section id="screen-training" class="hidden">
+        <div class="glass-box training-box">
+            <div class="top-info">MÓDULO DE APRENDIZADO ATIVO</div>
+            <h1 id="training-sport-name" class="neon">ESPORTE</h1>
+            <div class="training-ui">
+                <p id="training-desc">Carregando dados...</p>
+                <div class="timer">TEMPO: <span id="time-display">00:00</span></div>
+                <div class="progress-bar-bg">
+                    <div id="progress-fill"></div>
+                </div>
+            </div>
+            <button onclick="concluirModulo()" id="btn-next">CONCLUIR MÓDULO</button>
+            <button onclick="location.reload()" class="btn-danger">ABANDONAR</button>
+        </div>
+    </section>
 
     <script src="script.js"></script>
 </body>
