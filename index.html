@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arena Dark | Sports Tech</title>
+    <title>Arena Dark | Learning System</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,8 +14,10 @@
             <div class="scanner-line"></div>
             <h1>CORE<b>SYSTEM</b></h1>
             <h2 id="auth-title">NOVO REGISTRO</h2>
-            <input type="text" id="user" placeholder="USUÁRIO">
-            <input type="password" id="pass" placeholder="SENHA">
+            <div class="input-group">
+                <input type="text" id="user" placeholder="USUÁRIO">
+                <input type="password" id="pass" placeholder="SENHA">
+            </div>
             <button onclick="executarAcao()" id="main-btn">CADASTRAR</button>
             <p onclick="alternarTela()" id="toggle-text">ACESSO EXISTENTE? <span>ENTRAR</span></p>
         </div>
@@ -24,36 +26,24 @@
     <div id="sports-page" class="hidden">
         <header>
             <h2>BEM-VINDO, <span id="display-name" class="neon-text"></span></h2>
-            <p>SELECIONE SUA MODALIDADE</p>
+            <p>ESCOLHA A ORDEM DE APRENDIZADO DOS ESPORTES:</p>
         </header>
 
         <div class="sports-grid">
-            <div class="sport-card highlight" onclick="verDetalhes('futebol')">
-                <div class="badge">PRIORIDADE</div>
+            <div class="sport-card highlight" onclick="selecionarEsporte('Futebol', this)">
+                <div class="badge">PRIORIDADE MÁXIMA</div>
                 <h3>FUTEBOL</h3>
-                <p>Análise tática avançada e scout em tempo real.</p>
-                <div class="extra-info" id="info-futebol">
-                    <hr>
-                    <p>⚽ <b>Status:</b> Temporada 2026 Ativa</p>
-                    <p>📊 <b>Dados:</b> Estatísticas via satélite e biometria dos atletas.</p>
+                <p>O esporte mais tecnológico do mundo.</p>
+                <div class="info-extra">
+                    <span>• Táticas em VR</span>
+                    <span>• Biometria 2026</span>
+                    <span>• Análise de Scout IA</span>
                 </div>
             </div>
-            <div class="sport-card">
-                <h3>PING PONG</h3>
-                <p>Métricas de reflexo.</p>
-            </div>
-            <div class="sport-card">
-                <h3>BASQUETE</h3>
-                <p>Gráficos de arremesso.</p>
-            </div>
-            <div class="sport-card">
-                <h3>VÔLEI</h3>
-                <p>Potência de salto.</p>
-            </div>
-        </div>
-        <button onclick="location.reload()" class="btn-back">LOGOUT</button>
-    </div>
 
-    <script src="script.js"></script>
-</body>
-</html>
+            <div class="sport-card" onclick="selecionarEsporte('Ping Pong', this)">
+                <h3>PING PONG</h3>
+                <p>Reflexos neurais.</p>
+            </div>
+
+            <div class="sport-card" onclick="selecionarEsporte('Basquete',
