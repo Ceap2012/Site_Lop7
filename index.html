@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Sports Intel Pro 2026 | Interactive</title>
+    <title>Sports Intel Pro 2026</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,7 +14,7 @@
             <input type="text" id="user-input" placeholder="ID DO ATLETA">
             <input type="password" id="pass-input" placeholder="SENHA">
             <button onclick="gerenciarAcesso()">ACESSAR</button>
-            <p onclick="alternarModo()">Trocar Modo <span class="neon">Login/Cadastro</span></p>
+            <p onclick="alternarModo()">Trocar para <span class="neon">Login/Cadastro</span></p>
         </div>
     </section>
 
@@ -24,14 +24,14 @@
             <div class="sports-grid">
                 <div class="card highlight" onclick="adicionarAoRoteiro('Futebol', this)">
                     <h3>FUTEBOL + QUIZ</h3>
-                    <p>Dossiê completo e teste de nível.</p>
+                    <p>Dossiê completo e validação de conhecimento.</p>
                 </div>
                 <div class="card" onclick="adicionarAoRoteiro('Ping Pong', this)"><h3>PING PONG</h3></div>
                 <div class="card" onclick="adicionarAoRoteiro('Basquete', this)"><h3>BASQUETE</h3></div>
                 <div class="card" onclick="adicionarAoRoteiro('Vôlei', this)"><h3>VÔLEI</h3></div>
             </div>
             <ul id="display-roteiro"><li>Fila vazia...</li></ul>
-            <button id="btn-iniciar" class="hidden neon-btn" onclick="abrirWorkspace()">ABRIR WORKSPACE</button>
+            <button id="btn-iniciar" class="hidden neon-btn" onclick="abrirWorkspace()">GERAR WORKSPACE ➔</button>
         </div>
     </section>
 
@@ -40,10 +40,10 @@
             <aside class="sidebar">
                 <div class="sidebar-title">MÓDULOS</div>
                 <nav id="sidebar-nav"></nav>
-                <button onclick="location.reload()" class="btn-exit">SAIR</button>
+                <button onclick="location.reload()" class="btn-exit">LOGOUT</button>
             </aside>
             <main class="main-panel">
-                <div id="content-theory">
+                <div id="section-theory">
                     <h1 id="study-title" class="neon">ESPORTE</h1>
                     <div class="dossier-grid">
                         <div class="info-card"><h3>COMO JOGAR</h3><p id="text-how"></p></div>
@@ -51,29 +51,29 @@
                         <div class="info-card"><h3>TÁTICA</h3><p id="text-tactics"></p></div>
                         <div class="info-card"><h3>TECNOLOGIA</h3><p id="text-resources"></p></div>
                     </div>
-                    <button id="btn-quiz" class="neon-btn" style="margin-top:20px" onclick="iniciarQuiz()">INICIAR QUIZ DE VALIDAÇÃO</button>
+                    <button class="neon-btn" style="margin-top:20px" onclick="irParaQuiz()">IR PARA O QUIZ ➔</button>
                 </div>
 
-                <div id="content-quiz" class="hidden">
-                    <h2 class="neon">TESTE DE CONHECIMENTO</h2>
-                    <div class="quiz-box">
-                        <p id="quiz-question"></p>
+                <div id="section-quiz" class="hidden">
+                    <h2 class="neon">VALIDAÇÃO DE CONHECIMENTO</h2>
+                    <div class="info-card">
+                        <p id="quiz-question" style="font-size: 1.2rem; margin-bottom: 20px;"></p>
                         <div id="quiz-options"></div>
                     </div>
                 </div>
 
-                <div id="content-team" class="hidden">
-                    <h2 class="neon">IDENTIDADE DE TORCIDA</h2>
+                <div id="section-team" class="hidden">
+                    <h2 class="neon">DOSSIÊ DO TORCEDOR</h2>
                     <p>Para qual time você torce?</p>
-                    <select id="team-selector" onchange="mostrarDetalhesTime()">
-                        <option value="">Selecione um clube...</option>
+                    <select id="team-selector" onchange="exibirDadosTime()">
+                        <option value="">Selecione seu clube...</option>
                         <option value="Flamengo">Flamengo</option>
                         <option value="Palmeiras">Palmeiras</option>
+                        <option value="Santos">Santos</option>
                         <option value="São Paulo">São Paulo</option>
                         <option value="Corinthians">Corinthians</option>
-                        <option value="Santos">Santos</option>
                     </select>
-                    <div id="team-details" class="info-card style="margin-top:20px"></div>
+                    <div id="team-result" class="info-card" style="margin-top:20px; display:none;"></div>
                 </div>
             </main>
         </div>
