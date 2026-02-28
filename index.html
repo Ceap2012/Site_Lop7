@@ -2,197 +2,198 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>SISTEMA ESPORTIVO MULTI-MODAL V6</title>
+    <title>SISTEMA ESPORTIVO INTEGRADO - V7</title>
     <style>
-        :root { --neon: #00f2ff; --bg: #050505; --white: #ffffff; }
-        * { box-sizing: border-box; font-family: 'Courier New', Courier, monospace; }
-        body { margin: 0; background: var(--bg); color: var(--white); height: 100vh; width: 100vw; overflow: hidden; display: flex; justify-content: center; align-items: center; }
-        
-        /* TELAS */
-        .tela { display: none; width: 100vw; height: 100vh; flex-direction: column; align-items: center; justify-content: center; position: absolute; }
+        /* DESIGN NEON TOTAL */
+        :root { --neon: #00f2ff; --bg: #0d0d0d; --card: #1a1a1a; }
+        * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { margin: 0; background: var(--bg); color: white; height: 100vh; display: flex; overflow: hidden; }
+
+        /* NAVEGAÇÃO DE TELAS BRUTA */
+        .tela { display: none; width: 100vw; height: 100vh; flex-direction: column; align-items: center; justify-content: center; position: absolute; top: 0; left: 0; }
         .ativa { display: flex !important; }
 
-        /* DESIGN NEON */
-        .caixa { background: #000; border: 2px solid var(--neon); padding: 30px; box-shadow: 0 0 25px var(--neon); text-align: center; width: 500px; }
-        .dashboard { width: 98%; height: 95%; background: #000; border: 2px solid var(--neon); display: flex; }
+        /* ESTILOS DOS COMPONENTES */
+        .caixa-neon { background: #000; border: 2px solid var(--neon); padding: 40px; box-shadow: 0 0 20px var(--neon); text-align: center; width: 500px; }
+        .grid-selecao { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; }
+        .botao-esporte { border: 1px solid #333; padding: 20px; cursor: pointer; transition: 0.3s; text-transform: uppercase; }
+        .botao-esporte.clicado { border-color: var(--neon); background: rgba(0, 242, 255, 0.1); box-shadow: 0 0 10px var(--neon); }
         
-        h1, h2, h3 { color: var(--neon); text-shadow: 0 0 10px var(--neon); margin: 10px 0; }
-        button { background: transparent; color: var(--neon); border: 1px solid var(--neon); padding: 12px; cursor: pointer; margin: 5px; font-weight: bold; transition: 0.3s; }
+        /* WORKSPACE */
+        .workspace { display: flex; width: 100%; height: 100%; }
+        .sidebar { width: 250px; border-right: 2px solid var(--neon); background: #000; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+        .main { flex: 1; padding: 40px; overflow-y: auto; background: rgba(0,0,0,0.9); }
+        
+        h1, h2 { color: var(--neon); text-shadow: 0 0 8px var(--neon); text-transform: uppercase; }
+        button { background: transparent; color: var(--neon); border: 1px solid var(--neon); padding: 12px 20px; cursor: pointer; font-weight: bold; margin: 5px; }
         button:hover { background: var(--neon); color: #000; box-shadow: 0 0 15px var(--neon); }
 
-        /* WORKSPACE */
-        .sidebar { width: 200px; border-right: 1px solid var(--neon); padding: 15px; display: flex; flex-direction: column; gap: 10px; overflow-y: auto; }
-        .conteudo { flex: 1; padding: 25px; overflow-y: auto; }
-        .box-info { background: rgba(0, 242, 255, 0.05); padding: 15px; border-left: 4px solid var(--neon); margin-bottom: 15px; line-height: 1.4; }
-        
-        .grid-selecao { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 15px 0; }
-        .card-opt { border: 1px solid #333; padding: 15px; cursor: pointer; text-align: center; }
-        .card-opt.check { border-color: var(--neon); background: rgba(0, 242, 255, 0.1); }
+        .info-bloco { background: rgba(255,255,255,0.05); padding: 20px; border-left: 5px solid var(--neon); margin-bottom: 20px; }
         .escondido { display: none !important; }
-        select { width: 100%; padding: 10px; background: #000; color: var(--neon); border: 1px solid var(--neon); }
+        select { width: 100%; padding: 10px; background: #000; color: var(--neon); border: 1px solid var(--neon); margin-bottom: 20px; }
     </style>
 </head>
 <body>
 
-    <section id="p1" class="tela ativa">
-        <div class="caixa">
-            <h1>CORE_ACCESS</h1>
-            <p>Insira as credenciais ou entre direto</p>
-            <input type="text" id="user" placeholder="USUÁRIO" style="width:100%; padding:10px; margin-bottom:10px;">
-            <input type="password" id="pass" placeholder="SENHA" style="width:100%; padding:10px; margin-bottom:10px;">
-            <button onclick="mudar('p2')">ENTRAR_SISTEMA</button>
+    <section id="tela-login" class="tela ativa">
+        <div class="caixa-neon">
+            <h1>SISTEMA_V7</h1>
+            <p>Acesso Biométrico Simulado</p>
+            <button onclick="irPara('tela-selecao')">ACESSAR MÓDULOS_</button>
         </div>
     </section>
 
-    <section id="p2" class="tela">
-        <div class="caixa" style="width: 650px;">
-            <h2>ESCOLHA OS MÓDULOS</h2>
+    <section id="tela-selecao" class="tela">
+        <div class="caixa-neon" style="width: 700px;">
+            <h2>MÓDULOS DISPONÍVEIS</h2>
             <div class="grid-selecao">
-                <div class="card-opt" onclick="escolher('Futebol', this)">FUTEBOL</div>
-                <div class="card-opt" onclick="escolher('Ping Pong', this)">PING PONG</div>
-                <div class="card-opt" onclick="escolher('Basquete', this)">BASQUETE</div>
-                <div class="card-opt" onclick="escolher('Vôlei', this)">VÔLEI</div>
+                <div class="botao-esporte" onclick="selecionar('Futebol', this)">FUTEBOL</div>
+                <div class="botao-esporte" onclick="selecionar('Basquete', this)">BASQUETE</div>
+                <div class="botao-esporte" onclick="selecionar('Vôlei', this)">VÔLEI</div>
+                <div class="botao-esporte" onclick="selecionar('Ping Pong', this)">PING PONG</div>
             </div>
-            <p id="msg">Aguardando seleção...</p>
-            <button id="btn-work" class="escondido" onclick="abrirWorkspace()">ABRIR_DASHBOARD</button>
+            <p id="feedback">Selecione pelo menos um módulo.</p>
+            <button id="btn-gerar" class="escondido" onclick="montarWorkspace()">INICIALIZAR INTERFACE_</button>
         </div>
     </section>
 
-    <section id="p3" class="tela">
-        <div class="dashboard">
-            <aside class="sidebar" id="menu-lateral"></aside>
-            <main class="conteudo">
-                <div id="bloco-info">
-                    <h1 id="tit-view">---</h1>
-                    <div class="box-info"><b>DINÂMICA:</b> <span id="info-how"></span></div>
-                    <div class="box-info"><b>REGRAS:</b> <span id="info-rules"></span></div>
-                    <div class="box-info"><b>TÁTICA:</b> <span id="info-tactic"></span></div>
-                    <div class="box-info"><b>TECNOLOGIA:</b> <span id="info-tech"></span></div>
-                    <button style="width:100%" onclick="irParaQuiz()">TESTAR CONHECIMENTO_</button>
+    <section id="tela-work" class="tela">
+        <div class="workspace">
+            <aside class="sidebar" id="menu-lateral">
+                </aside>
+            <main class="main">
+                <div id="bloco-dados">
+                    <h1 id="titulo-esp">---</h1>
+                    <div class="info-bloco"><h3>DINÂMICA</h3><p id="d-how"></p></div>
+                    <div class="info-bloco"><h3>REGRAS</h3><p id="d-rules"></p></div>
+                    <div class="info-bloco"><h3>TÁTICA</h3><p id="d-tactic"></p></div>
+                    <div class="info-bloco"><h3>TECNOLOGIA</h3><p id="d-tech"></p></div>
+                    <button onclick="abrirQuiz()" style="width:100%">DESBLOQUEAR VALIDAÇÃO_</button>
                 </div>
 
                 <div id="bloco-quiz" class="escondido">
-                    <h2>VALIDAÇÃO_DE_SISTEMA</h2>
-                    <p id="pergunta-txt" style="font-size: 1.1rem;"></p>
+                    <h2>QUIZ_SISTEMA</h2>
+                    <p id="pergunta-txt" style="font-size: 1.3rem; margin: 20px 0;"></p>
                     <div id="opcoes-quiz"></div>
                 </div>
 
-                <div id="bloco-time" class="escondido">
-                    <h2>DOSSIÊ_ESPECIAL_CORINTHIANS</h2>
-                    <select id="sel-t" onchange="verCorinthians()">
-                        <option value="">Selecione o arquivo...</option>
-                        <option value="Corinthians">S.C. CORINTHIANS PAULISTA</option>
+                <div id="bloco-corinthians" class="escondido">
+                    <h2>DOSSIÊ_RESTRITO: TIMÃO</h2>
+                    <select id="escolha-time" onchange="mostrarDossie()">
+                        <option value="">Selecione...</option>
+                        <option value="Corinthians">CORINTHIANS</option>
                     </select>
-                    <div id="out-t" style="margin-top:20px; border:1px solid var(--neon); padding:15px;"></div>
+                    <div id="resultado-dossie" style="border: 1px solid var(--neon); padding: 20px; background: rgba(0,242,255,0.05);"></div>
                 </div>
             </main>
         </div>
     </section>
 
     <script>
-        const DATABASE = {
+        // BANCO DE DADOS COMPLETO
+        const ESPORTES = {
             "Futebol": {
-                h: "Esporte coletivo de invasão. 11 jogadores tentam levar a bola ao gol adversário usando apenas os pés ou cabeça.",
-                r: "Campo de 105m, dois tempos de 45min, regra do impedimento e uso do VAR para lances capitais.",
-                t: "Sistemas como 4-3-3 (ofensivo) ou 3-5-2. Foco em transição rápida e compactação defensiva.",
-                te: "EPTS (rastreamento eletrônico), chuteiras de fibra de carbono e bolas com microchips de pressão.",
-                q: { p: "Qual o limite de substituições em jogos oficiais hoje?", o: ["3", "5", "7"], c: 1 }
-            },
-            "Ping Pong": {
-                h: "Tênis de mesa. Duelo de alta intensidade e reflexos curtos em mesa de 2,74 metros.",
-                r: "Partidas em melhor de 5 ou 7 sets. Cada set vai até 11 pontos. Saque muda a cada 2 pontos.",
-                t: "Efeito 'Corta' (Backspin) e 'Drive' (Topspin). Posicionamento próximo à mesa para ataques rápidos.",
-                te: "Borrachas de alta fricção e raquetes de madeira tratada com camadas de carbono.",
-                q: { p: "Com quantos pontos se vence um set no Ping Pong?", o: ["11", "21", "15"], c: 0 }
+                h: "Avanço coletivo para marcar gols. 11 contra 11 em campo gramado.",
+                r: "90 min, Impedimento, VAR, 5 substituições.",
+                t: "Marcação por pressão (Gegenpressing) e transições ofensivas rápidas.",
+                te: "EPTS (Rastreamento por GPS) e sensores de impacto na bola.",
+                q: { p: "Quantos jogadores cada time tem em campo?", a: ["9", "11", "12"], c: 1 }
             },
             "Basquete": {
-                h: "Dinâmica de ataque e defesa constante. Objetivo é acertar a bola na cesta a 3,05m de altura.",
-                r: "4 quartos de 10 ou 12 minutos. Posse de bola de 24 segundos. Faltas individuais eliminam o jogador.",
-                t: "Pick and Roll (bloqueio e continuação), defesa por zona e arremessos de 3 pontos para espaçamento.",
-                te: "Tabelas de vidro temperado com sensores de impacto e sistemas de estatística avançada (ShotChart).",
-                q: { p: "Quanto tempo dura uma posse de bola no Basquete?", o: ["14s", "24s", "30s"], c: 1 }
+                h: "Jogo de alta pontuação. Levar a bola até a cesta a 3,05m de altura.",
+                r: "4 quartos, 24 segundos de posse, arremessos de 2 e 3 pontos.",
+                t: "Pick and Roll, Defesa individual ou por Zona.",
+                te: "Tabelas de vidro temperado e Shot Clock digital sincronizado.",
+                q: { p: "Quanto tempo dura a posse de bola no ataque?", a: ["14s", "24s", "30s"], c: 1 }
             },
             "Vôlei": {
-                h: "Jogo de rede onde a bola não pode tocar o chão. Cada time tem no máximo 3 toques antes de devolver.",
-                r: "Sets de 25 pontos (exceto o tie-break de 15). É proibido dois toques consecutivos do mesmo jogador.",
-                t: "Rodízio de posições, ataque sincronizado e bloqueio duplo/triplo para fechar diagonais.",
-                te: "Sensores de linha (Hawk-Eye) para verificar se a bola 'beijou' a quadra e pisos de absorção de impacto.",
-                q: { p: "Qual o máximo de toques que um time pode dar na bola?", o: ["2", "3", "4"], c: 1 }
+                h: "Bola não pode tocar o chão. Máximo de 3 toques por equipe.",
+                r: "Sets de 25 pontos, rodízio obrigatório, líbero especializado.",
+                t: "Ataque sincronizado (tempo 1 e 2) e bloqueio escalonado.",
+                te: "Hawk-Eye (Olho de Águia) para conferência de linhas.",
+                q: { p: "Qual o máximo de toques antes de passar a bola?", a: ["2", "3", "4"], c: 1 }
+            },
+            "Ping Pong": {
+                h: "Tênis de mesa. Reflexos puros em mesa de 2,74m.",
+                r: "Sets de 11 pontos, saque muda a cada 2 pontos.",
+                t: "Efeito Topspin (ataque) e Backspin (defesa).",
+                te: "Madeiras de carbono e borrachas de polímero tensionado.",
+                q: { p: "Com quantos pontos termina um Set?", a: ["11", "15", "21"], c: 0 }
             }
         };
 
-        const CORINTHIANS = {
+        const TIMAO = {
             f: "01/09/1910",
-            fund: "Joaquim Ambrósio, Antônio Pereira, Rafael Perrone, Anselmo Corrêa e Carlos Silva (operários).",
-            hist: "O 'Time do Povo'. Nasceu sob a luz de um lampião no Bom Retiro para dar voz aos trabalhadores que eram excluídos do futebol de elite.",
-            tit: "Bicampeão Mundial FIFA (2000-2012), Campeão da Libertadores Invicta, 7 Brasileiros e 30 Paulistas.",
-            i: "Sócrates (Doutor da Democracia), Marcelinho Carioca (Pé de Anjo), Cássio (Gigante) e Rivellino."
+            fund: "Joaquim Ambrósio, Antônio Pereira e operários no Bom Retiro.",
+            hist: "O 'Time do Povo'. Fundado sob um lampião, lutou contra o elitismo para incluir trabalhadores no esporte.",
+            tit: "Bicampeão Mundial (2000-2012), 1 Libertadores Invicta, 7 Brasileiros.",
+            i: "Sócrates, Cássio, Marcelinho Carioca, Rivellino."
         };
 
         let selecionados = [];
         let atual = "";
 
-        function mudar(id) {
+        // MOTOR DE NAVEGAÇÃO (ESTE NÃO FALHA!)
+        function irPara(id) {
             document.querySelectorAll('.tela').forEach(t => t.classList.remove('ativa'));
             document.getElementById(id).classList.add('ativa');
         }
 
-        function escolher(esp, el) {
-            if(!selecionados.includes(esp)) {
-                selecionados.push(esp);
-                el.classList.add('check');
-                document.getElementById('btn-work').classList.remove('escondido');
-                document.getElementById('msg').innerText = "Selecionados: " + selecionados.join(', ');
+        function selecionar(nome, el) {
+            if(!selecionados.includes(nome)) {
+                selecionados.push(nome);
+                el.classList.add('clicado');
+                document.getElementById('btn-gerar').classList.remove('escondido');
+                document.getElementById('feedback').innerText = "SELECIONADOS: " + selecionados.join(' | ');
             }
         }
 
-        function abrirWorkspace() {
-            mudar('p3');
+        function montarWorkspace() {
+            irPara('tela-work');
             const menu = document.getElementById('menu-lateral');
-            menu.innerHTML = "<h3>MODULOS</h3>";
+            menu.innerHTML = "<h2>MENU_</h2>";
             selecionados.forEach(s => {
-                const b = document.createElement('button');
-                b.innerText = s;
-                b.style.width = "100%";
-                b.onclick = () => carregarConteudo(s);
-                menu.appendChild(b);
+                const btn = document.createElement('button');
+                btn.innerText = s;
+                btn.onclick = () => carregarMódulo(s);
+                menu.appendChild(btn);
             });
-            carregarConteudo(selecionados[0]);
+            carregarMódulo(selecionados[0]);
         }
 
-        function carregarConteudo(s) {
+        function carregarMódulo(s) {
             atual = s;
-            document.getElementById('bloco-info').classList.remove('escondido');
+            document.getElementById('bloco-dados').classList.remove('escondido');
             document.getElementById('bloco-quiz').classList.add('escondido');
-            document.getElementById('bloco-time').classList.add('escondido');
+            document.getElementById('bloco-corinthians').classList.add('escondido');
             
-            const d = DATABASE[s];
-            document.getElementById('tit-view').innerText = s;
-            document.getElementById('info-how').innerText = d.h;
-            document.getElementById('info-rules').innerText = d.r;
-            document.getElementById('info-tactic').innerText = d.t;
-            document.getElementById('info-tech').innerText = d.te;
+            const info = ESPORTES[s];
+            document.getElementById('titulo-esp').innerText = s;
+            document.getElementById('d-how').innerText = info.h;
+            document.getElementById('d-rules').innerText = info.r;
+            document.getElementById('d-tactic').innerText = info.t;
+            document.getElementById('d-tech').innerText = info.te;
         }
 
-        function irParaQuiz() {
-            document.getElementById('bloco-info').classList.add('escondido');
+        function abrirQuiz() {
+            document.getElementById('bloco-dados').classList.add('escondido');
             document.getElementById('bloco-quiz').classList.remove('escondido');
-            const q = DATABASE[atual].quiz;
+            const q = ESPORTES[atual].q;
             document.getElementById('pergunta-txt').innerText = q.p;
             const area = document.getElementById('opcoes-quiz');
             area.innerHTML = "";
-            q.o.forEach((opt, i) => {
+            q.a.forEach((opt, i) => {
                 const b = document.createElement('button');
                 b.innerText = opt;
                 b.style.display = "block"; b.style.width = "100%";
                 b.onclick = () => {
                     if(i === q.c) {
-                        alert("SISTEMA VALIDADO!");
+                        alert("VALIDADO!");
                         if(atual === "Futebol") {
                             document.getElementById('bloco-quiz').classList.add('escondido');
-                            document.getElementById('bloco-time').classList.remove('escondido');
+                            document.getElementById('bloco-corinthians').classList.remove('escondido');
                         } else {
-                            carregarConteudo(atual);
+                            carregarMódulo(atual);
                         }
                     } else alert("ERRO NA VALIDAÇÃO!");
                 };
@@ -200,14 +201,14 @@
             });
         }
 
-        function verCorinthians() {
-            const out = document.getElementById('out-t');
+        function mostrarDossie() {
+            const out = document.getElementById('resultado-dossie');
             out.innerHTML = `<h3>S.C. CORINTHIANS</h3>
-                <p><b>FUNDAÇÃO:</b> ${CORINTHIANS.f}</p>
-                <p><b>FUNDADORES:</b> ${CORINTHIANS.fund}</p>
-                <p><b>HISTÓRIA:</b> ${CORINTHIANS.hist}</p>
-                <p><b>TÍTULOS:</b> ${CORINTHIANS.tit}</p>
-                <p><b>ÍDOLOS:</b> ${CORINTHIANS.i}</p>`;
+                <p><b>FUNDAÇÃO:</b> ${TIMAO.f}</p>
+                <p><b>FUNDADORES:</b> ${TIMAO.fund}</p>
+                <p><b>HISTÓRIA:</b> ${TIMAO.hist}</p>
+                <p><b>TÍTULOS:</b> ${TIMAO.tit}</p>
+                <p><b>ÍDOLOS:</b> ${TIMAO.i}</p>`;
         }
     </script>
 </body>
