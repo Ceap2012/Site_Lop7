@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arena Sports Tech 2026</title>
+    <title>SportsTech Alpha - Dashboard</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,14 +12,10 @@
     <section id="screen-auth" class="active">
         <div class="glass-box">
             <div class="scanner"></div>
-            <h1 class="logo">CORE<b>SYSTEM</b></h1>
+            <h1>SPORTS<b>NODE</b></h1>
             <h2 id="auth-title">CRIAR CONTA</h2>
-            
-            <div class="input-group">
-                <input type="text" id="user-input" placeholder="NOME DO ATLETA">
-                <input type="password" id="pass-input" placeholder="SENHA DE ACESSO">
-            </div>
-
+            <input type="text" id="user-input" placeholder="ID DO ATLETA">
+            <input type="password" id="pass-input" placeholder="CHAVE DE ACESSO">
             <button onclick="gerenciarAcesso()" id="btn-auth">CADASTRAR</button>
             <p id="toggle-text" onclick="alternarModo()">JÁ TEM CONTA? <span class="neon">ENTRAR</span></p>
         </div>
@@ -29,55 +25,63 @@
         <div class="container">
             <header>
                 <h2>BEM-VINDO, <span id="user-display" class="neon"></span></h2>
-                <p>DEFINA A ORDEM DE APRENDIZADO CLICANDO NOS CARDS:</p>
+                <p>MONTE SEU CRONOGRAMA DE ESTUDOS:</p>
             </header>
-
             <div class="sports-grid">
                 <div class="card highlight" onclick="adicionarAoRoteiro('Futebol', this)">
-                    <div class="badge">PRIORIDADE</div>
+                    <div class="badge">DATABASE EXPANDIDA</div>
                     <h3>FUTEBOL</h3>
-                    <p>Análise de táticas 2026 e biomecânica de elite.</p>
+                    <p>Regras oficiais e tecnologias de campo 2026.</p>
                 </div>
                 <div class="card" onclick="adicionarAoRoteiro('Ping Pong', this)">
                     <h3>PING PONG</h3>
-                    <p>Reflexos neurais rápidos.</p>
+                    <p>Dinâmica de mesa e reflexos.</p>
                 </div>
                 <div class="card" onclick="adicionarAoRoteiro('Basquete', this)">
                     <h3>BASQUETE</h3>
-                    <p>Física de arremesso de precisão.</p>
+                    <p>Fundamentos de quadra e pontuação.</p>
                 </div>
                 <div class="card" onclick="adicionarAoRoteiro('Vôlei', this)">
                     <h3>VÔLEI</h3>
-                    <p>Dinâmica de salto vertical.</p>
+                    <p>Posicionamento e regras de rede.</p>
                 </div>
             </div>
-
             <div class="learning-area">
-                <h3 class="neon">SEU ROTEIRO:</h3>
-                <ul id="display-roteiro">
-                    <li class="placeholder">Monte sua lista acima...</li>
-                </ul>
-                <div class="controls">
-                    <button onclick="limparRoteiro()" class="btn-secondary">REINICIAR</button>
-                    <button id="btn-iniciar" onclick="irParaTreino()" class="hidden neon-btn">INICIAR TREINO ➔</button>
-                </div>
+                <h3 class="neon">FILA DE PROCESSAMENTO:</h3>
+                <ul id="display-roteiro"><li>Aguardando seleção...</li></ul>
+                <button onclick="limparRoteiro()">REINICIAR</button>
+                <button id="btn-iniciar" class="hidden neon-btn" onclick="iniciarEstudo()">ABRIR ÁREA DE TRABALHO ➔</button>
             </div>
         </div>
     </section>
 
-    <section id="screen-training" class="hidden">
-        <div class="glass-box training-box">
-            <div class="top-tag">SESSÃO ATIVA</div>
-            <h1 id="training-sport-name" class="neon">ESPORTE</h1>
-            <div class="training-content">
-                <p id="training-desc">Carregando dados...</p>
-                <div class="timer">TEMPO: <span id="time-display">00:00</span></div>
-                <div class="progress-container">
-                    <div id="progress-fill"></div>
+    <section id="screen-workspace" class="hidden">
+        <div class="dashboard">
+            <aside class="sidebar">
+                <div class="logo-s">SN</div>
+                <nav id="side-menu"></nav>
+                <button class="btn-exit" onclick="location.reload()">SAIR</button>
+            </aside>
+            <main class="main-content">
+                <header class="content-header">
+                    <h1 id="study-title" class="neon">ESPORTE</h1>
+                    <span class="tag">MODULADO EM 2026</span>
+                </header>
+                <div class="data-grid">
+                    <div class="data-box">
+                        <h3><span class="neon">#</span> COMO JOGAR</h3>
+                        <p id="text-how"></p>
+                    </div>
+                    <div class="data-box">
+                        <h3><span class="neon">#</span> REGRAS PRINCIPAIS</h3>
+                        <ul id="list-rules"></ul>
+                    </div>
+                    <div class="data-box">
+                        <h3><span class="neon">#</span> RECURSOS E EQUIPAMENTOS</h3>
+                        <p id="text-resources"></p>
+                    </div>
                 </div>
-            </div>
-            <button onclick="concluirModulo()" id="btn-next">CONCLUIR MÓDULO</button>
-            <button onclick="location.reload()" class="btn-danger">ABANDONAR</button>
+            </main>
         </div>
     </section>
 
