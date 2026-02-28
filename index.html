@@ -2,75 +2,80 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Sports Intel Neon</title>
+    <title>HUB ESPORTIVO PRO</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="grid-bg"></div>
+    <div class="cyber-bg"></div>
 
-    <section id="tela-login" class="screen active">
-        <div class="neon-box">
-            <h1 class="neon-txt">SISTEMA_LOGIN</h1>
-            <input type="text" id="user-id" placeholder="USUÁRIO">
-            <input type="password" id="pass-id" placeholder="SENHA">
-            <div class="btn-group">
-                <button type="button" onclick="cadastrar()">REGISTRAR</button>
-                <button type="button" onclick="logar()" class="btn-glow">ENTRAR_</button>
+    <main id="page-auth" class="page active">
+        <div class="glass-box">
+            <h1 class="neon-title">CORE_SYSTEM</h1>
+            <p>Identifique-se para acessar os dados</p>
+            <input type="text" id="reg-user" placeholder="USUÁRIO">
+            <input type="password" id="reg-pass" placeholder="SENHA">
+            <div class="row">
+                <button type="button" onclick="salvarCadastro()">CADASTRAR</button>
+                <button type="button" onclick="autenticar()" class="btn-neon">ACESSAR</button>
             </div>
         </div>
-    </section>
+    </main>
 
-    <section id="tela-selecao" class="screen">
-        <div class="neon-box wide">
-            <h2 class="neon-txt">MÓDULOS_ESPORTIVOS</h2>
-            <div class="sports-grid">
-                <div class="sport-card" onclick="selecionar('Futebol', this)">FUTEBOL</div>
-                <div class="sport-card" onclick="selecionar('Basquete', this)">BASQUETE</div>
-                <div class="sport-card" onclick="selecionar('Vôlei', this)">VÔLEI</div>
+    <main id="page-select" class="page">
+        <div class="glass-box wide">
+            <h2 class="neon-title">MÓDULOS_DISPONÍVEIS</h2>
+            <div class="grid-sports">
+                <div class="card" onclick="toggleSport('Futebol', this)">FUTEBOL</div>
+                <div class="card" onclick="toggleSport('Basquete', this)">BASQUETE</div>
+                <div class="card" onclick="toggleSport('Vôlei', this)">VÔLEI</div>
             </div>
-            <p id="msg-selecao">SELECIONE OS MÓDULOS DESEJADOS</p>
-            <button type="button" id="btn-ir-work" class="hidden btn-glow" onclick="montarDashboard()">GERAR_DASHBOARD</button>
+            <div id="status-bar">
+                <p id="txt-selecao">Aguardando escolha...</p>
+                <button type="button" id="btn-work" class="hidden btn-neon" onclick="irParaWorkspace()">GERAR WORKSPACE</button>
+            </div>
         </div>
-    </section>
+    </main>
 
-    <section id="tela-workspace" class="screen">
-        <div class="main-container">
-            <aside class="nav-lateral">
-                <h3 class="neon-txt">MENU_</h3>
-                <div id="lista-esportes-nav"></div>
-                <button type="button" onclick="location.reload()" class="btn-exit">LOGOUT</button>
+    <main id="page-work" class="page">
+        <div class="workspace-container">
+            <aside class="sidebar">
+                <h2 class="neon-title">MENU</h2>
+                <nav id="nav-esportes"></nav>
+                <button onclick="location.reload()" class="btn-exit">LOGOUT</button>
             </aside>
-            <main class="content-area">
-                <div id="view-estudo">
-                    <h1 id="tit-modulo" class="neon-txt"></h1>
+            
+            <section class="main-content">
+                <div id="sec-teoria">
+                    <h1 id="view-titulo" class="neon-title">---</h1>
                     <div class="data-grid">
-                        <div class="data-item"><h4>DINÂMICA</h4><p id="d-how"></p></div>
-                        <div class="data-item"><h4>REGRAS</h4><p id="d-rules"></p></div>
-                        <div class="data-item"><h4>TÁTICA</h4><p id="d-tactic"></p></div>
-                        <div class="data-item"><h4>TECH</h4><p id="d-tech"></p></div>
+                        <div class="data-card"><h3>DINÂMICA</h3><p id="view-how"></p></div>
+                        <div class="data-card"><h3>REGRAS</h3><p id="view-rules"></p></div>
+                        <div class="data-card"><h3>TÁTICA</h3><p id="view-tactic"></p></div>
+                        <div class="data-card"><h3>TECNOLOGIA</h3><p id="view-tech"></p></div>
                     </div>
-                    <button type="button" class="btn-glow" onclick="irParaQuiz()">DESBLOQUEAR QUIZ_</button>
+                    <button class="btn-neon" onclick="abrirQuiz()">DESBLOQUEAR QUIZ</button>
                 </div>
 
-                <div id="view-quiz" class="hidden">
-                    <h2 class="neon-txt">VALIDAÇÃO_CONHECIMENTO</h2>
-                    <p id="pergunta-display" style="font-size: 1.3rem;"></p>
-                    <div id="opcoes-container"></div>
+                <div id="sec-quiz" class="hidden">
+                    <h2 class="neon-title">TESTE DE APTIDÃO</h2>
+                    <p id="pergunta-txt" class="q-text"></p>
+                    <div id="opcoes-quiz"></div>
                 </div>
 
-                <div id="view-times" class="hidden">
-                    <h2 class="neon-txt">DOSSIÊ_CLUBES</h2>
-                    <select id="select-clube" onchange="mostrarInfoTime()">
+                <div id="sec-time" class="hidden">
+                    <h2 class="neon-title">DOSSIÊ DO CLUBE</h2>
+                    <select id="select-time" onchange="exibirDossie()">
                         <option value="">Selecione um clube...</option>
                         <option value="Flamengo">Flamengo</option>
                         <option value="Palmeiras">Palmeiras</option>
                         <option value="Santos">Santos</option>
+                        <option value="São Paulo">São Paulo</option>
                     </select>
-                    <div id="detalhes-time" class="result-box"></div>
+                    <div id="dossie-resultado" class="dossie-box"></div>
                 </div>
-            </main>
+            </section>
         </div>
-    </section>
+    </main>
 
     <script src="script.js"></script>
 </body>
