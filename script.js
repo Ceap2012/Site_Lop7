@@ -1,120 +1,78 @@
-let isLoginMode = false;
-let roteiro = [];
-let esporteAtualIndex = 0;
-let tempoSegundos = 0;
-let cronometroInterval;
+const db = {
+    "Futebol": {
+        how: "Disputado em campo retangular, o objetivo é conduzir a bola ao gol adversário apenas com os pés e tronco.",
+        rules: ["11 jogadores por lado", "Duração: 90 min", "Impedimento assistido por IA", "Cartões Amarelo/Vermelho"],
+        res: "Bola com sensor inercial, chuteiras inteligentes e VAR automático."
+    },
+    "Ping Pong": {
+        how: "Tênis de mesa onde se rebate a bola sobre uma rede central em uma mesa rígida.",
+        rules: ["Sets de 11 pontos", "Serviço alterna a cada 2 pontos", "A bola deve quicar uma vez de cada lado"],
+        res: "Raquete de carbono, bolas de polímero e mesa com sensores de pressão."
+    },
+    "Basquete": {
+        how: "O foco é encestar a bola no aro adversário a 3 metros de altura usando as mãos.",
+        rules: ["5 jogadores ativos", "Limite de 24 segundos de posse", "Pontuações de 1, 2 e 3 pontos"],
+        res: "Bola de alta aderência, tênis de propulsão e tabelas digitais."
+    },
+    "Vôlei": {
+        how: "Enviar a bola por cima da rede para tocar o chão do oponente com no máximo 3 toques.",
+        rules: ["6 jogadores por time", "Rodízio obrigatório", "Sets de 25 pontos (Tie-break 15)"],
+        res: "Rede com sensores infravermelhos e bolas micro-texturizadas."
+    }
+};
 
-// --- 1. LOGIN E CADASTRO ---
+let roteiro = []; let loginMode = false;
+
 function alternarModo() {
-    isLoginMode = !isLoginMode;
-    document.getElementById('auth-title').innerText = isLoginMode ? "LOGIN DE ATLETA" : "CRIAR CONTA";
-    document.getElementById('btn-auth').innerText = isLoginMode ? "ENTRAR" : "CADASTRAR";
-    document.getElementById('toggle-text').innerHTML = isLoginMode ? 
-        "NOVO POR AQUI? <span class='neon'>CADASTRAR</span>" : 
-        "JÁ TEM CONTA? <span class='neon'>ENTRAR</span>";
+    loginMode = !loginMode;
+    document.getElementById('auth-title').innerText = loginMode ? "LOGIN" : "CRIAR CONTA";
+    document.getElementById('btn-auth').innerText = loginMode ? "ENTRAR" : "CADASTRAR";
 }
 
 function gerenciarAcesso() {
-    const user = document.getElementById('user-input').value.trim();
-    const pass = document.getElementById('pass-input').value.trim();
+    const u = document.getElementById('user-input').value;
+    const p = document.getElementById('pass-input').value;
+    if(!u || !p) return alert("Dados incompletos");
 
-    if (!user || !pass) return alert("Preencha todos os campos!");
-
-    if (isLoginMode) {
-        // Tenta fazer login
-        const senhaSalva = localStorage.getItem(user);
-        if (senhaSalva === pass) {
-            alert("Acesso concedido!");
-            irParaSelecao(user);
-        } else {
-            alert("Usuário ou senha incorretos.");
-        }
+    if(loginMode) {
+        if(localStorage.getItem(u) === p) {
+            document.getElementById('screen-auth').classList.add('hidden');
+            document.getElementById('screen-selection').classList.remove('hidden');
+            document.getElementById('user-display').innerText = u.toUpperCase();
+        } else alert("Acesso negado");
     } else {
-        // Faz cadastro
-        if (localStorage.getItem(user)) {
-            alert("Este nome já existe!");
-        } else {
-            localStorage.setItem(user, pass);
-            alert("Conta criada! Mude para Entrar.");
-            alternarModo();
-        }
+        localStorage.setItem(u, p); alert("Cadastrado! Mude para entrar."); alternarModo();
     }
 }
 
-function irParaSelecao(nome) {
-    document.getElementById('screen-auth').classList.add('hidden');
-    document.getElementById('screen-selection').classList.remove('hidden');
-    document.getElementById('user-display').innerText = nome.toUpperCase();
-}
-
-// --- 2. MONTAGEM DO ROTEIRO ---
-function adicionarAoRoteiro(esporte, elemento) {
-    if (!roteiro.includes(esporte)) {
-        roteiro.push(esporte);
-        elemento.classList.add('selected');
-        
-        const listaUI = document.getElementById('display-roteiro');
-        if (roteiro.length === 1) listaUI.innerHTML = ""; // Limpa o aviso inicial
-        
-        const li = document.createElement('li');
-        li.innerText = `${roteiro.length}º - Módulo: ${esporte}`;
-        listaUI.appendChild(li);
-        
+function adicionarAoRoteiro(esp, el) {
+    if(!roteiro.includes(esp)) {
+        roteiro.push(esp); el.classList.add('selected');
+        const list = document.getElementById('display-roteiro');
+        if(roteiro.length === 1) list.innerHTML = "";
+        list.innerHTML += `<li>${roteiro.length}º - ${esp}</li>`;
         document.getElementById('btn-iniciar').classList.remove('hidden');
     }
 }
 
-function limparRoteiro() {
-    roteiro = [];
-    document.getElementById('display-roteiro').innerHTML = '<li>Monte sua lista acima...</li>';
-    document.getElementById('btn-iniciar').classList.add('hidden');
-    document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
-}
-
-// --- 3. MÓDULO DE TREINO ---
-function irParaTreino() {
+function iniciarEstudo() {
     document.getElementById('screen-selection').classList.add('hidden');
-    document.getElementById('screen-training').classList.remove('hidden');
-    carregarEsporteDoRoteiro();
+    document.getElementById('screen-workspace').classList.remove('hidden');
+    const nav = document.getElementById('side-menu');
+    roteiro.forEach(esp => {
+        nav.innerHTML += `<button onclick="carregarConteudo('${esp}')">${esp}</button>`;
+    });
+    carregarConteudo(roteiro[0]);
 }
 
-function carregarEsporteDoRoteiro() {
-    const esporte = roteiro[esporteAtualIndex];
-    document.getElementById('training-sport-name').innerText = esporte.toUpperCase();
-    
-    // Texto exclusivo para Futebol
-    if(esporte === "Futebol") {
-        document.getElementById('training-desc').innerText = "Analisando táticas avançadas de 2026. Foco em posicionamento biomecânico.";
-    } else {
-        document.getElementById('training-desc').innerText = `Iniciando fundamentos técnicos para ${esporte}.`;
-    }
-
-    tempoSegundos = 0;
-    document.getElementById('progress-fill').style.width = "0%";
-    iniciarCronometro();
+function carregarConteudo(esp) {
+    const data = db[esp];
+    document.getElementById('study-title').innerText = esp.toUpperCase();
+    document.getElementById('text-how').innerText = data.how;
+    document.getElementById('text-resources').innerText = data.res;
+    const rulesUI = document.getElementById('list-rules');
+    rulesUI.innerHTML = "";
+    data.rules.forEach(r => rulesUI.innerHTML += `<li>${r}</li>`);
 }
 
-function iniciarCronometro() {
-    clearInterval(cronometroInterval);
-    cronometroInterval = setInterval(() => {
-        tempoSegundos++;
-        let m = Math.floor(tempoSegundos / 60).toString().padStart(2, '0');
-        let s = (tempoSegundos % 60).toString().padStart(2, '0');
-        document.getElementById('time-display').innerText = `${m}:${s}`;
-        
-        // Simular progresso (completa em 5s para demonstração)
-        let prog = (tempoSegundos / 5) * 100;
-        if(prog <= 100) document.getElementById('progress-fill').style.width = prog + "%";
-    }, 1000);
-}
-
-function concluirModulo() {
-    esporteAtualIndex++;
-    if (esporteAtualIndex < roteiro.length) {
-        carregarEsporteDoRoteiro();
-    } else {
-        clearInterval(cronometroInterval);
-        alert("PARABÉNS! Você concluiu toda a sua lista de aprendizado!");
-        location.reload();
-    }
-}
+function limparRoteiro() { location.reload(); }
