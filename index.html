@@ -3,86 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sports Intel 2026 | Workspace</title>
+    <title>SportsTech Workspace</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="grid-overlay"></div>
 
-    <section id="screen-auth" class="active">
+    <section id="screen-auth" class="screen active">
         <div class="glass-box">
-            <div class="scanner"></div>
             <h1>CORE<b>DATA</b></h1>
             <h2 id="auth-title">CRIAR CONTA</h2>
-            <input type="text" id="user-input" placeholder="ID DO USUÁRIO">
-            <input type="password" id="pass-input" placeholder="CHAVE DE ACESSO">
-            <button onclick="gerenciarAcesso()" id="btn-auth">CADASTRAR</button>
-            <p id="toggle-text" onclick="alternarModo()">JÁ TEM CONTA? <span class="neon">ENTRAR</span></p>
+            <input type="text" id="user-input" placeholder="USUÁRIO">
+            <input type="password" id="pass-input" placeholder="SENHA">
+            <button onclick="gerenciarAcesso()">CONTINUAR</button>
+            <p onclick="alternarModo()" style="cursor:pointer">Já tem conta? <span class="neon">Entrar</span></p>
         </div>
     </section>
 
-    <section id="screen-selection" class="hidden">
+    <section id="screen-selection" class="screen">
         <div class="container">
-            <header>
-                <h2>BEM-VINDO, <span id="user-display" class="neon"></span></h2>
-                <p>ESCOLHA OS ESPORTES PARA ESTUDAR:</p>
-            </header>
+            <h2>BEM-VINDO, <span id="user-display" class="neon"></span></h2>
+            <p>Selecione os esportes para sua lista de estudos:</p>
             <div class="sports-grid">
                 <div class="card highlight" onclick="adicionarAoRoteiro('Futebol', this)">
-                    <div class="badge">SISTEMA COMPLETO</div>
                     <h3>FUTEBOL</h3>
-                    <p>Mecânicas, VAR e Dinâmica 2026.</p>
+                    <p>Mecânicas e Regras 2026</p>
                 </div>
-                <div class="card" onclick="adicionarAoRoteiro('Ping Pong', this)">
-                    <h3>PING PONG</h3>
-                    <p>Teoria de mesa e reflexo.</p>
-                </div>
-                <div class="card" onclick="adicionarAoRoteiro('Basquete', this)">
-                    <h3>BASQUETE</h3>
-                    <p>Posicionamento e Aro.</p>
-                </div>
-                <div class="card" onclick="adicionarAoRoteiro('Vôlei', this)">
-                    <h3>VÔLEI</h3>
-                    <p>Regras de rede e rodízio.</p>
-                </div>
+                <div class="card" onclick="adicionarAoRoteiro('Ping Pong', this)"><h3>PING PONG</h3></div>
+                <div class="card" onclick="adicionarAoRoteiro('Basquete', this)"><h3>BASQUETE</h3></div>
+                <div class="card" onclick="adicionarAoRoteiro('Vôlei', this)"><h3>VÔLEI</h3></div>
             </div>
             <div class="learning-area">
-                <h3 class="neon">ROTEIRO DE ESTUDO:</h3>
-                <ul id="display-roteiro"><li>Lista vazia...</li></ul>
-                <div class="btn-row">
-                    <button onclick="location.reload()">LIMPAR</button>
-                    <button id="btn-iniciar" class="hidden neon-btn" onclick="abrirWorkspace()">ABRIR ÁREA DE TRABALHO ➔</button>
-                </div>
+                <ul id="display-roteiro"><li>Fila vazia...</li></ul>
+                <button id="btn-iniciar" class="hidden neon-btn" onclick="abrirWorkspace()">ABRIR ÁREA DE TRABALHO</button>
             </div>
         </div>
     </section>
 
-    <section id="screen-workspace" class="hidden">
+    <section id="screen-workspace" class="screen">
         <div class="dashboard">
             <aside class="sidebar">
-                <div class="status-indicator"><span class="dot"></span> ONLINE</div>
+                <div class="neon">ESTAÇÃO DE TRABALHO</div>
                 <nav id="sidebar-nav"></nav>
-                <button class="logout-btn" onclick="location.reload()">LOGOUT</button>
+                <button onclick="location.reload()" class="btn-danger">SAIR</button>
             </aside>
             <main class="main-panel">
-                <header class="panel-header">
-                    <h1 id="study-title" class="neon">CARREGANDO...</h1>
-                    <span class="version-tag">DOCS V2.6</span>
-                </header>
-                
+                <h1 id="study-title" class="neon">SELECIONE UM ESPORTE</h1>
                 <div class="info-grid">
-                    <div class="info-card">
-                        <h3><span class="neon">/</span> COMO JOGAR</h3>
-                        <p id="text-how"></p>
-                    </div>
-                    <div class="info-card">
-                        <h3><span class="neon">/</span> REGRAS PRINCIPAIS</h3>
-                        <ul id="list-rules"></ul>
-                    </div>
-                    <div class="info-card">
-                        <h3><span class="neon">/</span> RECURSOS E TECNOLOGIA</h3>
-                        <p id="text-resources"></p>
-                    </div>
+                    <div class="info-card"><h3>COMO JOGAR</h3><p id="text-how"></p></div>
+                    <div class="info-card"><h3>REGRAS</h3><ul id="list-rules"></ul></div>
+                    <div class="info-card"><h3>RECURSOS</h3><p id="text-resources"></p></div>
                 </div>
             </main>
         </div>
