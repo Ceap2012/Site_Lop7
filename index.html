@@ -3,37 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arena Futurista | Sports Tech</title>
+    <title>Arena Dark | Sports Tech</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="tech-bg"></div>
+    <div class="grid-overlay"></div>
 
     <div class="container" id="auth-container">
         <div class="glass-box">
-            <div class="logo-space">
-                <div class="orb"></div>
-                <h1>NEXT<b>GEN</b> SPORTS</h1>
-            </div>
-            
-            <h2 id="auth-title">CRIAR ACESSO</h2>
-            <div class="input-group">
-                <input type="text" id="user" placeholder="USUÁRIO" autocomplete="off">
-                <input type="password" id="pass" placeholder="SENHA" autocomplete="off">
-            </div>
-
+            <div class="scanner-line"></div>
+            <h1>CORE<b>SYSTEM</b></h1>
+            <h2 id="auth-title">NOVO REGISTRO</h2>
+            <input type="text" id="user" placeholder="USUÁRIO">
+            <input type="password" id="pass" placeholder="SENHA">
             <button onclick="executarAcao()" id="main-btn">CADASTRAR</button>
-            <p onclick="alternarTela()" id="toggle-text">Já possui registro? <span>ENTRAR</span></p>
+            <p onclick="alternarTela()" id="toggle-text">ACESSO EXISTENTE? <span>ENTRAR</span></p>
         </div>
     </div>
 
-    <div id="dashboard" class="hidden">
-        <div class="glass-box dashboard-card">
-            <div class="pulse-status">SISTEMA ONLINE</div>
-            <h2>BEM-VINDO, <span id="display-name">ATLETA</span></h2>
-            <p>Sincronização com o futebol 2026 completa.</p>
-            <button onclick="location.reload()" class="btn-exit">SAIR DO SISTEMA</button>
+    <div id="sports-page" class="hidden">
+        <header>
+            <h2>BEM-VINDO, <span id="display-name" class="neon-text"></span></h2>
+            <p>SELECIONE SUA MODALIDADE</p>
+        </header>
+
+        <div class="sports-grid">
+            <div class="sport-card highlight" onclick="verDetalhes('futebol')">
+                <div class="badge">PRIORIDADE</div>
+                <h3>FUTEBOL</h3>
+                <p>Análise tática avançada e scout em tempo real.</p>
+                <div class="extra-info" id="info-futebol">
+                    <hr>
+                    <p>⚽ <b>Status:</b> Temporada 2026 Ativa</p>
+                    <p>📊 <b>Dados:</b> Estatísticas via satélite e biometria dos atletas.</p>
+                </div>
+            </div>
+            <div class="sport-card">
+                <h3>PING PONG</h3>
+                <p>Métricas de reflexo.</p>
+            </div>
+            <div class="sport-card">
+                <h3>BASQUETE</h3>
+                <p>Gráficos de arremesso.</p>
+            </div>
+            <div class="sport-card">
+                <h3>VÔLEI</h3>
+                <p>Potência de salto.</p>
+            </div>
         </div>
+        <button onclick="location.reload()" class="btn-back">LOGOUT</button>
     </div>
 
     <script src="script.js"></script>
