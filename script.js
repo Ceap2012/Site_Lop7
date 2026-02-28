@@ -1,125 +1,104 @@
-const DB = {
+const BANCO = {
     "Futebol": {
-        how: "Disputado em campo retangular. O objetivo é a progressão da bola até o gol adversário usando táticas de triangulação e ocupação de espaços.",
-        rules: ["Partida de 90min", "Regra do Impedimento (VAR)", "Máximo 5 substituições", "Cartões Amarelo/Vermelho"],
-        tactics: "Formações como 4-3-3 e 4-2-3-1. Uso de marcação alta (pressing).",
-        tech: "Bolas com chips, GPS de alta performance e análise de vídeo em tempo real.",
-        quiz: { p: "O que acontece se um jogador receber o segundo cartão amarelo?", o: ["Continua no jogo", "É expulso (Vermelho)", "Fica 10 min fora"], c: 1 }
-    },
-    "Basquete": {
-        how: "Jogo de alta velocidade onde 5 atletas tentam converter a bola na cesta a 3,05m de altura.",
-        rules: ["Relógio de 24s", "4 quartos de 10 ou 12min", "Limite de 5 faltas individuais"],
-        tactics: "Pick and Roll, defesa em zona e transições rápidas.",
-        tech: "Sensores de arco e análise biométrica.",
-        quiz: { p: "Quanto tempo uma equipe tem para arremessar?", o: ["14 segundos", "24 segundos", "30 segundos"], c: 1 }
+        how: "Avançar a bola até o gol adversário sem usar as mãos.",
+        rules: "90 min, Impedimento, VAR, 11 jogadores por time.",
+        tactic: "Formação 4-3-3, marcação pressão e posse de bola.",
+        tech: "Bolas com sensores, coletes GPS e análise por IA.",
+        quiz: { p: "Qual o limite de substituições padrão hoje?", o: ["3", "5", "7"], c: 1 }
     }
 };
 
-const TIMES = {
-    "Flamengo": { fund: "1895", hist: "Nasceu no remo e se tornou o 'Mais Querido'.", tits: "Mundial (1981), 3 Libertadores, 8 Brasileiros.", idolo: "Zico", fundadores: "Grupo de remadores do bairro do Flamengo." },
-    "Palmeiras": { fund: "1914", hist: "Fundado por imigrantes italianos como Palestra Italia.", tits: "3 Libertadores, 12 Brasileiros.", idolo: "Ademir da Guia", fundadores: "Luigi Cervo, Vicenzo Ragognetti e outros." },
-    "Santos": { fund: "1912", hist: "O time de Pelé que encantou o mundo nos anos 60.", tits: "2 Mundiais, 3 Libertadores.", idolo: "Pelé", fundadores: "Raimundo Marques, Mário Ferraz e Argemiro de Souza." }
+const CLUBES = {
+    "Flamengo": { f: "1895", h: "Maior torcida do Brasil, começou no Remo.", t: "Mundial 1981, 3 Liberta.", i: "Zico", fund: "Remadores do Rio." },
+    "Palmeiras": { f: "1914", h: "Antigo Palestra Itália.", t: "3 Liberta, 12 Brasileiros.", i: "Ademir da Guia", fund: "Imigrantes Italianos." }
 };
 
 let selecionados = [];
 let atual = "";
 
-// AUTH
+function tela(id) {
+    document.querySelectorAll('.tela').forEach(t => t.classList.remove('ativa'));
+    document.getElementById(id).classList.add('ativa');
+}
+
 function cadastrar() {
-    const u = document.getElementById('user-input').value;
-    const p = document.getElementById('pass-input').value;
-    if(!u || !p) return alert("Preencha tudo!");
-    localStorage.setItem(u, p);
-    alert("Usuário Cadastrado!");
+    const u = document.getElementById('user').value;
+    const p = document.getElementById('pass').value;
+    if(u && p) { localStorage.setItem(u, p); alert("CADASTRADO!"); }
 }
 
-function login() {
-    const u = document.getElementById('user-input').value;
-    const p = document.getElementById('pass-input').value;
-    if(localStorage.getItem(u) === p) {
-        document.getElementById('screen-auth').classList.remove('active');
-        document.getElementById('screen-selection').classList.add('active');
-    } else alert("Erro no Login!");
+function logar() {
+    const u = document.getElementById('user').value;
+    const p = document.getElementById('pass').value;
+    if(localStorage.getItem(u) === p) tela('tela-selecao');
+    else alert("ACESSO NEGADO!");
 }
 
-// SELEÇÃO
-function selecionar(esp, el) {
+function addEsporte(esp, el) {
     if(!selecionados.includes(esp)) {
         selecionados.push(esp);
-        el.classList.add('selected');
+        el.classList.add('selecionado');
         document.getElementById('btn-gerar').classList.remove('hidden');
-        document.getElementById('txt-fila').innerText = selecionados.join(' | ');
+        document.getElementById('lista-escolhidos').innerText = selecionados.join(' | ');
     }
 }
 
-// WORKSPACE
-function montarWorkspace() {
-    document.getElementById('screen-selection').classList.remove('active');
-    document.getElementById('screen-workspace').classList.add('active');
-    const nav = document.getElementById('nav-links');
-    nav.innerHTML = "";
+function abrirWorkspace() {
+    tela('tela-work');
+    const menu = document.getElementById('menu-lateral');
+    menu.innerHTML = "<h3 class='texto-neon'>MENU_</h3>";
     selecionados.forEach(s => {
         const b = document.createElement('button');
         b.innerText = s;
         b.onclick = () => carregar(s);
-        b.style = "width:100%; margin:5px 0; background:#495057; color:white; border:none; padding:10px; cursor:pointer;";
-        nav.appendChild(b);
+        menu.appendChild(b);
     });
     carregar(selecionados[0]);
 }
 
-function carregar(esp) {
-    atual = esp;
-    const d = DB[esp];
-    document.getElementById('bloco-teoria').classList.remove('hidden');
+function carregar(s) {
+    atual = s;
+    const d = BANCO[s];
+    document.getElementById('bloco-estudo').classList.remove('hidden');
     document.getElementById('bloco-quiz').classList.add('hidden');
     document.getElementById('bloco-time').classList.add('hidden');
     
-    document.getElementById('titulo-esporte').innerText = esp;
-    document.getElementById('info-how').innerText = d.how;
-    document.getElementById('info-tactics').innerText = d.tactics;
-    document.getElementById('info-tech').innerText = d.tech;
-    
-    const list = document.getElementById('info-rules');
-    list.innerHTML = "";
-    d.rules.forEach(r => list.innerHTML += `<li>${r}</li>`);
+    document.getElementById('tit-esporte').innerText = s;
+    document.getElementById('txt-how').innerText = d.how;
+    document.getElementById('txt-rules').innerText = d.rules;
+    document.getElementById('txt-tactic').innerText = d.tactic;
+    document.getElementById('txt-tech').innerText = d.tech;
 }
 
-// QUIZ
-function abrirQuiz() {
-    document.getElementById('bloco-teoria').classList.add('hidden');
+function irProQuiz() {
+    document.getElementById('bloco-estudo').classList.add('hidden');
     document.getElementById('bloco-quiz').classList.remove('hidden');
-    const q = DB[atual].quiz;
-    document.getElementById('pergunta-txt').innerText = q.p;
-    const opts = document.getElementById('opcoes-quiz');
-    opts.innerHTML = "";
-    q.o.forEach((opt, i) => {
-        const btn = document.createElement('button');
-        btn.innerText = opt;
-        btn.style = "display:block; width:100%; margin:10px 0; padding:10px;";
-        btn.onclick = () => {
+    const q = BANCO[atual].quiz;
+    document.getElementById('pergunta-quiz').innerText = q.p;
+    const opt = document.getElementById('opcoes-quiz');
+    opt.innerHTML = "";
+    q.o.forEach((o, i) => {
+        const b = document.createElement('button');
+        b.innerText = o;
+        b.style.display = "block"; b.style.width = "100%";
+        b.onclick = () => {
             if(i === q.c) {
-                alert("CORRETO!");
+                alert("ACESSO LIBERADO!");
                 if(atual === "Futebol") {
                     document.getElementById('bloco-quiz').classList.add('hidden');
                     document.getElementById('bloco-time').classList.remove('hidden');
                 } else carregar(atual);
-            } else alert("ERROU! VOLTE E ESTUDE.");
+            } else alert("DADOS INCORRETOS. REVISE.");
         };
-        opts.appendChild(btn);
+        opt.appendChild(b);
     });
 }
 
-// TIME
-function detalharTime() {
+function verTime() {
     const t = document.getElementById('select-time').value;
-    const res = document.getElementById('resultado-time');
-    if(t && TIMES[t]) {
-        const d = TIMES[t];
-        res.innerHTML = `<h3>${t}</h3>
-            <p><b>Fundadores:</b> ${d.fundadores}</p>
-            <p><b>História:</b> ${d.hist}</p>
-            <p><b>Títulos:</b> ${d.tits}</p>
-            <p><b>Ídolo:</b> ${d.idolo}</p>`;
+    const r = document.getElementById('res-time');
+    if(t && CLUBES[t]) {
+        const d = CLUBES[t];
+        r.innerHTML = `<h3>${t}</h3><p><b>HISTÓRIA:</b> ${d.h}</p><p><b>FUNDADOR:</b> ${d.fund}</p><p><b>TÍTULOS:</b> ${d.t}</p><p><b>ÍDOLO:</b> ${d.i}</p>`;
     }
 }
